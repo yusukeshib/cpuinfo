@@ -5,6 +5,8 @@
 @implementation CpumeterUpdater
 
 #define BORDERWIDTH 0.5f
+#define BARWIDTH 36.0f
+#define BARHEIGHT 9.0f
 
 -(id)initWithStatusItem:(NSStatusItem *)si {
     self = [super init];
@@ -18,7 +20,7 @@
         updateInterval = 0.5;
         textmode_flg = YES;
         //
-        barimage = [[NSImage alloc] initWithSize:NSMakeSize(40, 10)];
+        barimage = [[NSImage alloc] initWithSize:NSMakeSize(BARWIDTH, BARHEIGHT)];
     }
     return self;
 }
@@ -91,11 +93,11 @@
     if(textmode_flg == NO) {
         [barimage lockFocus];
         [[NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:1.0] set];
-        NSRectFill(NSMakeRect(0,0,40,10));
+        NSRectFill(NSMakeRect(0,0,BARWIDTH,BARHEIGHT));
         [[NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:1.0] set];
-        NSRectFill(NSMakeRect(BORDERWIDTH,BORDERWIDTH,40-BORDERWIDTH*2,10-BORDERWIDTH*2));
+        NSRectFill(NSMakeRect(BORDERWIDTH,BORDERWIDTH,BARWIDTH-BORDERWIDTH*2,BARHEIGHT-BORDERWIDTH*2));
         [[NSColor greenColor] set];
-        NSRectFill(NSMakeRect(BORDERWIDTH,BORDERWIDTH,(40-BORDERWIDTH*2)*usage/100.0f,10-BORDERWIDTH*2));
+        NSRectFill(NSMakeRect(BORDERWIDTH,BORDERWIDTH,(BARWIDTH-BORDERWIDTH*2)*usage/100.0f,BARHEIGHT-BORDERWIDTH*2));
         [barimage unlockFocus];
         //
         [statusItem setImage:barimage];
