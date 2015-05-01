@@ -6,6 +6,9 @@
   NSStatusItem *statusItem;
   double updateInterval;
   BOOL textmode_flg;
+  //
+  NSImage *barimage;
+  NSMutableAttributedString *title;
 }
 
 - (void)setUpdateInterval:(double)val;

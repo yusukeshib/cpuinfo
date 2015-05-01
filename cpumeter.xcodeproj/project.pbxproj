@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		256AC3DA0F4B6AC300CF3369 /* CpumeterDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* CpumeterDelegate.m */; };
 		744EADB9156B760A00C21C02 /* CpumeterUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 744EADB8156B760A00C21C02 /* CpumeterUpdater.m */; };
-		744EAE41156BA3D000C21C02 /* base.png in Resources */ = {isa = PBXBuildFile; fileRef = 744EAE40156BA3D000C21C02 /* base.png */; };
 		7464C38F1AF38BDF004BA98F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7464C3841AF38BDF004BA98F /* InfoPlist.strings */; };
 		7464C3901AF38BDF004BA98F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7464C3861AF38BDF004BA98F /* MainMenu.xib */; };
 		7464C39B1AF38C4B004BA98F /* Cpumeter-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7464C3951AF38C4B004BA98F /* Cpumeter-Info.plist */; };
@@ -30,8 +29,7 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		744EADB7156B760A00C21C02 /* CpumeterUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpumeterUpdater.h; sourceTree = "<group>"; };
-		744EADB8156B760A00C21C02 /* CpumeterUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpumeterUpdater.m; sourceTree = "<group>"; };
-		744EAE40156BA3D000C21C02 /* base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base.png; sourceTree = "<group>"; };
+		744EADB8156B760A00C21C02 /* CpumeterUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = CpumeterUpdater.m; sourceTree = "<group>"; tabWidth = 4; };
 		7464C3851AF38BDF004BA98F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = InfoPlist.strings; sourceTree = "<group>"; };
 		7464C3871AF38BDF004BA98F /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = MainMenu.xib; sourceTree = "<group>"; };
 		7464C3961AF38C4B004BA98F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ja; path = "Cpumeter-Info.plist"; sourceTree = "<group>"; };
@@ -41,7 +39,7 @@
 		74BDDAFD1AF37F2100512344 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		74BDDAFE1AF37F2100512344 /* icon.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = icon.svg; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Cpumeter-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Cpumeter-Info.plist"; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* cpumeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cpumeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* cpumeterDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cpumeterDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +86,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1107320486CEB800E47090 /* cpumeter.app */,
+				8D1107320486CEB800E47090 /* cpumeterDebug.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,7 +123,6 @@
 				74BDDAFD1AF37F2100512344 /* icon.png */,
 				74A69D981AF38E4700EE522B /* Images.xcassets */,
 				74BDDAFE1AF37F2100512344 /* icon.svg */,
-				744EAE40156BA3D000C21C02 /* base.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -177,7 +174,7 @@
 			name = cpumeter;
 			productInstallPath = "$(HOME)/Applications";
 			productName = Cpumeter;
-			productReference = 8D1107320486CEB800E47090 /* cpumeter.app */;
+			productReference = 8D1107320486CEB800E47090 /* cpumeterDebug.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -225,7 +222,6 @@
 				7464C39B1AF38C4B004BA98F /* Cpumeter-Info.plist in Resources */,
 				7464C3901AF38BDF004BA98F /* MainMenu.xib in Resources */,
 				7464C38F1AF38BDF004BA98F /* InfoPlist.strings in Resources */,
-				744EAE41156BA3D000C21C02 /* base.png in Resources */,
 				7464C39D1AF38C4B004BA98F /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,7 +302,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/en.lproj/Cpumeter-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				PRODUCT_NAME = cpumeter;
+				PRODUCT_NAME = cpumeterDebug;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 			};

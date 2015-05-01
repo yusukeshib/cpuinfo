@@ -1432,14 +1432,6 @@
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
 					</object>
-					<object class="NSMenuItem" id="645070888">
-						<reference key="NSMenu" ref="591114077"/>
-						<string key="NSTitle">Simple Cpumeterについて</string>
-						<string key="NSKeyEquiv"/>
-						<int key="NSMnemonicLoc">2147483647</int>
-						<reference key="NSOnImage" ref="35465992"/>
-						<reference key="NSMixedImage" ref="502551668"/>
-					</object>
 					<object class="NSMenuItem" id="148955089">
 						<reference key="NSMenu" ref="591114077"/>
 						<string key="NSTitle">終了</string>
@@ -1479,14 +1471,6 @@
 						<reference key="destination" ref="976324537"/>
 					</object>
 					<int key="connectionID">495</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">orderFrontStandardAboutPanel:</string>
-						<reference key="source" ref="1021"/>
-						<reference key="destination" ref="645070888"/>
-					</object>
-					<int key="connectionID">596</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -3260,7 +3244,6 @@
 							<reference ref="729832338"/>
 							<reference ref="176662382"/>
 							<reference ref="1062082680"/>
-							<reference ref="645070888"/>
 							<reference ref="113121504"/>
 						</array>
 						<reference key="parent" ref="0"/>
@@ -3354,11 +3337,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">594</int>
 						<reference key="object" ref="1062082680"/>
-						<reference key="parent" ref="591114077"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">595</int>
-						<reference key="object" ref="645070888"/>
 						<reference key="parent" ref="591114077"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -3524,7 +3502,6 @@
 				<string key="590.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="591.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="594.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="595.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="602.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
