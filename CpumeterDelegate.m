@@ -16,9 +16,22 @@
   //
   updater = [CpumeterUpdater runWithStatusItem:statusItem];
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  double updateInterval = [defaults doubleForKey:@"updateInterval"];
-  if(updateInterval > 0) [self _setUpdateInterval:updateInterval];
-  [self _setTextMode:[defaults boolForKey:@"textMode"]];
+  int updateInterval = [defaults integerForKey:@"updateInterval"];
+  if(updateInterval < 100) updateInterval = 500;
+  updater.updateInterval = updateInterval;
+  for(int i=0;i<mi_updateInterval.submenu.itemArray.count;i++) {
+    NSMenuItem *mi = mi_updateInterval.submenu.itemArray[i];
+    mi.state = mi.tag == updateInterval ? NSOnState : NSOffState;
+  }
+  //
+  int imageSize = [defaults integerForKey:@"imageSize"];
+  if(imageSize <= 0) imageSize = 8;
+  updater.imageSize = imageSize;
+  for(int i=0;i<mi_imageSize.submenu.itemArray.count;i++) {
+    NSMenuItem *mi = mi_imageSize.submenu.itemArray[i];
+    mi.state = mi.tag == imageSize ? NSOnState : NSOffState;
+  }
+
   NSString * appPath = [[NSBundle mainBundle] bundlePath];
   LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
   [self _setStartAtLogin:[self loginItemExistsWithLoginItemReference:loginItems ForPath:appPath]];
@@ -28,46 +41,30 @@
   [updater release];
   return NSTerminateNow;
 }
-- (IBAction)setUpdateInterval100:(id)sender {
-  [self _setUpdateInterval:0.1];
-}
-- (IBAction)setUpdateInterval200:(id)sender {
-  [self _setUpdateInterval:0.2];
-}
-- (IBAction)setUpdateInterval500:(id)sender {
-  [self _setUpdateInterval:0.5];
-}
-- (IBAction)setUpdateInterval1000:(id)sender {
-  [self _setUpdateInterval:1.0];
-}
-
-- (void)_setUpdateInterval:(double)val {
-  mi_ui100.state = NSOffState;
-  mi_ui200.state = NSOffState;
-  mi_ui500.state = NSOffState;
-  mi_ui1000.state = NSOffState;
-  updater.updateInterval = val;
-  if(val == 0.1) mi_ui100.state = NSOnState;
-  else if(val == 0.2) mi_ui200.state = NSOnState;
-  else if(val == 0.5) mi_ui500.state = NSOnState;
-  else if(val == 1.0) mi_ui1000.state = NSOnState;
+- (IBAction)setUpdateInterval:(id)sender {
+  NSMenuItem *mi_selected = sender;
+  mi_selected.state = NSOnState;
+  for(int i=0;i<mi_selected.menu.itemArray.count;i++) {
+    NSMenuItem *mi = mi_selected.menu.itemArray[i];
+    if(mi != mi_selected) mi.state = NSOffState;
+  }
+  updater.updateInterval = mi_selected.tag;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setObject:[NSNumber numberWithDouble:updater.updateInterval] forKey:@"updateInterval"];
+  [defaults setObject:[NSNumber numberWithInteger:updater.updateInterval] forKey:@"updateInterval"];
+  [defaults synchronize];
 }
 - (IBAction)setImageMode:(id)sender {
-  [self _setTextMode:NO];
-}
-- (IBAction)setTextMode:(id)sender {
-  [self _setTextMode:YES];
-}
-- (void)_setTextMode:(BOOL)val {
-  mi_mText.state = NSOffState;
-  mi_mImage.state = NSOffState;
-  updater.textMode = val;
-  if(val == NO) mi_mImage.state = NSOnState;
-  else mi_mText.state = NSOnState;
+  NSMenuItem *mi_selected = sender;
+  mi_selected.state = NSOnState;
+  for(int i=0;i<mi_selected.menu.itemArray.count;i++) {
+    NSMenuItem *mi = mi_selected.menu.itemArray[i];
+    if(mi != mi_selected) mi.state = NSOffState;
+  }
+  updater.imageSize = mi_selected.tag;
+  //
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setObject:[NSNumber numberWithBool:updater.textMode] forKey:@"textMode"];
+  [defaults setObject:[NSNumber numberWithInteger:updater.imageSize] forKey:@"imageSize"];
+  [defaults synchronize];
 }
 - (IBAction)setStartAtLogin:(id)sender {
   NSMenuItem *mi = sender;

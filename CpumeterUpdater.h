@@ -1,20 +1,23 @@
 #import <Foundation/Foundation.h>
 
+//#define IMAGESIZE_NORMAL 8
+//#define IMAGESIZE_BIG    11
+//#define IMAGESIZE_SMALL  4
+
 @interface CpumeterUpdater : NSObject {
   BOOL termination_flg;
   NSLock *proc_lock;
   NSStatusItem *statusItem;
-  double updateInterval;
-  BOOL textmode_flg;
-  //
+  int updateInterval;
+  int imageSize;
   NSImage *barimage;
   NSMutableAttributedString *title;
 }
 
-- (void)setUpdateInterval:(double)val;
-- (double)updateInterval;
-- (void)setTextMode:(BOOL)flg;
-- (BOOL)textMode;
+- (void)setUpdateInterval:(int)val;
+- (int)updateInterval;
+- (void)setImageSize:(int)size;
+- (int)imageSize;
 
 -(id)initWithStatusItem:(NSStatusItem *)statusItem;
 +(CpumeterUpdater *)runWithStatusItem:(NSStatusItem *)statusItem;

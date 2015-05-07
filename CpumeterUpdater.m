@@ -6,21 +6,20 @@
 
 #define BORDERWIDTH 0.5f
 #define BARWIDTH 36.0f
-#define BARHEIGHT 9.0f
+#define DEFAULT_IMAGESIZE 8
 
 -(id)initWithStatusItem:(NSStatusItem *)si {
     self = [super init];
     if(self != nil) {
-        termination_flg = NO;
         proc_lock = [[NSLock alloc] init];
         statusItem = si;
         title = [[NSMutableAttributedString alloc]
                  initWithString:@""
                  attributes:[NSDictionary dictionaryWithObject:[NSFont menuBarFontOfSize:[NSFont smallSystemFontSize]] forKey:NSFontAttributeName]];
         updateInterval = 0.5;
-        textmode_flg = YES;
+        imageSize = 8;
         //
-        barimage = [[NSImage alloc] initWithSize:NSMakeSize(BARWIDTH, BARHEIGHT)];
+        barimage = [[NSImage alloc] initWithSize:NSMakeSize(BARWIDTH, imageSize)];
     }
     return self;
 }
@@ -30,17 +29,19 @@
     [barimage release];
     [super dealloc];
 }
-- (void)setUpdateInterval:(double)val {
+- (void)setImageSize:(int)size {
+    imageSize = size;
+    [barimage release];
+    barimage = [[NSImage alloc] initWithSize:NSMakeSize(BARWIDTH, imageSize)];
+}
+- (int)imageSize {
+    return imageSize;
+}
+- (void)setUpdateInterval:(int)val {
     updateInterval = val;
 }
-- (double)updateInterval {
+- (int)updateInterval {
     return updateInterval;
-}
-- (void)setTextMode:(BOOL)flg {
-    textmode_flg = flg;
-}
-- (BOOL)textMode {
-    return textmode_flg;
 }
 +(CpumeterUpdater *)runWithStatusItem:(NSStatusItem *)statusItem {
     CpumeterUpdater *updater = [[CpumeterUpdater alloc] initWithStatusItem:statusItem];
@@ -72,7 +73,7 @@
     host_statistics(host_port, HOST_CPU_LOAD_INFO, (host_info_t)&prev_cpu_load, &count);
     
     while(termination_flg == NO) {
-        [NSThread sleepForTimeInterval:updateInterval];
+        [NSThread sleepForTimeInterval:(double)updateInterval/1000.0];
         host_statistics(host_port, HOST_CPU_LOAD_INFO, (host_info_t)&cpu_load, &count);
         user = cpu_load.cpu_ticks[CPU_STATE_USER] - prev_cpu_load.cpu_ticks[CPU_STATE_USER];
         system = cpu_load.cpu_ticks[CPU_STATE_SYSTEM] - prev_cpu_load.cpu_ticks[CPU_STATE_SYSTEM];
@@ -90,14 +91,14 @@
 -(void) updateView:(NSNumber *)usageNum {
     int usage = [usageNum intValue];
     //
-    if(textmode_flg == NO) {
+    if(imageSize > 0) {
         [barimage lockFocus];
         [[NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:1.0] set];
-        NSRectFill(NSMakeRect(0,0,BARWIDTH,BARHEIGHT));
+        NSRectFill(NSMakeRect(0,0,BARWIDTH,imageSize));
         [[NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:1.0] set];
-        NSRectFill(NSMakeRect(BORDERWIDTH,BORDERWIDTH,BARWIDTH-BORDERWIDTH*2,BARHEIGHT-BORDERWIDTH*2));
+        NSRectFill(NSMakeRect(BORDERWIDTH,BORDERWIDTH,BARWIDTH-BORDERWIDTH*2,imageSize-BORDERWIDTH*2));
         [[NSColor greenColor] set];
-        NSRectFill(NSMakeRect(BORDERWIDTH,BORDERWIDTH,(BARWIDTH-BORDERWIDTH*2)*usage/100.0f,BARHEIGHT-BORDERWIDTH*2));
+        NSRectFill(NSMakeRect(BORDERWIDTH,BORDERWIDTH,(BARWIDTH-BORDERWIDTH*2)*usage/100.0f,imageSize-BORDERWIDTH*2));
         [barimage unlockFocus];
         //
         [statusItem setImage:barimage];

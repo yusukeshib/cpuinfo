@@ -4,18 +4,12 @@
 @interface CpumeterDelegate : NSObject <NSApplicationDelegate> {
   NSWindow *window;
   IBOutlet NSMenu *statusMenu;
-  IBOutlet NSMenuItem *mi_ui100, *mi_ui200, *mi_ui500, *mi_ui1000, *mi_mImage, *mi_mText, *mi_startAtLogin;
+  IBOutlet NSMenuItem *mi_startAtLogin, *mi_updateInterval, *mi_imageSize;
   NSStatusItem *statusItem;
   CpumeterUpdater *updater;
 }
-- (IBAction)setUpdateInterval100:(id)sender;
-- (IBAction)setUpdateInterval200:(id)sender;
-- (IBAction)setUpdateInterval500:(id)sender;
-- (IBAction)setUpdateInterval1000:(id)sender;
-- (void)_setUpdateInterval:(double)val;
+- (IBAction)setUpdateInterval:(id)sender;
 - (IBAction)setImageMode:(id)sender;
-- (IBAction)setTextMode:(id)sender;
-- (void)_setTextMode:(BOOL)val;
 - (IBAction)setStartAtLogin:(id)sender;
 - (void)_setStartAtLogin:(BOOL)val;
 
