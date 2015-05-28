@@ -15,7 +15,7 @@
         statusItem = si;
         title = [[NSMutableAttributedString alloc]
                  initWithString:@""
-                 attributes:[NSDictionary dictionaryWithObject:[NSFont menuBarFontOfSize:[NSFont smallSystemFontSize]] forKey:NSFontAttributeName]];
+                 attributes:[NSDictionary dictionaryWithObject:[NSFont menuBarFontOfSize:[NSFont systemFontSize]] forKey:NSFontAttributeName]];
         updateInterval = 0.5;
         imageSize = 8;
         //
