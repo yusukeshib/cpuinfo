@@ -6,6 +6,10 @@ This application is stationed in Menu bar showing cpu usage with visual bar or t
 
 OSX Version: 10.8+
 
+## Screenshot
+
+![animation](/res/screenshot.gif?raw=true)
+
 ## Download latest
 
 Download [Latest pkg](https://github.com/fataio/cpumeter/raw/master/dist/cpumeter.pkg).
