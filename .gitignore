@@ -1,8 +1,0 @@
-build
-DerivedData
-logs
-.DS_Store
-*.xcworkspace
-xcuserdata
-*.pbxuser
-*.mode1v3
