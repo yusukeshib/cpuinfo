@@ -1408,24 +1408,6 @@
 									<reference key="NSMixedImage" ref="502551668"/>
 									<int key="NSTag">8</int>
 								</object>
-								<object class="NSMenuItem" id="253352627">
-									<reference key="NSMenu" ref="692135288"/>
-									<string key="NSTitle">アイコン(小)</string>
-									<string key="NSKeyEquiv"/>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="35465992"/>
-									<reference key="NSMixedImage" ref="502551668"/>
-									<int key="NSTag">4</int>
-								</object>
-								<object class="NSMenuItem" id="982075452">
-									<reference key="NSMenu" ref="692135288"/>
-									<string key="NSTitle">アイコン(大)</string>
-									<string key="NSKeyEquiv"/>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="35465992"/>
-									<reference key="NSMixedImage" ref="502551668"/>
-									<int key="NSTag">13</int>
-								</object>
 								<object class="NSMenuItem" id="75572462">
 									<reference key="NSMenu" ref="692135288"/>
 									<string key="NSTitle">テキスト</string>
@@ -2182,22 +2164,6 @@
 						<reference key="destination" ref="113121504"/>
 					</object>
 					<int key="connectionID">603</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">setImageMode:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="982075452"/>
-					</object>
-					<int key="connectionID">615</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">setImageMode:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="253352627"/>
-					</object>
-					<int key="connectionID">616</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -3274,19 +3240,12 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="293970556"/>
 							<reference ref="75572462"/>
-							<reference ref="982075452"/>
-							<reference ref="253352627"/>
 						</array>
 						<reference key="parent" ref="590530897"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">543</int>
 						<reference key="object" ref="293970556"/>
-						<reference key="parent" ref="692135288"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">544</int>
-						<reference key="object" ref="982075452"/>
 						<reference key="parent" ref="692135288"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -3356,11 +3315,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">604</int>
 						<reference key="object" ref="75572462"/>
-						<reference key="parent" ref="692135288"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">608</int>
-						<reference key="object" ref="253352627"/>
 						<reference key="parent" ref="692135288"/>
 					</object>
 				</array>
@@ -3506,7 +3460,6 @@
 				<string key="541.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="542.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="543.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="544.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="545.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="546.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<dictionary class="NSMutableDictionary" key="547.IBAttributePlaceholdersKey"/>
@@ -3523,7 +3476,6 @@
 				<string key="594.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="602.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="604.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="608.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="74.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3543,7 +3495,102 @@
 			<nil key="sourceID"/>
 			<int key="maxID">623</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">CpumeterDelegate</string>
+					<string key="superclassName">NSObject</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="launchActivityMonitoy:">id</string>
+						<string key="setImageMode:">id</string>
+						<string key="setStartAtLogin:">id</string>
+						<string key="setUpdateInterval:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="launchActivityMonitoy:">
+							<string key="name">launchActivityMonitoy:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="setImageMode:">
+							<string key="name">setImageMode:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="setStartAtLogin:">
+							<string key="name">setStartAtLogin:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="setUpdateInterval:">
+							<string key="name">setUpdateInterval:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="mi_imageSize">NSMenuItem</string>
+						<string key="mi_startAtLogin">NSMenuItem</string>
+						<string key="mi_updateInterval">NSMenuItem</string>
+						<string key="statusMenu">NSMenu</string>
+						<string key="window">NSWindow</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="mi_imageSize">
+							<string key="name">mi_imageSize</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mi_startAtLogin">
+							<string key="name">mi_startAtLogin</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mi_updateInterval">
+							<string key="name">mi_updateInterval</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="statusMenu">
+							<string key="name">statusMenu</string>
+							<string key="candidateClassName">NSMenu</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="window">
+							<string key="name">window</string>
+							<string key="candidateClassName">NSWindow</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../src/CpumeterDelegate.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">CpumeterDelegate</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="launchActivityMonitoy:">id</string>
+						<string key="setImageMode:">id</string>
+						<string key="setStartAtLogin:">id</string>
+						<string key="setUpdateInterval:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="launchActivityMonitoy:">
+							<string key="name">launchActivityMonitoy:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="setImageMode:">
+							<string key="name">setImageMode:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="setStartAtLogin:">
+							<string key="name">setStartAtLogin:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="setUpdateInterval:">
+							<string key="name">setUpdateInterval:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">../src/CpumeterDelegate.m</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<bool key="IBDocument.previouslyAttemptedUpgradeToXcode5">NO</bool>

@@ -11,7 +11,7 @@
   statusItem = [[[NSStatusBar systemStatusBar]
                  statusItemWithLength:NSVariableStatusItemLength] retain];
   [statusItem setMenu:statusMenu];
-  [statusItem setTitle:@"-%"];
+  [statusItem setTitle:@""];
   [statusItem setHighlightMode:YES];
   //
   updater = [CpumeterUpdater runWithStatusItem:statusItem];
@@ -31,6 +31,8 @@
     NSMenuItem *mi = mi_imageSize.submenu.itemArray[i];
     mi.state = mi.tag == imageSize ? NSOnState : NSOffState;
   }
+  //
+  [statusItem setLength:(updater.imageSize==0 ? NSSquareStatusItemLength : NSVariableStatusItemLength)];
 
   NSString * appPath = [[NSBundle mainBundle] bundlePath];
   LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
@@ -61,6 +63,8 @@
     if(mi != mi_selected) mi.state = NSOffState;
   }
   updater.imageSize = mi_selected.tag;
+  //
+  [statusItem setLength:(updater.imageSize==0 ? NSSquareStatusItemLength : NSVariableStatusItemLength)];
   //
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setObject:[NSNumber numberWithInteger:updater.imageSize] forKey:@"imageSize"];
