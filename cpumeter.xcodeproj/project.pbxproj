@@ -12,9 +12,7 @@
 		74203A141B16ADC20087E214 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74203A111B16ADC20087E214 /* main.m */; };
 		74203A1E1B16ADD20087E214 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 74203A161B16ADD10087E214 /* InfoPlist.strings */; };
 		74203A1F1B16ADD20087E214 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74203A181B16ADD10087E214 /* MainMenu.xib */; };
-		74203A201B16ADD20087E214 /* icon.svg in Resources */ = {isa = PBXBuildFile; fileRef = 74203A1A1B16ADD10087E214 /* icon.svg */; };
-		74203A211B16ADD20087E214 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74203A1B1B16ADD10087E214 /* Images.xcassets */; };
-		7494969D1B17509D00AA9C78 /* Cpumeter-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7494969C1B17509D00AA9C78 /* Cpumeter-Info.plist */; };
+		74A1145E1B1C20F7008193B1 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 74A1145D1B1C20F7008193B1 /* icon.icns */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,11 +30,10 @@
 		74203A111B16ADC20087E214 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		74203A171B16ADD10087E214 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		74203A191B16ADD10087E214 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		74203A1A1B16ADD10087E214 /* icon.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = icon.svg; sourceTree = "<group>"; };
-		74203A1B1B16ADD10087E214 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		74203A1C1B16ADD20087E214 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		74203A1D1B16ADD20087E214 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		7494969C1B17509D00AA9C78 /* Cpumeter-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Cpumeter-Info.plist"; sourceTree = "<group>"; };
+		74A1145D1B1C20F7008193B1 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* cpumeterDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cpumeterDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -121,8 +118,7 @@
 				7494969C1B17509D00AA9C78 /* Cpumeter-Info.plist */,
 				74203A161B16ADD10087E214 /* InfoPlist.strings */,
 				74203A181B16ADD10087E214 /* MainMenu.xib */,
-				74203A1A1B16ADD10087E214 /* icon.svg */,
-				74203A1B1B16ADD10087E214 /* Images.xcassets */,
+				74A1145D1B1C20F7008193B1 /* icon.icns */,
 			);
 			path = res;
 			sourceTree = SOURCE_ROOT;
@@ -190,9 +186,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74203A201B16ADD20087E214 /* icon.svg in Resources */,
-				74203A211B16ADD20087E214 /* Images.xcassets in Resources */,
-				7494969D1B17509D00AA9C78 /* Cpumeter-Info.plist in Resources */,
+				74A1145E1B1C20F7008193B1 /* icon.icns in Resources */,
 				74203A1F1B16ADD20087E214 /* MainMenu.xib in Resources */,
 				74203A1E1B16ADD20087E214 /* InfoPlist.strings in Resources */,
 			);
