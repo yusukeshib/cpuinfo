@@ -269,6 +269,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -282,6 +283,7 @@
 				PRODUCT_NAME = cpumeterDebug;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
+				SYMROOT = "$(SRCROOT)/build";
 			};
 			name = Debug;
 		};
@@ -294,6 +296,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_MODEL_TUNING = G5;
@@ -305,6 +308,7 @@
 				PRODUCT_NAME = cpumeter;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
+				SYMROOT = "$(SRCROOT)/build";
 			};
 			name = Release;
 		};
