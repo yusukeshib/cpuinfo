@@ -12,9 +12,9 @@ OSX Version: 10.8+
 
 ## Download latest
 
-Download [Latest pkg](https://github.com/fataio/cpumeter/raw/master/dist/cpumeter.pkg).
+Download [Latest pkg](dist/cpumeter.pkg?raw=true).
 
-## Licence
+## License
 
 The MIT License (MIT)
 
