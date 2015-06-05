@@ -1,6 +1,6 @@
 cask :v1 => 'cpumeter' do
   version '1.0.3'
-  sha256 '078936bffa150083217f0f171522c0dfafb42b3a03e6c7ebd8295bb57753cc2a'
+  sha256 'fbc7ce7aa2a744909919542dcf6018e3009906a34c239e5a7678536f4668341a'
 
   url 'https://github.com/fataio/cpumeter/blob/master/dist/cpumeter.zip?raw=true'
   name 'cpumeter'
