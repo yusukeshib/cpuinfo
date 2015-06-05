@@ -12,7 +12,7 @@ OSX Version: 10.6+
 
 ## Download latest
 
-Download [Latest pkg](dist/cpumeter.pkg?raw=true).
+Download [Latest application zipped](dist/cpumeter.zip?raw=true).
 
 ## License
 
