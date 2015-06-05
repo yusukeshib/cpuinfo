@@ -226,7 +226,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "CFBundleShortVersionString=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\")\nCFBundleIdentifier=$(/usr/libexec/PlistBuddy -c \"Print CFBundleIdentifier\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\")\npkgbuild \\\n--root \"${TARGET_BUILD_DIR}/../\" \\\n--component-plist \"${SRCROOT}/$CFBundleIdentifier.plist\" \\\n--identifier \"$CFBundleIdentifier\" \\\n--version \"$CFBundleShortVersionString\" \\\n\"${DIST_DIR}/${PRODUCT_NAME}.pkg\"";
+			shellScript = "cd \"${BUILT_PRODUCTS_DIR}\"\n/usr/bin/zip -r \"${DIST_DIR}/${PRODUCT_NAME}.zip\" \"${PRODUCT_NAME}.app\"\n\n#CFBundleShortVersionString=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\")\n#CFBundleIdentifier=$(/usr/libexec/PlistBuddy -c \"Print CFBundleIdentifier\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\")\n#pkgbuild \\\n#--root \"${TARGET_BUILD_DIR}/../\" \\\n#--component-plist \"${SRCROOT}/$CFBundleIdentifier.plist\" \\\n#--identifier \"$CFBundleIdentifier\" \\\n#--version \"$CFBundleShortVersionString\" \\\n#\"${DIST_DIR}/${PRODUCT_NAME}.pkg\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
