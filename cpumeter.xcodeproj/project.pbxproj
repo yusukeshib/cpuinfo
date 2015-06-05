@@ -134,7 +134,7 @@
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				740BC71B1B04DD8700324CDD /* Add Build Number */,
-				74CA32CA1B04EA420041B546 /* ShellScript */,
+				74CA32CA1B04EA420041B546 /* Create pkg */,
 			);
 			buildRules = (
 			);
@@ -210,13 +210,14 @@
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\"";
 			showEnvVarsInLog = 0;
 		};
-		74CA32CA1B04EA420041B546 /* ShellScript */ = {
+		74CA32CA1B04EA420041B546 /* Create pkg */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Create pkg";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,7 +270,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/tmp/app";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -279,7 +280,8 @@
 				GCC_PREFIX_HEADER = src/Cpumeter_Prefix.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/res/Cpumeter-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OBJROOT = "$(SYMROOT)";
 				PRODUCT_NAME = cpumeterDebug;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -296,7 +298,8 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/tmp/app";
+				CONFIGURATION_TEMP_DIR = "$(SRCROOT)/tmp/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_MODEL_TUNING = G5;
@@ -304,7 +307,8 @@
 				GCC_PREFIX_HEADER = src/Cpumeter_Prefix.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/res/Cpumeter-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OBJROOT = "$(SYMROOT)";
 				PRODUCT_NAME = cpumeter;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -322,7 +326,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -338,7 +342,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 			};
