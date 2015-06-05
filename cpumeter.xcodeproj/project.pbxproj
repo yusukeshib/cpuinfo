@@ -13,6 +13,7 @@
 		74203A1E1B16ADD20087E214 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 74203A161B16ADD10087E214 /* InfoPlist.strings */; };
 		74203A1F1B16ADD20087E214 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74203A181B16ADD10087E214 /* MainMenu.xib */; };
 		74A1145E1B1C20F7008193B1 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 74A1145D1B1C20F7008193B1 /* icon.icns */; };
+		74E502481B2192A20089719D /* io.fata.app.cpumeter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74E502471B2192A20089719D /* io.fata.app.cpumeter.plist */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		74203A1D1B16ADD20087E214 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		7494969C1B17509D00AA9C78 /* Cpumeter-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Cpumeter-Info.plist"; sourceTree = "<group>"; };
 		74A1145D1B1C20F7008193B1 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		74E502471B2192A20089719D /* io.fata.app.cpumeter.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = io.fata.app.cpumeter.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* cpumeterDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cpumeterDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -78,6 +80,7 @@
 		29B97314FDCFA39411CA2CEA /* Cpumeter */ = {
 			isa = PBXGroup;
 			children = (
+				74E502471B2192A20089719D /* io.fata.app.cpumeter.plist */,
 				740BC7191B04DBFE00324CDD /* cpumeter.xcconfig */,
 				74203A151B16ADD10087E214 /* res */,
 				74203A0B1B16ADC20087E214 /* src */,
@@ -186,6 +189,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74E502481B2192A20089719D /* io.fata.app.cpumeter.plist in Resources */,
 				74A1145E1B1C20F7008193B1 /* icon.icns in Resources */,
 				74203A1F1B16ADD20087E214 /* MainMenu.xib in Resources */,
 				74203A1E1B16ADD20087E214 /* InfoPlist.strings in Resources */,
@@ -222,7 +226,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "CFBundleShortVersionString=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\")\nCFBundleIdentifier=$(/usr/libexec/PlistBuddy -c \"Print CFBundleIdentifier\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\")\npkgbuild \\\n--root \"${TARGET_BUILD_DIR}\" \\\n--install-location \"/Applications\" \\\n--identifier \"$CFBundleIdentifier\" \\\n--version \"$CFBundleShortVersionString\" \\\n\"${DIST_DIR}/${PRODUCT_NAME}.pkg\"";
+			shellScript = "CFBundleShortVersionString=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\")\nCFBundleIdentifier=$(/usr/libexec/PlistBuddy -c \"Print CFBundleIdentifier\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\")\npkgbuild \\\n--root \"${TARGET_BUILD_DIR}/../\" \\\n--component-plist \"${SRCROOT}/$CFBundleIdentifier.plist\" \\\n--identifier \"$CFBundleIdentifier\" \\\n--version \"$CFBundleShortVersionString\" \\\n\"${DIST_DIR}/${PRODUCT_NAME}.pkg\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -270,7 +274,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/tmp/app";
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/tmp/root/Applications";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -298,7 +302,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/tmp/app";
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/tmp/root/Applications";
 				CONFIGURATION_TEMP_DIR = "$(SRCROOT)/tmp/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
