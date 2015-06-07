@@ -12,7 +12,11 @@ OSX Version: 10.6+
 
 ## Download latest
 
-Download [Latest application zipped](dist/cpumeter.zip?raw=true).
+Download [Latest application zipped](dist/cpumeter.zip?raw=true).  
+
+or with [brew cask](http://caskroom.io/).  
+
+`brew cask install cpumeter`
 
 ## License
 
