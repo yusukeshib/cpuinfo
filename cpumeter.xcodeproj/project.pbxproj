@@ -13,7 +13,6 @@
 		74203A1E1B16ADD20087E214 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 74203A161B16ADD10087E214 /* InfoPlist.strings */; };
 		74203A1F1B16ADD20087E214 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74203A181B16ADD10087E214 /* MainMenu.xib */; };
 		74A1145E1B1C20F7008193B1 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 74A1145D1B1C20F7008193B1 /* icon.icns */; };
-		74E502481B2192A20089719D /* io.fata.app.cpumeter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74E502471B2192A20089719D /* io.fata.app.cpumeter.plist */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +34,6 @@
 		74203A1D1B16ADD20087E214 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		7494969C1B17509D00AA9C78 /* Cpumeter-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Cpumeter-Info.plist"; sourceTree = "<group>"; };
 		74A1145D1B1C20F7008193B1 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
-		74E502471B2192A20089719D /* io.fata.app.cpumeter.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = io.fata.app.cpumeter.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* cpumeterDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cpumeterDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -80,7 +78,6 @@
 		29B97314FDCFA39411CA2CEA /* Cpumeter */ = {
 			isa = PBXGroup;
 			children = (
-				74E502471B2192A20089719D /* io.fata.app.cpumeter.plist */,
 				740BC7191B04DBFE00324CDD /* cpumeter.xcconfig */,
 				74203A151B16ADD10087E214 /* res */,
 				74203A0B1B16ADC20087E214 /* src */,
@@ -137,7 +134,7 @@
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				740BC71B1B04DD8700324CDD /* Add Build Number */,
-				74CA32CA1B04EA420041B546 /* Create pkg */,
+				74CA32CA1B04EA420041B546 /* Create zip */,
 			);
 			buildRules = (
 			);
@@ -189,7 +186,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74E502481B2192A20089719D /* io.fata.app.cpumeter.plist in Resources */,
 				74A1145E1B1C20F7008193B1 /* icon.icns in Resources */,
 				74203A1F1B16ADD20087E214 /* MainMenu.xib in Resources */,
 				74203A1E1B16ADD20087E214 /* InfoPlist.strings in Resources */,
@@ -214,14 +210,14 @@
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\"";
 			showEnvVarsInLog = 0;
 		};
-		74CA32CA1B04EA420041B546 /* Create pkg */ = {
+		74CA32CA1B04EA420041B546 /* Create zip */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Create pkg";
+			name = "Create zip";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,6 +273,10 @@
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/tmp/root/Applications";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -306,6 +306,10 @@
 				CONFIGURATION_TEMP_DIR = "$(SRCROOT)/tmp/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = src/Cpumeter_Prefix.pch;

@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>76</string>
+	<string>82</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
@@ -34,5 +34,16 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>io.fata.app.updater</key>
+	<dict>
+		<key>checkinterval</key>
+		<integer>15000</integer>
+		<key>plisturl</key>
+		<string>https://github.com/fataio/cpumeter/blob/master/res/Cpumeter-Info.plist?raw=true</string>
+		<key>silent</key>
+		<true/>
+		<key>zipurl</key>
+		<string>https://github.com/fataio/cpumeter/blob/master/dist/cpumeter.zip?raw=true</string>
+	</dict>
 </dict>
 </plist>
