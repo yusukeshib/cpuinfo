@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>120</string>
+	<string>127</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
@@ -47,6 +47,8 @@
 			<key>zip</key>
 			<string>https://github.com/fataio/cpumeter/blob/master/dist/cpumeter.zip?raw=true</string>
 		</dict>
+		<key>versionkey</key>
+		<string>CFBundleVersion</string>
 	</dict>
 </dict>
 </plist>
