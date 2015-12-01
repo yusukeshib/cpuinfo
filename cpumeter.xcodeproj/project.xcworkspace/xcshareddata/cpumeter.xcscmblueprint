@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "7C7EF62FE166F312E5464F3E2D7664A946DEC45F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "7C7EF62FE166F312E5464F3E2D7664A946DEC45F" : 0,
+    "EB67BB44F3630AE21C25CA0D98220E27E53EF0AC" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "6AFE0AF5-19EC-4AD1-ABAB-15A24DE4B0FC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "7C7EF62FE166F312E5464F3E2D7664A946DEC45F" : "cpumeter\/",
+    "EB67BB44F3630AE21C25CA0D98220E27E53EF0AC" : "updater.framework\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "cpumeter",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "cpumeter.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:panefordope\/cpumeter.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7C7EF62FE166F312E5464F3E2D7664A946DEC45F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:panefordope\/updater.framework.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EB67BB44F3630AE21C25CA0D98220E27E53EF0AC"
+    }
+  ]
+}

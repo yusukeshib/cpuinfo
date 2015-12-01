@@ -1,5 +1,5 @@
 #import "CpumeterDelegate.h"
-#import <Updater/Updater.h>
+#import <Updater.h>
 
 @implementation CpumeterDelegate
 

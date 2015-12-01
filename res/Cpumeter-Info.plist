@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string>icon.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>io.fata.app.cpumeter</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>127</string>
+	<string>149</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
@@ -29,26 +29,26 @@
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
-	<string>2015 fata.io</string>
+	<string>2015 Yusuke SHIBATA</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>io.fata.fmwk.updater</key>
+	<key>io.fata.shibata.fmwk.updater</key>
 	<dict>
 		<key>interval</key>
 		<integer>15000</integer>
+		<key>key</key>
+		<string>CFBundleVersion</string>
 		<key>plist</key>
-		<string>https://github.com/fataio/cpumeter/blob/master/res/Cpumeter-Info.plist?raw=true</string>
+		<string>https://github.com/panefordope/cpumeter/blob/master/res/Cpumeter-Info.plist?raw=true</string>
 		<key>silent</key>
 		<true/>
 		<key>url</key>
 		<dict>
 			<key>zip</key>
-			<string>https://github.com/fataio/cpumeter/blob/master/dist/cpumeter.zip?raw=true</string>
+			<string>https://github.com/panefordope/cpumeter/blob/master/dist/cpumeter.zip?raw=true</string>
 		</dict>
-		<key>versionkey</key>
-		<string>CFBundleVersion</string>
 	</dict>
 </dict>
 </plist>
