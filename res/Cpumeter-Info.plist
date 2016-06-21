@@ -41,13 +41,13 @@
 		<key>key</key>
 		<string>CFBundleVersion</string>
 		<key>plist</key>
-		<string>https://github.com/panefordope/cpumeter/blob/master/res/Cpumeter-Info.plist?raw=true</string>
+		<string>https://github.com/yusukeshibata/cpumeter/blob/master/res/Cpumeter-Info.plist?raw=true</string>
 		<key>silent</key>
 		<true/>
 		<key>url</key>
 		<dict>
 			<key>zip</key>
-			<string>https://github.com/panefordope/cpumeter/blob/master/dist/cpumeter.zip?raw=true</string>
+			<string>https://github.com/yusukeshibata/cpumeter/blob/master/dist/cpumeter.zip?raw=true</string>
 		</dict>
 	</dict>
 </dict>
