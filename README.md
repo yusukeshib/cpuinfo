@@ -1,4 +1,4 @@
-# cpumeter.app for Mac OSX
+# cpumeter menuber app for mac.
 
 This application is stationed in Menu bar showing cpu usage with visual bar or text percentage.
 
