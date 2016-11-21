@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8D1107260486CEB800E47090"
-               BuildableName = "cpumeter.app"
-               BlueprintName = "cpumeter"
-               ReferencedContainer = "container:cpumeter.xcodeproj">
+               BuildableName = "Simple cpumeter.app"
+               BlueprintName = "Simple cpumeter"
+               ReferencedContainer = "container:Simple cpumeter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D1107260486CEB800E47090"
-            BuildableName = "cpumeter.app"
-            BlueprintName = "cpumeter"
-            ReferencedContainer = "container:cpumeter.xcodeproj">
+            BuildableName = "Simple cpumeter.app"
+            BlueprintName = "Simple cpumeter"
+            ReferencedContainer = "container:Simple cpumeter.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D1107260486CEB800E47090"
-            BuildableName = "cpumeter.app"
-            BlueprintName = "cpumeter"
-            ReferencedContainer = "container:cpumeter.xcodeproj">
+            BuildableName = "Simple cpumeter.app"
+            BlueprintName = "Simple cpumeter"
+            ReferencedContainer = "container:Simple cpumeter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D1107260486CEB800E47090"
-            BuildableName = "cpumeter.app"
-            BlueprintName = "cpumeter"
-            ReferencedContainer = "container:cpumeter.xcodeproj">
+            BuildableName = "Simple cpumeter.app"
+            BlueprintName = "Simple cpumeter"
+            ReferencedContainer = "container:Simple cpumeter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

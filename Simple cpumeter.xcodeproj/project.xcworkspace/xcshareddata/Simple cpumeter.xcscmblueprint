@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "7C7EF62FE166F312E5464F3E2D7664A946DEC45F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "1E07AB0AB7D10B011BCC8B53C478288A4785DA0D" : 9223372036854775807,
+    "7C7EF62FE166F312E5464F3E2D7664A946DEC45F" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "54D3C111-A2F7-4B75-A865-5D35362B00AE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "1E07AB0AB7D10B011BCC8B53C478288A4785DA0D" : "..\/..",
+    "7C7EF62FE166F312E5464F3E2D7664A946DEC45F" : "cpumeter\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Simple cpumeter",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Simple cpumeter.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:yusukeshibata\/docked.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1E07AB0AB7D10B011BCC8B53C478288A4785DA0D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:yusukeshibata\/cpumeter.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7C7EF62FE166F312E5464F3E2D7664A946DEC45F"
+    }
+  ]
+}
