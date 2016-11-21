@@ -1,4 +1,5 @@
 #import "CpumeterDelegate.h"
+#import <Updater.h>
 
 @implementation CpumeterDelegate
 
@@ -6,6 +7,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   // Insert code here to initialize your application
+	[Updater Initialize];
 }
 -(void)awakeFromNib{
   statusItem = [[[NSStatusBar systemStatusBar]

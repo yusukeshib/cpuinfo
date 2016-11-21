@@ -1,0 +1,6 @@
+framework module Updater {
+  umbrella header "Updater.h"
+
+  export *
+  module * { export * }
+}
