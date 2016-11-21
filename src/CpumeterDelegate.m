@@ -1,5 +1,4 @@
 #import "CpumeterDelegate.h"
-#import <Updater.h>
 
 @implementation CpumeterDelegate
 
@@ -7,7 +6,6 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   // Insert code here to initialize your application
-  [Updater Initialize];
 }
 -(void)awakeFromNib{
   statusItem = [[[NSStatusBar systemStatusBar]
@@ -18,7 +16,7 @@
   //
   updater = [CpumeterUpdater runWithStatusItem:statusItem];
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  int updateInterval = [defaults integerForKey:@"updateInterval"];
+  long updateInterval = [defaults integerForKey:@"updateInterval"];
   if(updateInterval < 100) updateInterval = 500;
   updater.updateInterval = updateInterval;
   for(int i=0;i<mi_updateInterval.submenu.itemArray.count;i++) {
@@ -26,7 +24,7 @@
     mi.state = mi.tag == updateInterval ? NSOnState : NSOffState;
   }
   //
-  int imageSize = [defaults integerForKey:@"imageSize"];
+  long imageSize = [defaults integerForKey:@"imageSize"];
   if(imageSize <= 0) imageSize = 8;
   updater.imageSize = imageSize;
   for(int i=0;i<mi_imageSize.submenu.itemArray.count;i++) {

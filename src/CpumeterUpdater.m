@@ -29,18 +29,18 @@
     [barimage release];
     [super dealloc];
 }
-- (void)setImageSize:(int)size {
+- (void)setImageSize:(long)size {
     imageSize = size;
     [barimage release];
     barimage = [[NSImage alloc] initWithSize:NSMakeSize(BARWIDTH, imageSize)];
 }
-- (int)imageSize {
+- (long)imageSize {
     return imageSize;
 }
-- (void)setUpdateInterval:(int)val {
+- (void)setUpdateInterval:(long)val {
     updateInterval = val;
 }
-- (int)updateInterval {
+- (long)updateInterval {
     return updateInterval;
 }
 +(CpumeterUpdater *)runWithStatusItem:(NSStatusItem *)statusItem {

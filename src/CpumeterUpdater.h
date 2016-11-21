@@ -8,16 +8,16 @@
   BOOL termination_flg;
   NSLock *proc_lock;
   NSStatusItem *statusItem;
-  int updateInterval;
-  int imageSize;
+  long updateInterval;
+  long imageSize;
   NSImage *barimage;
   NSMutableAttributedString *title;
 }
 
-- (void)setUpdateInterval:(int)val;
-- (int)updateInterval;
-- (void)setImageSize:(int)size;
-- (int)imageSize;
+- (void)setUpdateInterval:(long)val;
+- (long)updateInterval;
+- (void)setImageSize:(long)size;
+- (long)imageSize;
 
 -(id)initWithStatusItem:(NSStatusItem *)statusItem;
 +(CpumeterUpdater *)runWithStatusItem:(NSStatusItem *)statusItem;
