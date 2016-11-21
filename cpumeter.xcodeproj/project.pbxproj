@@ -179,8 +179,7 @@
 				ORGANIZATIONNAME = "Yusuke Shibata";
 				TargetAttributes = {
 					8D1107260486CEB800E47090 = {
-						DevelopmentTeam = 4TZUUASNPN;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -251,7 +250,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"${BUILT_PRODUCTS_DIR}\"\n/usr/bin/zip -r \"${DIST_DIR}/${PRODUCT_NAME}.zip\" \"${PRODUCT_NAME}.app\"\n\n#CFBundleShortVersionString=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\")\n#CFBundleIdentifier=$(/usr/libexec/PlistBuddy -c \"Print CFBundleIdentifier\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\")\n#pkgbuild \\\n#--root \"${TARGET_BUILD_DIR}/../\" \\\n#--component-plist \"${SRCROOT}/$CFBundleIdentifier.plist\" \\\n#--identifier \"$CFBundleIdentifier\" \\\n#--version \"$CFBundleShortVersionString\" \\\n#\"${DIST_DIR}/${PRODUCT_NAME}.pkg\"";
+			shellScript = "cd \"${BUILT_PRODUCTS_DIR}\" && /usr/bin/zip -r \"${DIST_DIR}/${PRODUCT_NAME}.zip\" \"${PRODUCT_NAME}.app\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -296,11 +295,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = cpumeter.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 4TZUUASNPN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -325,11 +322,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = cpumeter.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 4TZUUASNPN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
