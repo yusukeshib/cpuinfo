@@ -1,8 +1,8 @@
-#import "CpumeterUpdater.h"
+#import "CIUpdater.h"
 #import <mach/host_info.h>
 #import <mach/processor_info.h>
 
-@implementation CpumeterUpdater
+@implementation CIUpdater
 
 #define BORDERWIDTH 0.5f
 #define BARWIDTH 36.0f
@@ -25,13 +25,9 @@
 }
 -(void)dealloc {
     [self terminate];
-    [proc_lock release];
-    [barimage release];
-    [super dealloc];
 }
 - (void)setImageSize:(long)size {
     imageSize = size;
-    [barimage release];
     barimage = [[NSImage alloc] initWithSize:NSMakeSize(BARWIDTH, imageSize)];
 }
 - (long)imageSize {
@@ -43,8 +39,8 @@
 - (long)updateInterval {
     return updateInterval;
 }
-+(CpumeterUpdater *)runWithStatusItem:(NSStatusItem *)statusItem {
-    CpumeterUpdater *updater = [[CpumeterUpdater alloc] initWithStatusItem:statusItem];
++(CIUpdater *)runWithStatusItem:(NSStatusItem *)statusItem {
+    CIUpdater *updater = [[CIUpdater alloc] initWithStatusItem:statusItem];
     [updater begin];
     return updater;
 }
@@ -66,9 +62,8 @@
     natural_t user, system, idle;
     int usage;
     
-    NSAutoreleasePool* pool;
-    pool = [[NSAutoreleasePool alloc]init];
-    
+	@autoreleasepool {
+	
     host_port = mach_host_self();
     host_statistics(host_port, HOST_CPU_LOAD_INFO, (host_info_t)&prev_cpu_load, &count);
     
@@ -84,8 +79,10 @@
         [self performSelectorOnMainThread:@selector(updateView:) withObject:[NSNumber numberWithInt:usage] waitUntilDone:NO];
     }
     //
-    [proc_lock unlock];
-    [pool release];
+		[proc_lock unlock];
+
+	}
+	
     [NSThread exit];
 }
 -(void) updateView:(NSNumber *)usageNum {

@@ -1,12 +1,12 @@
 #import <Cocoa/Cocoa.h>
-#import "CpumeterUpdater.h"
+#import "CIUpdater.h"
 
-@interface CpumeterDelegate : NSObject <NSApplicationDelegate> {
+@interface CIDelegate : NSObject <NSApplicationDelegate> {
   NSWindow *window;
   IBOutlet NSMenu *statusMenu;
   IBOutlet NSMenuItem *mi_startAtLogin, *mi_updateInterval, *mi_imageSize;
   NSStatusItem *statusItem;
-  CpumeterUpdater *updater;
+  CIUpdater *updater;
 }
 - (IBAction)setUpdateInterval:(id)sender;
 - (IBAction)setImageMode:(id)sender;
@@ -19,6 +19,6 @@
 - (void)enableLoginItemWithLoginItemsReference:(LSSharedFileListRef )theLoginItemsRefs ForPath:(NSString *)appPath;
 - (void)disableLoginItemWithLoginItemsReference:(LSSharedFileListRef )theLoginItemsRefs ForPath:(NSString *)appPath;
 
-@property (assign) IBOutlet NSWindow *window;
+@property IBOutlet NSWindow *window;
 
 @end

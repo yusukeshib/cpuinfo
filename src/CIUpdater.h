@@ -1,10 +1,10 @@
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 //#define IMAGESIZE_NORMAL 8
 //#define IMAGESIZE_BIG    11
 //#define IMAGESIZE_SMALL  4
 
-@interface CpumeterUpdater : NSObject {
+@interface CIUpdater : NSObject {
   BOOL termination_flg;
   NSLock *proc_lock;
   NSStatusItem *statusItem;
@@ -20,7 +20,7 @@
 - (long)imageSize;
 
 -(id)initWithStatusItem:(NSStatusItem *)statusItem;
-+(CpumeterUpdater *)runWithStatusItem:(NSStatusItem *)statusItem;
++(CIUpdater *)runWithStatusItem:(NSStatusItem *)statusItem;
 -(void)begin;
 -(void)terminate;
 -(void)update:(id)param;

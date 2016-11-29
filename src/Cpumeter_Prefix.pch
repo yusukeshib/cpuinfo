@@ -1,7 +1,0 @@
-//
-// Prefix header for all source files of the 'Cpumeter' target in the 'Cpumeter' project
-//
-
-#ifdef __OBJC__
-    #import <Cocoa/Cocoa.h>
-#endif
