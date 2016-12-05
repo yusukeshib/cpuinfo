@@ -39,7 +39,6 @@
 	//
 	NSString * identifier = [[[NSBundle mainBundle] bundleIdentifier] stringByAppendingString:@".helper"];
 	loginController = [[StartAtLoginController alloc] initWithIdentifier:identifier];
-	loginController.enabled = YES;
 	mi_startAtLogin.state = [loginController startAtLogin] ? NSOnState : NSOffState;
 }
 
@@ -79,7 +78,7 @@
 - (IBAction)setStartAtLogin:(id)sender {
   NSMenuItem *mi = sender;
   loginController.startAtLogin = (mi.state == NSOffState);
-	mi_startAtLogin.state = [loginController startAtLogin] ? NSOnState : NSOffState;
+	mi_startAtLogin.state = [loginController startAtLogin] ? NSOffState : NSOnState;
 }
 
 - (IBAction)launchActivityMonitoy:(id)sender {

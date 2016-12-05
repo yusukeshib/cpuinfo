@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7408CD561DEFA6C6000793CB /* helper.app in Copy Helper App */ = {isa = PBXBuildFile; fileRef = 7408CD4A1DEFA60D000793CB /* helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		7408CD5B1DEFA720000793CB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7408CD261DEFA5A8000793CB /* Info.plist */; };
 		742AC1531DEBD1E9005EE2D6 /* Updater.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74B6AAFD1DE2F1B2007D7A72 /* Updater.framework */; };
 		742AC1541DEBD1E9005EE2D6 /* Updater.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74B6AAFD1DE2F1B2007D7A72 /* Updater.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		742AC1561DEBD2F6005EE2D6 /* CIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74203A0E1B16ADC20087E214 /* CIDelegate.m */; };
@@ -247,7 +246,6 @@
 			files = (
 				742AC1591DEBD30A005EE2D6 /* Images.xcassets in Resources */,
 				742AC15A1DEBD532005EE2D6 /* MainMenu.xib in Resources */,
-				7408CD5B1DEFA720000793CB /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,7 +304,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_ENTITLEMENTS = helper/helper.entitlements;
+				CODE_SIGN_ENTITLEMENTS = cpuinfo.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -349,7 +347,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_ENTITLEMENTS = helper/helper.entitlements;
+				CODE_SIGN_ENTITLEMENTS = cpuinfo.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
