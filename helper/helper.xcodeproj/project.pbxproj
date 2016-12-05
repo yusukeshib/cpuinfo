@@ -10,14 +10,13 @@
 		7408CD511DEFA624000793CB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7408CD4C1DEFA624000793CB /* AppDelegate.m */; };
 		7408CD551DEFA624000793CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7408CD501DEFA624000793CB /* main.m */; };
 		7408CD611DEFA86D000793CB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7408CD601DEFA86D000793CB /* MainMenu.xib */; };
-		7408CD621DEFA89E000793CB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7408CD4F1DEFA624000793CB /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7408CD311DEFA601000793CB /* helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = helper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7408CD4B1DEFA624000793CB /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7408CD4C1DEFA624000793CB /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7408CD4F1DEFA624000793CB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7408CD4F1DEFA624000793CB /* helper.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = helper.plist; sourceTree = "<group>"; };
 		7408CD501DEFA624000793CB /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7408CD601DEFA86D000793CB /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		74C1A3DA1DEFA94D000D83BF /* helper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = helper.entitlements; sourceTree = "<group>"; };
@@ -41,7 +40,7 @@
 				7408CD4B1DEFA624000793CB /* AppDelegate.h */,
 				7408CD4C1DEFA624000793CB /* AppDelegate.m */,
 				7408CD601DEFA86D000793CB /* MainMenu.xib */,
-				7408CD4F1DEFA624000793CB /* Info.plist */,
+				7408CD4F1DEFA624000793CB /* helper.plist */,
 				7408CD501DEFA624000793CB /* main.m */,
 				7408CD321DEFA601000793CB /* Products */,
 			);
@@ -120,7 +119,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7408CD611DEFA86D000793CB /* MainMenu.xib in Resources */,
-				7408CD621DEFA89E000793CB /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,7 +231,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 4TZUUASNPN;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/helper.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = io.fata.shibata.cpuinfo.helper;
@@ -249,7 +247,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 4TZUUASNPN;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/helper.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = io.fata.shibata.cpuinfo.helper;
