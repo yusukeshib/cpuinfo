@@ -16,7 +16,7 @@ Download [Latest application zipped](dist/cpuinfo.zip?raw=true).
 
 or with [brew cask](http://caskroom.io/).
 
-`brew cask install cpumeter`
+`brew cask install cpuinfo`
 
 ## License
 
