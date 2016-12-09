@@ -1,4 +1,4 @@
-# cpumeter menuber app for mac.
+# cpuinfo menuber app for mac.
 
 This application is stationed in Menu bar showing cpu usage with visual bar or text percentage.
 
@@ -12,11 +12,11 @@ OSX Version: 10.6+
 
 ## Download latest
 
-Download [Latest application zipped](dist/cpumeter.zip?raw=true).  
+Download [Latest application zipped](dist/cpuinfo.zip?raw=true).
 
-or with [brew cask](http://caskroom.io/).  
+or with [brew cask](http://caskroom.io/).
 
-`brew cask install cpumeter`
+`brew cask install cpuinfo`
 
 ## License
 
