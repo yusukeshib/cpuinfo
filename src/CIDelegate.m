@@ -78,7 +78,7 @@
 - (IBAction)setStartAtLogin:(id)sender {
   NSMenuItem *mi = sender;
   loginController.startAtLogin = (mi.state == NSOffState);
-	mi_startAtLogin.state = [loginController startAtLogin] ? NSOffState : NSOnState;
+	mi_startAtLogin.state = [loginController startAtLogin] ? NSOnState : NSOffState;
 }
 
 - (IBAction)launchActivityMonitoy:(id)sender {
