@@ -265,7 +265,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/bin/zip -r \"${DIST_DIR}/${PRODUCT_NAME}.zip\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\"";
+			shellScript = "cd \"${BUILT_PRODUCTS_DIR}\" && /usr/bin/zip -r \"${DIST_DIR}/${PRODUCT_NAME}.zip\" \"${PRODUCT_NAME}.app\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
