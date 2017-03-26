@@ -1,13 +1,10 @@
 #import "CIDelegate.h"
-#import <Updater.h>
 
 @implementation CIDelegate
 
 @synthesize window;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-  // Insert code here to initialize your application
-	[Updater Initialize];
 }
 
 -(void)awakeFromNib{

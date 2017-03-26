@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7408CD561DEFA6C6000793CB /* helper.app in Copy Helper App */ = {isa = PBXBuildFile; fileRef = 7408CD4A1DEFA60D000793CB /* helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		742AC1531DEBD1E9005EE2D6 /* Updater.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74B6AAFD1DE2F1B2007D7A72 /* Updater.framework */; };
-		742AC1541DEBD1E9005EE2D6 /* Updater.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74B6AAFD1DE2F1B2007D7A72 /* Updater.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		742AC1561DEBD2F6005EE2D6 /* CIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74203A0E1B16ADC20087E214 /* CIDelegate.m */; };
 		742AC1571DEBD2FB005EE2D6 /* CIUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 74203A101B16ADC20087E214 /* CIUpdater.m */; };
 		742AC1581DEBD2FE005EE2D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74203A111B16ADC20087E214 /* main.m */; };
@@ -36,7 +34,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				742AC1541DEBD1E9005EE2D6 /* Updater.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,7 +73,6 @@
 		746A13761DEF96D800856F96 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; };
 		746A13771DEF96D800856F96 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; };
 		746A13941DEF9CCD00856F96 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
-		74B6AAFD1DE2F1B2007D7A72 /* Updater.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Updater.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +81,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				746A13951DEF9CCD00856F96 /* ServiceManagement.framework in Frameworks */,
-				742AC1531DEBD1E9005EE2D6 /* Updater.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +120,6 @@
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
-				74B6AAFD1DE2F1B2007D7A72 /* Updater.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				746A13941DEF9CCD00856F96 /* ServiceManagement.framework */,
 			);
