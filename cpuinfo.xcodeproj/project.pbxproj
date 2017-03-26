@@ -160,7 +160,6 @@
 				742AC11D1DEBD150005EE2D6 /* Resources */,
 				742AC1551DEBD1E9005EE2D6 /* Embed Frameworks */,
 				746A13911DEF996400856F96 /* Copy Helper App */,
-				74AA1C991E1146A600B812CD /* Build zip */,
 			);
 			buildRules = (
 			);
@@ -245,23 +244,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		74AA1C991E1146A600B812CD /* Build zip */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Build zip";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd \"${BUILT_PRODUCTS_DIR}\" && /usr/bin/zip -r \"${DIST_DIR}/${PRODUCT_NAME}.zip\" \"${PRODUCT_NAME}.app\"";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		742AC11B1DEBD150005EE2D6 /* Sources */ = {
