@@ -53,8 +53,9 @@
   if(self) {
     self.identifier = identifier;
   }
-  NSDictionary* environ = [[NSProcessInfo processInfo] environment];
-  _sandboxed = (nil != [environ objectForKey:@"APP_SANDBOX_CONTAINER_ID"]);
+  //NSDictionary* environ = [[NSProcessInfo processInfo] environment];
+  //_sandboxed = (nil != [environ objectForKey:@"APP_SANDBOX_CONTAINER_ID"]);
+	_sandboxed = NO;
 	NSLog(@"sandboxed: %i", _sandboxed);
   return self;
 }
