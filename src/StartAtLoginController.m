@@ -53,10 +53,6 @@
   if(self) {
     self.identifier = identifier;
   }
-  //NSDictionary* environ = [[NSProcessInfo processInfo] environment];
-  //_sandboxed = (nil != [environ objectForKey:@"APP_SANDBOX_CONTAINER_ID"]);
-	_sandboxed = NO;
-	NSLog(@"sandboxed: %i", _sandboxed);
   return self;
 }
 
@@ -75,45 +71,19 @@
 
 	BOOL isEnabled  = NO;
 
-  if(!_sandboxed) {
-    UInt32 seedValue;
-    CFURLRef thePath = NULL;
-
-    NSString * appPath = [[NSBundle mainBundle] bundlePath];
-    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-    // We're going to grab the contents of the shared file list (LSSharedFileListItemRef objects)
-    // and pop it in an array so we can iterate through it to find our item.
-    CFArrayRef loginItemsArray = LSSharedFileListCopySnapshot(loginItems, &seedValue);
-    for(id item in (__bridge NSArray *)loginItemsArray) {
-      LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)item;
-      if(LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &thePath, NULL) == noErr) {
-        if([[(__bridge NSURL *)thePath path] hasPrefix:appPath]) {
-          isEnabled = YES;
-          break;
-        }
-        // Docs for LSSharedFileListItemResolve say we're responsible
-        // for releasing the CFURLRef that is returned
-        if(thePath != NULL) CFRelease(thePath);
-      }
-    }
-    if(loginItemsArray != NULL) CFRelease(loginItemsArray);
-
- } else {
-		// the easy and sane method (SMJobCopyDictionary) can pose problems when sandboxed. -_-
-		CFArrayRef cfJobDicts = SMCopyAllJobDictionaries(kSMDomainUserLaunchd);
-		NSArray* jobDicts = CFBridgingRelease(cfJobDicts);
-
-		if (jobDicts && [jobDicts count] > 0) {
-			for (NSDictionary* job in jobDicts) {
-				NSString *label = [job objectForKey:@"Label"];
-				if ([_identifier isEqualToString:label]) {
-					isEnabled = [[job objectForKey:@"OnDemand"] boolValue];
-					NSLog(@"%@:%i", label, isEnabled);
-					break;
-				}
+	CFArrayRef cfJobDicts = SMCopyAllJobDictionaries(kSMDomainUserLaunchd);
+	NSArray* jobDicts = CFBridgingRelease(cfJobDicts);
+	
+	if (jobDicts && [jobDicts count] > 0) {
+		for (NSDictionary* job in jobDicts) {
+			NSString *label = [job objectForKey:@"Label"];
+			if ([_identifier isEqualToString:label]) {
+				isEnabled = [[job objectForKey:@"OnDemand"] boolValue];
+				NSLog(@"%@:%i", label, isEnabled);
+				break;
 			}
 		}
- }
+	}
 
 	if (isEnabled != _enabled) {
 		[self willChangeValueForKey:@"enabled"];
@@ -129,48 +99,6 @@
     return;
 
   [self willChangeValueForKey:@"startAtLogin"];
-
-	if(!_sandboxed) {
-
-		NSString * appPath = [[NSBundle mainBundle] bundlePath];
-		LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-		UInt32 seedValue;
-
-		// enable
-		if(flag) {
-
-			// We call LSSharedFileListInsertItemURL to insert the item at the bottom of Login Items list.
-			CFURLRef url = (__bridge CFURLRef)[NSURL fileURLWithPath:appPath];
-			LSSharedFileListItemRef item = LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemLast, NULL, NULL, url, NULL, NULL);
-			if (item) CFRelease(item);
-
-		// disable
-		} else {
-
-			CFURLRef thePath = NULL;
-			// We're going to grab the contents of the shared file list (LSSharedFileListItemRef objects)
-			// and pop it in an array so we can iterate through it to find our item.
-			CFArrayRef loginItemsArray = LSSharedFileListCopySnapshot(loginItems, &seedValue);
-			for (id item in (__bridge NSArray *)loginItemsArray) {
-				LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)item;
-				if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &thePath, NULL) == noErr) {
-					if ([[(__bridge NSURL *)thePath path] hasPrefix:appPath]) {
-						LSSharedFileListItemRemove(loginItems, itemRef); // Deleting the item
-					}
-					// Docs for LSSharedFileListItemResolve say we're responsible
-					// for releasing the CFURLRef that is returned
-					if (thePath != NULL) CFRelease(thePath);
-				}
-			}
-			if (loginItemsArray != NULL) CFRelease(loginItemsArray);
-		}
-		[self willChangeValueForKey:@"enabled"];
-		_enabled = YES;
-		[self didChangeValueForKey:@"enabled"];
-
-		return;
-	}
-
 
   if (!SMLoginItemSetEnabled((__bridge CFStringRef)_identifier, (flag) ? true : false)) {
     NSLog(@"SMLoginItemSetEnabled failed!");
