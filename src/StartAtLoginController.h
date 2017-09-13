@@ -26,7 +26,6 @@
   NSString *_identifier;
   NSURL    *_url;
   BOOL _enabled;
-  BOOL _sandboxed;
 }
 
 @property (assign, nonatomic, readwrite)   BOOL startAtLogin;

@@ -25,7 +25,7 @@
   }
   //
   long imageSize = [defaults integerForKey:@"imageSize"];
-  if(imageSize <= 0) imageSize = 8;
+  if(imageSize < 0) imageSize = 8;
   updater.imageSize = imageSize;
   for(int i=0;i<mi_imageSize.submenu.itemArray.count;i++) {
     NSMenuItem *mi = mi_imageSize.submenu.itemArray[i];
