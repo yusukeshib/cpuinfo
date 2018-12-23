@@ -8,7 +8,10 @@ OSX Version: 10.6+
 
 ## Screenshot
 
-![animation](/res/screenshot.gif?raw=true)
+![screenshot 1](/res/screenshot1.png?raw=true)
+![screenshot 2](/res/screenshot2.png?raw=true)
+![screenshot 3](/res/screenshot3.png?raw=true)
+![screenshot 4](/res/screenshot4.png?raw=true)
 
 ## Download latest
 
