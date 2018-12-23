@@ -68,7 +68,11 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="updateShowText:" target="494" id="pLe-fS-G6r"/>
-                                    <binding destination="494" name="value" keyPath="showText" id="RME-Yf-24L"/>
+                                    <binding destination="494" name="value" keyPath="showImage" id="oV3-Tp-4hB">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
                                 </connections>
                             </menuItem>
                         </items>

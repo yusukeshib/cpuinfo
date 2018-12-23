@@ -75,7 +75,11 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="updateShowText:" target="494" id="Up1-dB-sw6"/>
-                                    <binding destination="494" name="value" keyPath="showText" id="Hrv-Jj-0Cw"/>
+                                    <binding destination="494" name="value" keyPath="showImage" id="yTN-6k-0Et">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
                                 </connections>
                             </menuItem>
                         </items>

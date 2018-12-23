@@ -34,12 +34,10 @@
   [defaults registerDefaults:
    @{
      @"updateInterval": @500,
-     @"showImage": @YES,
-     @"showText": @NO
+     @"showImage": @YES
      }];
   self.updateInterval = [defaults integerForKey:@"updateInterval"];
   self.showImage = [defaults boolForKey:@"showImage"];
-  self.showText = [defaults boolForKey:@"showText"];
   
   // updateInterval
   for(int i=0;i<mi_updateInterval.submenu.itemArray.count;i++) {
@@ -53,10 +51,11 @@
   
   //
   image = [[NSImage alloc] initWithSize:NSMakeSize(BARWIDTH, IMAGESIZE)];
-  NSFont *font = [NSFont menuBarFontOfSize:[NSFont smallSystemFontSize]];
+  NSFont *font = [NSFont monospacedDigitSystemFontOfSize:[NSFont smallSystemFontSize]
+                                                  weight:NSFontWeightRegular];
   NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
                                                          forKey:NSFontAttributeName];
-  title = [[NSMutableAttributedString alloc] initWithString:@""
+  title = [[NSMutableAttributedString alloc] initWithString:@"---"
                                                  attributes:attributes];
 }
 
@@ -74,19 +73,20 @@
   }
   self.updateInterval = mi_selected.tag;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setObject:[NSNumber numberWithInteger:self.updateInterval] forKey:@"updateInterval"];
+  [defaults setObject:[NSNumber numberWithInteger:self.updateInterval]
+               forKey:@"updateInterval"];
 }
 
 - (IBAction)updateShowImage:(id)sender {
-  BOOL showImage = !self.showImage;
+  BOOL showImage = YES;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:showImage forKey:@"showImage"];
 }
 
 - (IBAction)updateShowText:(id)sender {
-  BOOL showText = !self.showText;
+  BOOL showImage = NO;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setBool:showText forKey:@"showText"];
+  [defaults setBool:showImage forKey:@"showImage"];
 }
 
 - (IBAction)updateStartAtLogin:(id)sender {
@@ -135,7 +135,9 @@
       user = cpu_load.cpu_ticks[CPU_STATE_USER] - prev_cpu_load.cpu_ticks[CPU_STATE_USER];
       system = cpu_load.cpu_ticks[CPU_STATE_SYSTEM] - prev_cpu_load.cpu_ticks[CPU_STATE_SYSTEM];
       idle = cpu_load.cpu_ticks[CPU_STATE_IDLE] - prev_cpu_load.cpu_ticks[CPU_STATE_IDLE];
-      usage = round((double)(user + system) / (system + user + idle) * 100.0);
+      double total = system + user + idle;
+      if(total == 0) continue;
+      usage = round((double)(user + system) / total * 100.0);
       prev_cpu_load = cpu_load;
       
       dispatch_async(dispatch_get_main_queue(), ^{
@@ -148,13 +150,32 @@
 -(void) updateView:(int)usage {
   if(self.showImage) {
     [image lockFocus];
-    [[NSColor colorWithCalibratedRed:255 green:255 blue:255 alpha:0.1] set];
-    NSRectFill(NSMakeRect(
-                          BORDERWIDTH,
-                          BORDERWIDTH,
-                          BARWIDTH-BORDERWIDTH*2,
-                          IMAGESIZE-BORDERWIDTH*2
-                          ));
+    [NSGraphicsContext saveGraphicsState];
+
+    // clear all
+    NSRect rect = NSMakeRect(0, 0, BARWIDTH, IMAGESIZE);
+    [image drawInRect:rect
+             fromRect:rect
+            operation:NSCompositeClear
+             fraction:1.0];
+    
+    NSRect barrect = NSMakeRect(
+                                BORDERWIDTH,
+                                BORDERWIDTH,
+                                BARWIDTH-BORDERWIDTH*2,
+                                IMAGESIZE-BORDERWIDTH*2
+                                );
+    
+    // border radius
+    NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:barrect
+                                                         xRadius:3
+                                                         yRadius:3];
+    [path addClip];
+    // background
+    [[NSColor windowBackgroundColor] set];
+    NSRectFill(barrect);
+    
+    // green bar
     [[NSColor greenColor] set];
     NSRectFill(NSMakeRect(
                           BORDERWIDTH,
@@ -162,16 +183,14 @@
                           (BARWIDTH-BORDERWIDTH*2)*usage/100.0f,
                           IMAGESIZE-BORDERWIDTH*2
                           ));
+    [NSGraphicsContext restoreGraphicsState];
     [image unlockFocus];
     statusItem.image = image;
+    statusItem.attributedTitle = nil;
   } else {
     statusItem.image = nil;
-  }
-  if(self.showText) {
     title.mutableString.string = [NSString stringWithFormat:@"%d%%",usage];
     statusItem.attributedTitle = title;
-  } else {
-    statusItem.attributedTitle = nil;
   }
 }
 
