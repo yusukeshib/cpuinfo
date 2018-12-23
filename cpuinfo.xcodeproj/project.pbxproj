@@ -111,7 +111,7 @@
 			name = Cpumeter;
 			sourceTree = "<group>";
 			tabWidth = 2;
-			usesTabs = 1;
+			usesTabs = 0;
 		};
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
@@ -173,7 +173,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = CI;
+				CLASSPREFIX = Cpuinfo;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Yusuke Shibata";
 				TargetAttributes = {
