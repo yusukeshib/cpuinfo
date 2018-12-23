@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7408CD561DEFA6C6000793CB /* helper.app in Copy Helper App */ = {isa = PBXBuildFile; fileRef = 7408CD4A1DEFA60D000793CB /* helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		742AC1561DEBD2F6005EE2D6 /* CIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74203A0E1B16ADC20087E214 /* CIDelegate.m */; };
-		742AC1571DEBD2FB005EE2D6 /* CIUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 74203A101B16ADC20087E214 /* CIUpdater.m */; };
+		742AC1561DEBD2F6005EE2D6 /* CpuinfoDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74203A0E1B16ADC20087E214 /* CpuinfoDelegate.m */; };
 		742AC1581DEBD2FE005EE2D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74203A111B16ADC20087E214 /* main.m */; };
 		742AC1591DEBD30A005EE2D6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 743BD28E1DE2D01A000BA0D1 /* Images.xcassets */; };
 		742AC15A1DEBD532005EE2D6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74203A181B16ADD10087E214 /* MainMenu.xib */; };
@@ -59,10 +58,8 @@
 		7408CD261DEFA5A8000793CB /* cpuinfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cpuinfo.plist; sourceTree = "<group>"; };
 		7408CD451DEFA60D000793CB /* helper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = helper.xcodeproj; path = helper/helper.xcodeproj; sourceTree = "<group>"; };
 		740BC7191B04DBFE00324CDD /* cpuinfo.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = cpuinfo.xcconfig; sourceTree = "<group>"; };
-		74203A0D1B16ADC20087E214 /* CIDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIDelegate.h; sourceTree = "<group>"; };
-		74203A0E1B16ADC20087E214 /* CIDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CIDelegate.m; sourceTree = "<group>"; };
-		74203A0F1B16ADC20087E214 /* CIUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CIUpdater.h; sourceTree = "<group>"; };
-		74203A101B16ADC20087E214 /* CIUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CIUpdater.m; sourceTree = "<group>"; };
+		74203A0D1B16ADC20087E214 /* CpuinfoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpuinfoDelegate.h; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
+		74203A0E1B16ADC20087E214 /* CpuinfoDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpuinfoDelegate.m; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
 		74203A111B16ADC20087E214 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		74203A171B16ADD10087E214 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		74203A191B16ADD10087E214 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -71,8 +68,8 @@
 		742AC11F1DEBD150005EE2D6 /* cpuinfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cpuinfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		743A38001F68DF0F0003A2DB /* cpuinfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cpuinfo.entitlements; sourceTree = "<group>"; };
 		743BD28E1DE2D01A000BA0D1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = res/Images.xcassets; sourceTree = "<group>"; };
-		746A13761DEF96D800856F96 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; };
-		746A13771DEF96D800856F96 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; };
+		746A13761DEF96D800856F96 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
+		746A13771DEF96D800856F96 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
 		746A13941DEF9CCD00856F96 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -141,10 +138,8 @@
 			children = (
 				746A13761DEF96D800856F96 /* StartAtLoginController.h */,
 				746A13771DEF96D800856F96 /* StartAtLoginController.m */,
-				74203A0D1B16ADC20087E214 /* CIDelegate.h */,
-				74203A0E1B16ADC20087E214 /* CIDelegate.m */,
-				74203A0F1B16ADC20087E214 /* CIUpdater.h */,
-				74203A101B16ADC20087E214 /* CIUpdater.m */,
+				74203A0D1B16ADC20087E214 /* CpuinfoDelegate.h */,
+				74203A0E1B16ADC20087E214 /* CpuinfoDelegate.m */,
 				74203A111B16ADC20087E214 /* main.m */,
 			);
 			path = src;
@@ -252,8 +247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				742AC1561DEBD2F6005EE2D6 /* CIDelegate.m in Sources */,
-				742AC1571DEBD2FB005EE2D6 /* CIUpdater.m in Sources */,
+				742AC1561DEBD2F6005EE2D6 /* CpuinfoDelegate.m in Sources */,
 				742AC1581DEBD2FE005EE2D6 /* main.m in Sources */,
 				746A13781DEF96D800856F96 /* StartAtLoginController.m in Sources */,
 			);

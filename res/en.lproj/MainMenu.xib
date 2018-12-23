@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -13,10 +14,11 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu id="536">
             <items>
-                <menuItem title="Start at Login" id="591">
+                <menuItem title="Start at Login" identifier="startAtLogin" id="591">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="setStartAtLogin:" target="494" id="592"/>
+                        <action selector="updateStartAtLogin:" target="494" id="3BC-4U-sqH"/>
+                        <binding destination="494" name="value" keyPath="startAtLogin" id="2VA-54-SIh"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="594"/>
@@ -27,25 +29,25 @@
                             <menuItem title="0.1sec" tag="100" id="547">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="setUpdateInterval:" target="494" id="613"/>
+                                    <action selector="updateUpdateInterval:" target="494" id="0gm-fj-lo1"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="0.2sec" tag="200" id="548">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="setUpdateInterval:" target="494" id="614"/>
+                                    <action selector="updateUpdateInterval:" target="494" id="9t0-NQ-L6V"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="0.5sec" state="on" tag="500" id="549">
+                            <menuItem title="0.5sec" tag="500" id="549">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="setUpdateInterval:" target="494" id="615"/>
+                                    <action selector="updateUpdateInterval:" target="494" id="dZP-Qe-G3A"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="1.0sec" tag="1000" id="550">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="setUpdateInterval:" target="494" id="616"/>
+                                    <action selector="updateUpdateInterval:" target="494" id="D1c-5b-FyR"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -58,13 +60,15 @@
                             <menuItem title="Image" state="on" tag="8" id="604">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="setImageMode:" target="494" id="607"/>
+                                    <action selector="updateShowImage:" target="494" id="syQ-mX-s33"/>
+                                    <binding destination="494" name="value" keyPath="showImage" id="4BH-g2-uBM"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Text" id="544">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="setImageMode:" target="494" id="610"/>
+                                    <action selector="updateShowText:" target="494" id="pLe-fS-G6r"/>
+                                    <binding destination="494" name="value" keyPath="showText" id="RME-Yf-24L"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -74,22 +78,21 @@
                 <menuItem title="Open Activity Monitor" id="602">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="launchActivityMonitoy:" target="494" id="603"/>
+                        <action selector="launchActivityMonitor:" target="494" id="603"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Quit" id="539">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="terminate:" target="-3" id="551"/>
+                        <action selector="terminate:" target="-2" id="f3D-Ih-kcQ"/>
                     </connections>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="194" y="-2"/>
         </menu>
-        <customObject id="494" customClass="CIDelegate">
+        <customObject id="494" customClass="CpuinfoDelegate">
             <connections>
-                <outlet property="mi_imageSize" destination="541" id="612"/>
-                <outlet property="mi_startAtLogin" destination="591" id="593"/>
-                <outlet property="mi_updateInterval" destination="545" id="611"/>
+                <outlet property="mi_updateInterval" destination="545" id="fsg-fb-SbM"/>
                 <outlet property="statusMenu" destination="536" id="540"/>
             </connections>
         </customObject>
