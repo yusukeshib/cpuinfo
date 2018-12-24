@@ -61,6 +61,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="updateShowImage:" target="494" id="syQ-mX-s33"/>
+                                    <binding destination="494" name="enabled" keyPath="showText" id="fHY-58-eIO"/>
                                     <binding destination="494" name="value" keyPath="showImage" id="4BH-g2-uBM"/>
                                 </connections>
                             </menuItem>
@@ -68,11 +69,8 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="updateShowText:" target="494" id="pLe-fS-G6r"/>
-                                    <binding destination="494" name="value" keyPath="showImage" id="oV3-Tp-4hB">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                        </dictionary>
-                                    </binding>
+                                    <binding destination="494" name="enabled" keyPath="showImage" id="qQo-mc-Xab"/>
+                                    <binding destination="494" name="value" keyPath="showText" id="dPu-Qi-KRr"/>
                                 </connections>
                             </menuItem>
                         </items>

@@ -16,7 +16,7 @@
 }
 
 @synthesize window;
-@synthesize startAtLogin;
+@synthesize statusMenu;
 @synthesize mi_updateInterval;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -34,11 +34,13 @@
   [defaults registerDefaults:
    @{
      @"updateInterval": @500,
-     @"showImage": @YES
+     @"showImage": @YES,
+     @"showText": @NO
      }];
   self.updateInterval = [defaults integerForKey:@"updateInterval"];
   self.showImage = [defaults boolForKey:@"showImage"];
-  
+  self.showText = [defaults boolForKey:@"showText"];
+
   // updateInterval
   for(int i=0;i<mi_updateInterval.submenu.itemArray.count;i++) {
     NSMenuItem *mi = mi_updateInterval.submenu.itemArray[i];
@@ -78,15 +80,15 @@
 }
 
 - (IBAction)updateShowImage:(id)sender {
-  BOOL showImage = YES;
+  BOOL showImage = !self.showImage;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:showImage forKey:@"showImage"];
 }
 
 - (IBAction)updateShowText:(id)sender {
-  BOOL showImage = NO;
+  BOOL showText = !self.showText;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setBool:showImage forKey:@"showImage"];
+  [defaults setBool:showText forKey:@"showText"];
 }
 
 - (IBAction)updateStartAtLogin:(id)sender {
@@ -186,11 +188,14 @@
     [NSGraphicsContext restoreGraphicsState];
     [image unlockFocus];
     statusItem.image = image;
-    statusItem.attributedTitle = nil;
   } else {
     statusItem.image = nil;
+  }
+  if(self.showText) {
     title.mutableString.string = [NSString stringWithFormat:@"%d%%",usage];
     statusItem.attributedTitle = title;
+  } else {
+    statusItem.attributedTitle = nil;
   }
 }
 
