@@ -1,16 +1,16 @@
 #import "CpuinfoDelegate.h"
-#import <mach/host_info.h>
-#import <mach/processor_info.h>
+#import "CpuinfoImage.h"
+#import "Cpuinfo.hpp"
 
-#define BORDERWIDTH 0.5f
 #define BARWIDTH 36.0f
-#define IMAGESIZE 8
+#define IMAGESIZE 6.0f
 
 @implementation CpuinfoDelegate {
   NSStatusItem *statusItem;
   StartAtLoginController *loginController;
   BOOL running;
-  NSImage *image;
+  CpuinfoImage *image;
+  Cpuinfo cpuinfo;
   NSMutableAttributedString *title;
   dispatch_group_t group;
 }
@@ -36,11 +36,11 @@
      @"updateInterval": @500,
      @"showImage": @YES,
      @"showText": @NO
-     }];
+   }];
   self.updateInterval = [defaults integerForKey:@"updateInterval"];
   self.showImage = [defaults boolForKey:@"showImage"];
   self.showText = [defaults boolForKey:@"showText"];
-
+  
   // updateInterval
   for(int i=0;i<mi_updateInterval.submenu.itemArray.count;i++) {
     NSMenuItem *mi = mi_updateInterval.submenu.itemArray[i];
@@ -52,7 +52,7 @@
   self.startAtLogin = [loginController startAtLogin];
   
   //
-  image = [[NSImage alloc] initWithSize:NSMakeSize(BARWIDTH, IMAGESIZE)];
+  image = [[CpuinfoImage alloc] initWithSize:NSMakeSize(BARWIDTH, IMAGESIZE)];
   NSFont *font = [NSFont monospacedDigitSystemFontOfSize:[NSFont smallSystemFontSize]
                                                   weight:NSFontWeightRegular];
   NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
@@ -120,27 +120,15 @@
 }
 
 -(void)updateLoop {
-  mach_port_t host_port;
-  host_cpu_load_info_data_t prev_cpu_load, cpu_load;
-  mach_msg_type_number_t count = HOST_CPU_LOAD_INFO_COUNT;
-  natural_t user, system, idle;
   int usage;
   
   @autoreleasepool {
-    host_port = mach_host_self();
-    host_statistics(host_port, HOST_CPU_LOAD_INFO, (host_info_t)&prev_cpu_load, &count);
-    
     while(running) {
       double interval = MAX((double)self.updateInterval/1000.0, 0.1);
       [NSThread sleepForTimeInterval:interval];
-      host_statistics(host_port, HOST_CPU_LOAD_INFO, (host_info_t)&cpu_load, &count);
-      user = cpu_load.cpu_ticks[CPU_STATE_USER] - prev_cpu_load.cpu_ticks[CPU_STATE_USER];
-      system = cpu_load.cpu_ticks[CPU_STATE_SYSTEM] - prev_cpu_load.cpu_ticks[CPU_STATE_SYSTEM];
-      idle = cpu_load.cpu_ticks[CPU_STATE_IDLE] - prev_cpu_load.cpu_ticks[CPU_STATE_IDLE];
-      double total = system + user + idle;
-      if(total == 0) continue;
-      usage = round((double)(user + system) / total * 100.0);
-      prev_cpu_load = cpu_load;
+      
+      cpuinfo.update();
+      usage = round(cpuinfo.getUsage() * 100.0);
       
       dispatch_async(dispatch_get_main_queue(), ^{
         [self updateView:usage];
@@ -151,42 +139,7 @@
 
 -(void) updateView:(int)usage {
   if(self.showImage) {
-    [image lockFocus];
-    [NSGraphicsContext saveGraphicsState];
-
-    // clear all
-    NSRect rect = NSMakeRect(0, 0, BARWIDTH, IMAGESIZE);
-    [image drawInRect:rect
-             fromRect:rect
-            operation:NSCompositeClear
-             fraction:1.0];
-    
-    NSRect barrect = NSMakeRect(
-                                BORDERWIDTH,
-                                BORDERWIDTH,
-                                BARWIDTH-BORDERWIDTH*2,
-                                IMAGESIZE-BORDERWIDTH*2
-                                );
-    
-    // border radius
-    NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:barrect
-                                                         xRadius:3
-                                                         yRadius:3];
-    [path addClip];
-    // background
-    [[NSColor windowBackgroundColor] set];
-    NSRectFill(barrect);
-    
-    // green bar
-    [[NSColor greenColor] set];
-    NSRectFill(NSMakeRect(
-                          BORDERWIDTH,
-                          BORDERWIDTH,
-                          (BARWIDTH-BORDERWIDTH*2)*usage/100.0f,
-                          IMAGESIZE-BORDERWIDTH*2
-                          ));
-    [NSGraphicsContext restoreGraphicsState];
-    [image unlockFocus];
+    [image updateUsage:usage];
     statusItem.image = image;
   } else {
     statusItem.image = nil;
@@ -200,3 +153,4 @@
 }
 
 @end
+

@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		7408CD561DEFA6C6000793CB /* helper.app in Copy Helper App */ = {isa = PBXBuildFile; fileRef = 7408CD4A1DEFA60D000793CB /* helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		742AC1561DEBD2F6005EE2D6 /* CpuinfoDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74203A0E1B16ADC20087E214 /* CpuinfoDelegate.m */; };
+		742AC1561DEBD2F6005EE2D6 /* CpuinfoDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74203A0E1B16ADC20087E214 /* CpuinfoDelegate.mm */; };
 		742AC1581DEBD2FE005EE2D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74203A111B16ADC20087E214 /* main.m */; };
 		742AC1591DEBD30A005EE2D6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 743BD28E1DE2D01A000BA0D1 /* Images.xcassets */; };
 		742AC15A1DEBD532005EE2D6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74203A181B16ADD10087E214 /* MainMenu.xib */; };
 		746A13781DEF96D800856F96 /* StartAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746A13771DEF96D800856F96 /* StartAtLoginController.m */; };
 		746A13951DEF9CCD00856F96 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 746A13941DEF9CCD00856F96 /* ServiceManagement.framework */; };
+		74DC99D1235459F2005D8091 /* CpuinfoImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DC99D0235459F2005D8091 /* CpuinfoImage.m */; };
+		74DC99D42354A7B2005D8091 /* Cpuinfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DC99D22354A7B2005D8091 /* Cpuinfo.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +61,7 @@
 		7408CD451DEFA60D000793CB /* helper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = helper.xcodeproj; path = helper/helper.xcodeproj; sourceTree = "<group>"; };
 		740BC7191B04DBFE00324CDD /* cpuinfo.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = cpuinfo.xcconfig; sourceTree = "<group>"; };
 		74203A0D1B16ADC20087E214 /* CpuinfoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpuinfoDelegate.h; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
-		74203A0E1B16ADC20087E214 /* CpuinfoDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpuinfoDelegate.m; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
+		74203A0E1B16ADC20087E214 /* CpuinfoDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CpuinfoDelegate.mm; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
 		74203A111B16ADC20087E214 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		74203A171B16ADD10087E214 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		74203A191B16ADD10087E214 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -71,6 +73,10 @@
 		746A13761DEF96D800856F96 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
 		746A13771DEF96D800856F96 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
 		746A13941DEF9CCD00856F96 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		74DC99CF235459F2005D8091 /* CpuinfoImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CpuinfoImage.h; sourceTree = "<group>"; };
+		74DC99D0235459F2005D8091 /* CpuinfoImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CpuinfoImage.m; sourceTree = "<group>"; };
+		74DC99D22354A7B2005D8091 /* Cpuinfo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Cpuinfo.cpp; sourceTree = "<group>"; };
+		74DC99D32354A7B2005D8091 /* Cpuinfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Cpuinfo.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,8 +145,12 @@
 				746A13761DEF96D800856F96 /* StartAtLoginController.h */,
 				746A13771DEF96D800856F96 /* StartAtLoginController.m */,
 				74203A0D1B16ADC20087E214 /* CpuinfoDelegate.h */,
-				74203A0E1B16ADC20087E214 /* CpuinfoDelegate.m */,
+				74203A0E1B16ADC20087E214 /* CpuinfoDelegate.mm */,
 				74203A111B16ADC20087E214 /* main.m */,
+				74DC99CF235459F2005D8091 /* CpuinfoImage.h */,
+				74DC99D0235459F2005D8091 /* CpuinfoImage.m */,
+				74DC99D32354A7B2005D8091 /* Cpuinfo.hpp */,
+				74DC99D22354A7B2005D8091 /* Cpuinfo.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -174,7 +184,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = Cpuinfo;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "Yusuke Shibata";
 				TargetAttributes = {
 					742AC11E1DEBD150005EE2D6 = {
@@ -194,16 +204,14 @@
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "cpuinfo" */;
 			compatibilityVersion = "Xcode 6.3";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
-				English,
-				Japanese,
-				French,
-				German,
 				ja,
 				en,
 				Base,
+				fr,
+				de,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Cpumeter */;
 			projectDirPath = "";
@@ -247,8 +255,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				742AC1561DEBD2F6005EE2D6 /* CpuinfoDelegate.m in Sources */,
+				74DC99D1235459F2005D8091 /* CpuinfoImage.m in Sources */,
+				742AC1561DEBD2F6005EE2D6 /* CpuinfoDelegate.mm in Sources */,
 				742AC1581DEBD2FE005EE2D6 /* main.m in Sources */,
+				74DC99D42354A7B2005D8091 /* Cpuinfo.cpp in Sources */,
 				746A13781DEF96D800856F96 /* StartAtLoginController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,6 +310,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -345,6 +356,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -370,12 +382,20 @@
 			baseConfigurationReference = 740BC7191B04DBFE00324CDD /* cpuinfo.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -402,12 +422,20 @@
 			baseConfigurationReference = 740BC7191B04DBFE00324CDD /* cpuinfo.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
