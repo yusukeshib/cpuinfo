@@ -30,7 +30,7 @@
   if(usage < 0.75) {
     return [NSColor systemGreenColor];
   }
-  else if(usage < 0.9){
+  else if(usage < 0.9) {
     return [NSColor systemOrangeColor];
   }
   else {
