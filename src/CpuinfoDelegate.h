@@ -1,4 +1,5 @@
 #import <Cocoa/Cocoa.h>
+#import "CpuinfoImage.h"
 #import "StartAtLoginController.h"
 
 @interface CpuinfoDelegate : NSObject <NSApplicationDelegate> {
@@ -16,6 +17,5 @@
 @property BOOL startAtLogin;
 @property BOOL showImage;
 @property BOOL showText;
-@property long updateInterval;
 
 @end

@@ -8,36 +8,113 @@
 
 #import "CpuinfoImage.h"
 
-@implementation CpuinfoImage
+#define HEIGHT 16.0f
+#define IMAGEWIDTH 32.0f
+#define IMAGEHEIGHT 8.0f
+#define TEXTWIDTH 32.0f
+#define TEXTHEIGHT 12.0f
 
-- (void) updateUsage:(int)usage
+@implementation CpuinfoImage;
+
+@synthesize imageEnabled = _imageEnabled;
+@synthesize textEnabled = _textEnabled;
+
+-(BOOL)imageEnabled
+{
+  return _imageEnabled;
+}
+
+-(void)setImageEnabled:(BOOL)imageEnabled
+{
+  _imageEnabled = imageEnabled;
+  [self updateSize];
+}
+
+-(BOOL)textEnabled
+{
+  return _textEnabled;
+}
+
+-(void)setTextEnabled:(BOOL)textEnabled
+{
+  _textEnabled = textEnabled;
+  [self updateSize];
+}
+
+- (void)updateSize
+{
+  NSLog(@"text:%d, image:%d", _textEnabled, _imageEnabled);
+  CGFloat width = 0;
+  if(_textEnabled) width += TEXTWIDTH;
+  if(_imageEnabled) width += IMAGEWIDTH;
+  self.size = NSMakeSize(width, HEIGHT);
+}
+
+- (void)updateUsage:(int)usage
 {
   float w = self.size.width; 
   float h = self.size.height;
   
+  if(w == 0 || h == 0) return;
+  
   // lock
   [self lockFocus];
-  [NSGraphicsContext saveGraphicsState];
   
-  NSRect rect = NSMakeRect(0, 0, w, h);
-
   // clear all
-  [self drawInRect:rect fromRect:rect operation:NSCompositeClear fraction:1.0];
+  {
+    NSRect rect = NSMakeRect(0, 0, w, h);
+    [self drawInRect:rect fromRect:rect operation:NSCompositeClear fraction:1.0];
+  }
   
-  // clip rounded
-  NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:rect xRadius:h/2 yRadius:h/2];
-  [path addClip];
+  float offset = 0;
+  
+  if(_imageEnabled) {
+    NSRect rect = NSMakeRect(0, (HEIGHT - IMAGEHEIGHT)/2, IMAGEWIDTH, IMAGEHEIGHT);
+    
+    [NSGraphicsContext saveGraphicsState];
 
-  // background
-  [[NSColor windowBackgroundColor] set];
-  NSRectFill(rect);
-  
-  // usage
-  [[NSColor greenColor] set];
-  NSRectFill(NSMakeRect(0, 0, w*usage/100.0f, h));
+    // clip rounded
+    NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:rect xRadius:IMAGEHEIGHT/2 yRadius:IMAGEHEIGHT/2];
+    [path addClip];
+
+    // background
+    [[NSColor windowBackgroundColor] set];
+    NSRectFill(rect);
+    
+    // usage
+    [[NSColor greenColor] set];
+    NSRectFill(NSMakeRect(0, (HEIGHT - IMAGEHEIGHT)/2, IMAGEWIDTH*usage/100.0f, IMAGEHEIGHT));
+
+    [NSGraphicsContext restoreGraphicsState];
+    
+    offset += IMAGEWIDTH;
+  }
+
+  //
+  if(_textEnabled) {  
+    NSRect rect = NSMakeRect(offset, (HEIGHT - TEXTHEIGHT)/2, TEXTWIDTH, TEXTHEIGHT);
+    
+    [NSGraphicsContext saveGraphicsState];
+
+    // clear all
+    [self drawInRect:rect fromRect:rect operation:NSCompositeClear fraction:1.0];
+    
+    NSFont *font = [NSFont monospacedDigitSystemFontOfSize:[NSFont smallSystemFontSize] weight:NSFontWeightRegular];
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.alignment = NSTextAlignmentCenter;
+    NSDictionary *attributes = @{
+      NSFontAttributeName: font,
+      NSParagraphStyleAttributeName: style,
+      NSForegroundColorAttributeName: [NSColor labelColor]
+    };
+    NSString *str = [NSString stringWithFormat:@"%d%%", usage];
+    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:str attributes:attributes];
+    [text drawInRect:rect];
+
+    [NSGraphicsContext restoreGraphicsState];
+  }
   
   // unlock
-  [NSGraphicsContext restoreGraphicsState];
   [self unlockFocus];
   
 }

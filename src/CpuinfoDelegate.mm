@@ -1,18 +1,14 @@
 #import "CpuinfoDelegate.h"
-#import "CpuinfoImage.h"
 #import "Cpuinfo.hpp"
-
-#define BARWIDTH 36.0f
-#define IMAGESIZE 6.0f
 
 @implementation CpuinfoDelegate {
   NSStatusItem *statusItem;
   StartAtLoginController *loginController;
   BOOL running;
-  CpuinfoImage *image;
+  long updateInterval;
   Cpuinfo cpuinfo;
-  NSMutableAttributedString *title;
   dispatch_group_t group;
+  CpuinfoImage *image;
 }
 
 @synthesize window;
@@ -24,6 +20,9 @@
 }
 
 -(void)awakeFromNib{
+  //
+  image = [[CpuinfoImage alloc] init];
+
   statusItem = [[NSStatusBar systemStatusBar]
                 statusItemWithLength:NSVariableStatusItemLength];
   [statusItem setMenu:self.statusMenu];
@@ -37,28 +36,21 @@
      @"showImage": @YES,
      @"showText": @NO
    }];
-  self.updateInterval = [defaults integerForKey:@"updateInterval"];
+  updateInterval = [defaults integerForKey:@"updateInterval"];
   self.showImage = [defaults boolForKey:@"showImage"];
   self.showText = [defaults boolForKey:@"showText"];
+  image.imageEnabled = self.showImage;
+  image.textEnabled = self.showText;
   
   // updateInterval
   for(int i=0;i<mi_updateInterval.submenu.itemArray.count;i++) {
     NSMenuItem *mi = mi_updateInterval.submenu.itemArray[i];
-    mi.state = mi.tag == self.updateInterval ? NSOnState : NSOffState;
+    mi.state = mi.tag == updateInterval ? NSOnState : NSOffState;
   }
   //
   NSString * identifier = [[[NSBundle mainBundle] bundleIdentifier] stringByAppendingString:@".helper"];
   loginController = [[StartAtLoginController alloc] initWithIdentifier:identifier];
   self.startAtLogin = [loginController startAtLogin];
-  
-  //
-  image = [[CpuinfoImage alloc] initWithSize:NSMakeSize(BARWIDTH, IMAGESIZE)];
-  NSFont *font = [NSFont monospacedDigitSystemFontOfSize:[NSFont smallSystemFontSize]
-                                                  weight:NSFontWeightRegular];
-  NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
-                                                         forKey:NSFontAttributeName];
-  title = [[NSMutableAttributedString alloc] initWithString:@"---"
-                                                 attributes:attributes];
 }
 
 -(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
@@ -73,20 +65,22 @@
     NSMenuItem *mi = mi_selected.menu.itemArray[i];
     if(mi != mi_selected) mi.state = NSOffState;
   }
-  self.updateInterval = mi_selected.tag;
+  updateInterval = mi_selected.tag;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setObject:[NSNumber numberWithInteger:self.updateInterval]
+  [defaults setObject:[NSNumber numberWithInteger:updateInterval]
                forKey:@"updateInterval"];
 }
 
 - (IBAction)updateShowImage:(id)sender {
   BOOL showImage = !self.showImage;
+  image.imageEnabled = showImage;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:showImage forKey:@"showImage"];
 }
 
 - (IBAction)updateShowText:(id)sender {
   BOOL showText = !self.showText;
+  image.textEnabled = showText;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:showText forKey:@"showText"];
 }
@@ -124,7 +118,7 @@
   
   @autoreleasepool {
     while(running) {
-      double interval = MAX((double)self.updateInterval/1000.0, 0.1);
+      double interval = MAX((double)updateInterval/1000.0, 0.1);
       [NSThread sleepForTimeInterval:interval];
       
       cpuinfo.update();
@@ -138,18 +132,8 @@
 }
 
 -(void) updateView:(int)usage {
-  if(self.showImage) {
-    [image updateUsage:usage];
-    statusItem.image = image;
-  } else {
-    statusItem.image = nil;
-  }
-  if(self.showText) {
-    title.mutableString.string = [NSString stringWithFormat:@"%d%%",usage];
-    statusItem.attributedTitle = title;
-  } else {
-    statusItem.attributedTitle = nil;
-  }
+  [image updateUsage:usage];
+  statusItem.image = image;
 }
 
 @end

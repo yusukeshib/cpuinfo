@@ -12,7 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CpuinfoImage : NSImage
 
-- (void) updateUsage:(int)usage;
+- (void)updateUsage:(int)usage;
+
+@property BOOL textEnabled;
+@property BOOL imageEnabled;
 
 @end
 
