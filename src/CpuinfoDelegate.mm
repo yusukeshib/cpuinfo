@@ -114,7 +114,7 @@
 }
 
 -(void)updateLoop {
-  int usage;
+  float usage;
   
   @autoreleasepool {
     while(running) {
@@ -122,7 +122,7 @@
       [NSThread sleepForTimeInterval:interval];
       
       cpuinfo.update();
-      usage = round(cpuinfo.getUsage() * 100.0);
+      usage = cpuinfo.getUsage();
       
       dispatch_async(dispatch_get_main_queue(), ^{
         [self updateView:usage];
@@ -131,7 +131,7 @@
   }
 }
 
--(void) updateView:(int)usage {
+-(void) updateView:(float)usage {
   [image updateUsage:usage];
   statusItem.image = image;
 }

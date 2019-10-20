@@ -8,7 +8,7 @@
 
 #import "CpuinfoImage.h"
 
-#define HEIGHT 16.0f
+#define HEIGHT 24.0f
 #define IMAGEWIDTH 32.0f
 #define IMAGEHEIGHT 8.0f
 #define TEXTWIDTH 32.0f
@@ -22,6 +22,20 @@
 -(BOOL)imageEnabled
 {
   return _imageEnabled;
+}
+
+- (NSColor *)colorForUsage:(float)usage
+{
+  // usage
+  if(usage < 0.75) {
+    return [NSColor systemGreenColor];
+  }
+  else if(usage < 0.9){
+    return [NSColor systemOrangeColor];
+  }
+  else {
+    return [NSColor systemRedColor];
+  }
 }
 
 -(void)setImageEnabled:(BOOL)imageEnabled
@@ -43,14 +57,13 @@
 
 - (void)updateSize
 {
-  NSLog(@"text:%d, image:%d", _textEnabled, _imageEnabled);
   CGFloat width = 0;
   if(_textEnabled) width += TEXTWIDTH;
   if(_imageEnabled) width += IMAGEWIDTH;
   self.size = NSMakeSize(width, HEIGHT);
 }
 
-- (void)updateUsage:(int)usage
+- (void)updateUsage:(float)usage
 {
   float w = self.size.width; 
   float h = self.size.height;
@@ -82,8 +95,8 @@
     NSRectFill(rect);
     
     // usage
-    [[NSColor greenColor] set];
-    NSRectFill(NSMakeRect(0, (HEIGHT - IMAGEHEIGHT)/2, IMAGEWIDTH*usage/100.0f, IMAGEHEIGHT));
+    [[self colorForUsage:usage] set];
+    NSRectFill(NSMakeRect(0, (HEIGHT - IMAGEHEIGHT)/2, IMAGEWIDTH*usage, IMAGEHEIGHT));
 
     [NSGraphicsContext restoreGraphicsState];
     
@@ -105,9 +118,9 @@
     NSDictionary *attributes = @{
       NSFontAttributeName: font,
       NSParagraphStyleAttributeName: style,
-      NSForegroundColorAttributeName: [NSColor labelColor]
+      NSForegroundColorAttributeName: [self colorForUsage:usage]
     };
-    NSString *str = [NSString stringWithFormat:@"%d%%", usage];
+    NSString *str = [NSString stringWithFormat:@"%d%%", (int)round(usage * 100.0f)];
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:str attributes:attributes];
     [text drawInRect:rect];
 
