@@ -6,17 +6,27 @@
 #include <mach/processor_info.h>
 #include <stdio.h>
 
+typedef struct _coreinfo_t {
+  natural_t cpu_ticks[CPU_STATE_MAX];
+  double usage;
+} coreinfo_t;
+
 class Cpuinfo
 {
 public:
   Cpuinfo();
+  virtual ~Cpuinfo();
   void update();
-  double getUsage();
+  double getHostUsage();
+  double getCoreUsageAt(unsigned int index);
+  unsigned int getCoreCount();
+  void setMultiCoreEnabled(bool enabled);
   
 private:
-  host_cpu_load_info_data_t _prev;
-  mach_port_t _hostport;
-  double _usage;
+  bool multiCoreEnabled;
+  unsigned int core_count;
+  coreinfo_t host;
+  coreinfo_t *cores;
 };
 
 #endif /* Cpuinfo_hpp */

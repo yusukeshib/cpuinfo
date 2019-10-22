@@ -14,7 +14,7 @@
 		742AC15A1DEBD532005EE2D6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74203A181B16ADD10087E214 /* MainMenu.xib */; };
 		746A13781DEF96D800856F96 /* StartAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746A13771DEF96D800856F96 /* StartAtLoginController.m */; };
 		746A13951DEF9CCD00856F96 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 746A13941DEF9CCD00856F96 /* ServiceManagement.framework */; };
-		74DC99D1235459F2005D8091 /* CpuinfoImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DC99D0235459F2005D8091 /* CpuinfoImage.m */; };
+		74DC99D1235459F2005D8091 /* CpuinfoImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74DC99D0235459F2005D8091 /* CpuinfoImage.mm */; };
 		74DC99D42354A7B2005D8091 /* Cpuinfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DC99D22354A7B2005D8091 /* Cpuinfo.cpp */; };
 /* End PBXBuildFile section */
 
@@ -74,7 +74,7 @@
 		746A13771DEF96D800856F96 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
 		746A13941DEF9CCD00856F96 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		74DC99CF235459F2005D8091 /* CpuinfoImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CpuinfoImage.h; sourceTree = "<group>"; };
-		74DC99D0235459F2005D8091 /* CpuinfoImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CpuinfoImage.m; sourceTree = "<group>"; };
+		74DC99D0235459F2005D8091 /* CpuinfoImage.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CpuinfoImage.mm; sourceTree = "<group>"; };
 		74DC99D22354A7B2005D8091 /* Cpuinfo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Cpuinfo.cpp; sourceTree = "<group>"; };
 		74DC99D32354A7B2005D8091 /* Cpuinfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Cpuinfo.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,7 +148,7 @@
 				74203A0E1B16ADC20087E214 /* CpuinfoDelegate.mm */,
 				74203A111B16ADC20087E214 /* main.m */,
 				74DC99CF235459F2005D8091 /* CpuinfoImage.h */,
-				74DC99D0235459F2005D8091 /* CpuinfoImage.m */,
+				74DC99D0235459F2005D8091 /* CpuinfoImage.mm */,
 				74DC99D32354A7B2005D8091 /* Cpuinfo.hpp */,
 				74DC99D22354A7B2005D8091 /* Cpuinfo.cpp */,
 			);
@@ -255,7 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74DC99D1235459F2005D8091 /* CpuinfoImage.m in Sources */,
+				74DC99D1235459F2005D8091 /* CpuinfoImage.mm in Sources */,
 				742AC1561DEBD2F6005EE2D6 /* CpuinfoDelegate.mm in Sources */,
 				742AC1581DEBD2FE005EE2D6 /* main.m in Sources */,
 				74DC99D42354A7B2005D8091 /* Cpuinfo.cpp in Sources */,

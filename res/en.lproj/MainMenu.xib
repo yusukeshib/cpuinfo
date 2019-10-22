@@ -61,8 +61,8 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="updateShowImage:" target="494" id="syQ-mX-s33"/>
-                                    <binding destination="494" name="enabled" keyPath="showText" id="fHY-58-eIO"/>
                                     <binding destination="494" name="value" keyPath="showImage" id="4BH-g2-uBM"/>
+                                    <binding destination="494" name="enabled" keyPath="showText" id="fHY-58-eIO"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Text" id="544">
@@ -76,11 +76,18 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem isSeparatorItem="YES" id="590"/>
-                <menuItem title="Open Activity Monitor" id="602">
+                <menuItem title="Show cores indivisually" id="602">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="launchActivityMonitor:" target="494" id="603"/>
+                        <action selector="updateCoresIndividually:" target="494" id="brU-gf-ctp"/>
+                        <binding destination="494" name="value" keyPath="showCoresIndividually" id="C89-kE-3Cd"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="590"/>
+                <menuItem title="Open Activity Monitor" id="RfE-ia-xId">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="launchActivityMonitor:" target="494" id="jNM-rb-se6"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Quit" id="539">

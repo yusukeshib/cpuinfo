@@ -7,15 +7,18 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Cpuinfo.hpp"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CpuinfoImage : NSImage
 
-- (void)updateUsage:(float)usage;
+- (void)update;
+- (void)setCpuinfo:(Cpuinfo *)cpuinfo;
 
 @property BOOL textEnabled;
 @property BOOL imageEnabled;
+@property BOOL multiCoreEnabled;
 
 @end
 

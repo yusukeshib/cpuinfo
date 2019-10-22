@@ -22,6 +22,7 @@
 -(void)awakeFromNib{
   //
   image = [[CpuinfoImage alloc] init];
+  [image setCpuinfo:&cpuinfo];
 
   statusItem = [[NSStatusBar systemStatusBar]
                 statusItemWithLength:NSVariableStatusItemLength];
@@ -39,8 +40,11 @@
   updateInterval = [defaults integerForKey:@"updateInterval"];
   self.showImage = [defaults boolForKey:@"showImage"];
   self.showText = [defaults boolForKey:@"showText"];
+  self.showCoresIndividually = [defaults boolForKey:@"showCoresIndividually"];
   image.imageEnabled = self.showImage;
   image.textEnabled = self.showText;
+  image.multiCoreEnabled = self.showCoresIndividually;
+  cpuinfo.setMultiCoreEnabled(self.showCoresIndividually);
   
   // updateInterval
   for(int i=0;i<mi_updateInterval.submenu.itemArray.count;i++) {
@@ -85,6 +89,14 @@
   [defaults setBool:showText forKey:@"showText"];
 }
 
+- (IBAction)updateCoresIndividually:(id)sender {
+  BOOL showCoresIndividually = !self.showCoresIndividually;
+  image.multiCoreEnabled = showCoresIndividually;
+  cpuinfo.setMultiCoreEnabled(showCoresIndividually);
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setBool:showCoresIndividually forKey:@"showCoresIndividually"];
+}
+
 - (IBAction)updateStartAtLogin:(id)sender {
   BOOL startAtLogin = !self.startAtLogin;
   loginController.startAtLogin = startAtLogin;
@@ -114,25 +126,22 @@
 }
 
 -(void)updateLoop {
-  float usage;
-  
   @autoreleasepool {
     while(running) {
       double interval = MAX((double)updateInterval/1000.0, 0.1);
       [NSThread sleepForTimeInterval:interval];
       
       cpuinfo.update();
-      usage = cpuinfo.getUsage();
       
       dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateView:usage];
+        [self updateView];
       });
     }
   }
 }
 
--(void) updateView:(float)usage {
-  [image updateUsage:usage];
+-(void) updateView {
+  [image update];
   statusItem.image = image;
 }
 
