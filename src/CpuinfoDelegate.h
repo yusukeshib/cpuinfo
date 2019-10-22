@@ -1,4 +1,5 @@
 #import <Cocoa/Cocoa.h>
+#import "CpuinfoImage.h"
 #import "StartAtLoginController.h"
 
 @interface CpuinfoDelegate : NSObject <NSApplicationDelegate> {
@@ -14,8 +15,8 @@
 @property IBOutlet NSMenu *statusMenu;
 @property IBOutlet NSMenuItem *mi_updateInterval;
 @property BOOL startAtLogin;
+@property BOOL showCoresIndividually;
 @property BOOL showImage;
 @property BOOL showText;
-@property long updateInterval;
 
 @end

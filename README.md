@@ -4,7 +4,7 @@ This application is stationed in Menu bar showing cpu usage with visual bar or t
 
 ## Requirements
 
-OSX Version: 10.6+
+OSX Version: 10.7+
 
 ## Screenshot
 

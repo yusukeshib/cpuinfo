@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15400" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -68,8 +68,8 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="updateShowImage:" target="494" id="0Lf-Td-Xou"/>
-                                    <binding destination="494" name="enabled" keyPath="showText" id="vQa-CT-BnO"/>
                                     <binding destination="494" name="value" keyPath="showImage" id="mSj-Sh-868"/>
+                                    <binding destination="494" name="enabled" keyPath="showText" id="vQa-CT-BnO"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="テキスト" id="604">
@@ -82,6 +82,12 @@
                             </menuItem>
                         </items>
                     </menu>
+                </menuItem>
+                <menuItem title="コアを個別に表示" id="sfM-zJ-Hl0">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="494" name="value" keyPath="showCoresIndividually" id="rfZ-Ur-lGp"/>
+                    </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="590"/>
                 <menuItem title="アクティビティモニタを開く" id="602">
@@ -100,6 +106,7 @@
             <connections>
                 <outlet property="delegate" destination="494" id="yi5-Mx-NVA"/>
             </connections>
+            <point key="canvasLocation" x="142" y="152"/>
         </menu>
         <userDefaultsController representsSharedInstance="YES" id="556"/>
     </objects>
