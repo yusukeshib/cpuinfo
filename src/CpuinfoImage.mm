@@ -29,7 +29,25 @@
   cpuinfo = _cpuinfo;
 }
 
-- (NSColor *)colorForUsage:(float)usage
+- (NSColor *)textColorForUsage:(float)usage
+{
+  // usage
+  if(usage < 0.75) {
+    if (@available(macOS 10.13, *)) {
+      return [NSColor colorNamed:@"GreenText"];
+    } else {
+      return [NSColor systemGreenColor];
+    }
+  }
+  else if(usage < 0.9) {
+    return [NSColor systemOrangeColor];
+  }
+  else {
+    return [NSColor systemRedColor];
+  }
+}
+
+- (NSColor *)imageColorForUsage:(float)usage
 {
   // usage
   if(usage < 0.75) {
@@ -125,7 +143,7 @@
         NSRectFill(rect);
         
         // usage
-        [[self colorForUsage:coreUsage] set];
+        [[self imageColorForUsage:coreUsage] set];
         NSRectFill(NSMakeRect(offset, (HEIGHT - IMAGEHEIGHT)/2, COREIMAGEWIDTH*coreUsage, IMAGEHEIGHT));
         
         [NSGraphicsContext restoreGraphicsState];
@@ -148,7 +166,7 @@
         NSDictionary *attributes = @{
           NSFontAttributeName: font,
           NSParagraphStyleAttributeName: style,
-          NSForegroundColorAttributeName: [self colorForUsage:coreUsage]
+          NSForegroundColorAttributeName: [self textColorForUsage:coreUsage]
         };
         NSString *str = [NSString stringWithFormat:@"%d%%", (int)round(coreUsage * 100.0f)];
         NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:str attributes:attributes];
@@ -181,7 +199,7 @@
       NSRectFill(rect);
       
       // usage
-      [[self colorForUsage:hostUsage] set];
+      [[self imageColorForUsage:hostUsage] set];
       NSRectFill(NSMakeRect(0, (HEIGHT - IMAGEHEIGHT)/2, HOSTIMAGEWIDTH*hostUsage, IMAGEHEIGHT));
 
       [NSGraphicsContext restoreGraphicsState];
@@ -204,7 +222,7 @@
       NSDictionary *attributes = @{
         NSFontAttributeName: font,
         NSParagraphStyleAttributeName: style,
-        NSForegroundColorAttributeName: [self colorForUsage:hostUsage]
+        NSForegroundColorAttributeName: [self textColorForUsage:hostUsage]
       };
       NSString *str = [NSString stringWithFormat:@"%d%%", (int)round(hostUsage * 100.0f)];
       NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:str attributes:attributes];
