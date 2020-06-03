@@ -57,6 +57,24 @@
                                     <action selector="updateUpdateInterval:" target="494" id="ooz-71-4fJ"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="5秒" tag="5000" id="fVQ-98-yFP">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="updateUpdateInterval:" target="494" id="U5b-ky-IoS"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="10秒" tag="10000" id="cTE-TS-UtU">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="updateUpdateInterval:" target="494" id="WaA-iA-aO4"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="30秒" tag="30000" id="FuY-ZF-OAa">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="updateUpdateInterval:" target="494" id="PA1-1U-fYi"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>

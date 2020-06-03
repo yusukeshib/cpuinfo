@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15400" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -48,6 +48,24 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="updateUpdateInterval:" target="494" id="D1c-5b-FyR"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="5sec" tag="5000" id="qsC-Hj-hOu">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="updateUpdateInterval:" target="494" id="PuH-Rb-DTY"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="10sec" tag="10000" id="fxa-mN-qti">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="updateUpdateInterval:" target="494" id="CXC-SJ-l9h"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="30sec" tag="30000" id="kcg-I6-XWH">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="updateUpdateInterval:" target="494" id="7b0-oR-URZ"/>
                                 </connections>
                             </menuItem>
                         </items>
