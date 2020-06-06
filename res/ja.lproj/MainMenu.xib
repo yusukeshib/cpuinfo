@@ -14,6 +14,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="494" customClass="CpuinfoDelegate">
             <connections>
+                <outlet property="mi_theme" destination="8Hg-ui-yi9" id="kNR-Dj-1g7"/>
                 <outlet property="mi_updateInterval" destination="545" id="9Jc-EE-aal"/>
                 <outlet property="statusMenu" destination="536" id="bbZ-yM-I5R"/>
             </connections>
@@ -96,6 +97,25 @@
                                     <action selector="updateShowText:" target="494" id="Up1-dB-sw6"/>
                                     <binding destination="494" name="enabled" keyPath="showImage" id="4ye-h5-CGF"/>
                                     <binding destination="494" name="value" keyPath="showText" id="5Go-r5-Mo7"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="テーマ" id="8Hg-ui-yi9">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="テーマ" id="dGJ-Kn-gO5">
+                        <items>
+                            <menuItem title="Default" id="ULJ-2z-yDM">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="updateTheme:" target="494" id="KvF-nA-xDU"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="B/W" id="d0V-CP-t4L">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="updateTheme:" target="494" id="gKJ-pj-8vJ"/>
                                 </connections>
                             </menuItem>
                         </items>

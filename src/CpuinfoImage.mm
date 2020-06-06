@@ -20,6 +20,7 @@
 @synthesize textEnabled = _textEnabled;
 @synthesize darkMode = _darkMode;
 @synthesize multiCoreEnabled = _multiCoreEnabled;
+@synthesize theme = _theme;
 
 // https://stackoverflow.com/questions/8697205/convert-hex-color-code-to-nscolor/8697241
 - (NSColor*)colorWithHexColorString:(NSString*)inColorString
@@ -45,11 +46,18 @@
   return result;
 }
 
-- (NSDictionary *) currentTheme
+- (NSDictionary *)currentTheme
 {
-  NSArray *dic = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"theme"];
-  NSDictionary *themeDef = [dic objectAtIndex:0];
-  return [themeDef objectForKey: _darkMode ? @"dark" : @"light"];
+  NSArray *themes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"theme"];
+  id currentTheme = [themes objectAtIndex:0];
+  for(id themeItem in themes) {
+    NSString *name = [themeItem objectForKey:@"name"];
+    if([name isEqual: _theme]) {
+      currentTheme = themeItem;
+      break;
+    }
+  }
+  return [currentTheme objectForKey: _darkMode ? @"dark" : @"light"];
 }
 
 - (NSColor *)colorForKey: (NSString *)key
@@ -97,6 +105,16 @@
   else {
     return [self colorForKey:@"BAR_HIGH"];
   }
+}
+
+-(void)setTheme:(NSString *)theme
+{
+  _theme = theme;
+}
+
+-(NSString *)theme
+{
+  return _theme;
 }
 
 -(BOOL)multiCoreEnabled

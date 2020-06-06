@@ -14,6 +14,7 @@
 @synthesize window;
 @synthesize statusMenu;
 @synthesize mi_updateInterval;
+@synthesize mi_theme;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   [self begin];
@@ -23,7 +24,7 @@
   //
   image = [[CpuinfoImage alloc] init];
   [image setCpuinfo:&cpuinfo];
-
+  
   statusItem = [[NSStatusBar systemStatusBar]
                 statusItemWithLength:NSVariableStatusItemLength];
   [statusItem setMenu:self.statusMenu];
@@ -38,6 +39,7 @@
      @"showText": @NO
    }];
   updateInterval = [defaults integerForKey:@"updateInterval"];
+  image.theme = [defaults stringForKey:@"theme"];
   self.showImage = [defaults boolForKey:@"showImage"];
   self.showText = [defaults boolForKey:@"showText"];
   self.showCoresIndividually = [defaults boolForKey:@"showCoresIndividually"];
@@ -50,6 +52,11 @@
   for(int i=0;i<mi_updateInterval.submenu.itemArray.count;i++) {
     NSMenuItem *mi = mi_updateInterval.submenu.itemArray[i];
     mi.state = mi.tag == updateInterval ? NSOnState : NSOffState;
+  }
+  // theme
+  for(int i=0;i<mi_theme.submenu.itemArray.count;i++) {
+    NSMenuItem *mi = mi_theme.submenu.itemArray[i];
+    mi.state = [mi.title isEqual:image.theme] ? NSOnState : NSOffState;
   }
   //
   NSString * identifier = [[[NSBundle mainBundle] bundleIdentifier] stringByAppendingString:@".helper"];
@@ -75,6 +82,19 @@
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setObject:[NSNumber numberWithInteger:updateInterval]
                forKey:@"updateInterval"];
+}
+
+- (IBAction)updateTheme:(id)sender {
+  NSMenuItem *mi_selected = sender;
+  mi_selected.state = NSOnState;
+  for(int i=0;i<mi_selected.menu.itemArray.count;i++) {
+    NSMenuItem *mi = mi_selected.menu.itemArray[i];
+    if(mi != mi_selected) mi.state = NSOffState;
+  }
+  image.theme = mi_selected.title;
+ NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setObject:image.theme
+               forKey:@"theme"];
 }
 
 - (IBAction)updateShowImage:(id)sender {
@@ -168,4 +188,5 @@
   }
 }
 @end
+
 

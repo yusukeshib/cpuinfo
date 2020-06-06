@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property BOOL textEnabled;
 @property BOOL imageEnabled;
 @property BOOL multiCoreEnabled;
+@property NSString *theme;
 
 @end
 
