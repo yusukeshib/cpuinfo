@@ -48,5 +48,68 @@
 			<string>https://github.com/yusukeshibata/cpumeter/blob/master/dist/cpumeter.zip?raw=true</string>
 		</dict>
 	</dict>
+	<key>theme</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>default</string>
+			<key>light</key>
+			<dict>
+				<key>BORDERRADIUS</key>
+				<integer>4</integer>
+				<key>BARWIDTH</key>
+				<integer>32</integer>
+				<key>BARWIDTH_INDIVIDUAL</key>
+				<integer>24</integer>
+				<key>BARMARGIN_INDIVIDUAL</key>
+				<string>4</string>
+				<key>BARHEIGHT</key>
+				<integer>8</integer>
+				<key>BAR_BACKGROUND</key>
+				<string>222222</string>
+				<key>BAR_NORMAL</key>
+				<string>00FF00</string>
+				<key>BAR_MEDIUM</key>
+				<string>FFFF00</string>
+				<key>BAR_HIGH</key>
+				<string>FF0000</string>
+				<key>TEXT_NORMAL</key>
+				<string>333333</string>
+				<key>TEXT_MEDIUM</key>
+				<string>333333</string>
+				<key>TEXT_HIGH</key>
+				<string>333333</string>
+			</dict>
+			<key>dark</key>
+			<dict>
+				<key>BORDERRADIUS</key>
+				<integer>4</integer>
+				<key>BARWIDTH</key>
+				<integer>32</integer>
+				<key>BARWIDTH_INDIVIDUAL</key>
+				<integer>24</integer>
+				<key>BARMARGIN_INDIVIDUAL</key>
+				<string>4</string>
+				<key>BARHEIGHT</key>
+				<integer>8</integer>
+				<key>BAR_BACKGROUND</key>
+				<string>222222</string>
+				<key>BAR_NORMAL</key>
+				<string>00FF00</string>
+				<key>BAR_NORMAL - 2</key>
+				<string>00FF00</string>
+				<key>BAR_MEDIUM</key>
+				<string>FFFF00</string>
+				<key>BAR_HIGH</key>
+				<string>FF0000</string>
+				<key>TEXT_NORMAL</key>
+				<string>00FF00</string>
+				<key>TEXT_MEDIUM</key>
+				<string>FFFF00</string>
+				<key>TEXT_HIGH</key>
+				<string>FF0000</string>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>
