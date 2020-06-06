@@ -55,6 +55,8 @@
   NSString * identifier = [[[NSBundle mainBundle] bundleIdentifier] stringByAppendingString:@".helper"];
   loginController = [[StartAtLoginController alloc] initWithIdentifier:identifier];
   self.startAtLogin = [loginController startAtLogin];
+  //
+  [self updateView];
 }
 
 -(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
@@ -80,6 +82,8 @@
   image.imageEnabled = showImage;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:showImage forKey:@"showImage"];
+  //
+  [self updateView];
 }
 
 - (IBAction)updateShowText:(id)sender {
@@ -87,6 +91,8 @@
   image.textEnabled = showText;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:showText forKey:@"showText"];
+  //
+  [self updateView];
 }
 
 - (IBAction)updateCoresIndividually:(id)sender {
@@ -95,6 +101,8 @@
   cpuinfo.setMultiCoreEnabled(showCoresIndividually);
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:showCoresIndividually forKey:@"showCoresIndividually"];
+  //
+  [self updateView];
 }
 
 - (IBAction)updateStartAtLogin:(id)sender {
