@@ -140,7 +140,6 @@
       [NSThread sleepForTimeInterval:interval];
       
       cpuinfo.update();
-      
       dispatch_async(dispatch_get_main_queue(), ^{
         [self updateView];
       });
@@ -150,8 +149,23 @@
 
 -(void) updateView {
   [image update];
+  [image setDarkMode:[self appearanceIsDark]];
   statusItem.image = image;
 }
 
+- (BOOL)appearanceIsDark
+{
+  if (@available(macOS 10.14, *)) {
+    NSApplication *app = [NSApplication sharedApplication];
+    NSAppearance *appearance = app.effectiveAppearance;
+    NSAppearanceName basicAppearance = [appearance bestMatchFromAppearancesWithNames:@[
+      NSAppearanceNameAqua,
+      NSAppearanceNameDarkAqua
+    ]];
+    return [basicAppearance isEqualToString:NSAppearanceNameDarkAqua];
+  } else {
+    return NO;
+  }
+}
 @end
 

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)update;
 - (void)setCpuinfo:(Cpuinfo *)cpuinfo;
 
+@property BOOL darkMode;
 @property BOOL textEnabled;
 @property BOOL imageEnabled;
 @property BOOL multiCoreEnabled;

@@ -22,25 +22,12 @@
 
 @synthesize imageEnabled = _imageEnabled;
 @synthesize textEnabled = _textEnabled;
+@synthesize darkMode = _darkMode;
 @synthesize multiCoreEnabled = _multiCoreEnabled;
 
 - (void)setCpuinfo:(Cpuinfo *)_cpuinfo
 {
   cpuinfo = _cpuinfo;
-}
-
-- (BOOL)appearanceIsDark
-{
-  if (@available(macOS 10.14, *)) {
-    NSAppearance *appearance = NSAppearance.currentAppearance;
-    NSAppearanceName basicAppearance = [appearance bestMatchFromAppearancesWithNames:@[
-      NSAppearanceNameAqua,
-      NSAppearanceNameDarkAqua
-    ]];
-    return [basicAppearance isEqualToString:NSAppearanceNameDarkAqua];
-  } else {
-    return NO;
-  }
 }
 
 - (NSColor *)textColorForUsage:(float)usage
@@ -49,7 +36,7 @@
   if(usage < 0.75) {
     if (@available(macOS 10.13, *)) {
       return [NSColor colorNamed:@"GreenText"];
-    } else if([self appearanceIsDark]) {
+    } else if(_darkMode) {
       return [NSColor systemGreenColor];
     } else {
       return [NSColor blackColor];
@@ -91,6 +78,16 @@
 -(BOOL)imageEnabled
 {
   return _imageEnabled;
+}
+
+-(BOOL)darkMode
+{
+  return _darkMode;
+}
+
+-(void)setDarkMode:(BOOL)darkMode
+{
+  _darkMode = darkMode;
 }
 
 -(void)setImageEnabled:(BOOL)imageEnabled
