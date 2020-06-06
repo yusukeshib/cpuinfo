@@ -9,10 +9,6 @@
 #import "CpuinfoImage.h"
 
 #define HEIGHT 24.0f
-#define HOSTIMAGEWIDTH 32.0f
-#define COREIMAGEWIDTH 24.0f
-#define COREMARGIN 4.0f
-#define IMAGEHEIGHT 8.0f
 #define TEXTWIDTH 32.0f
 #define TEXTHEIGHT 12.0f
 
@@ -22,44 +18,78 @@
 
 @synthesize imageEnabled = _imageEnabled;
 @synthesize textEnabled = _textEnabled;
+@synthesize darkMode = _darkMode;
 @synthesize multiCoreEnabled = _multiCoreEnabled;
+@synthesize theme = _theme;
+
+// https://stackoverflow.com/questions/8697205/convert-hex-color-code-to-nscolor/8697241
+- (NSColor*)colorWithHexColorString:(NSString*)inColorString
+{
+  NSColor* result = nil;
+  unsigned colorCode = 0;
+  unsigned char redByte, greenByte, blueByte;
+  
+  if (nil != inColorString)
+  {
+    NSScanner* scanner = [NSScanner scannerWithString:inColorString];
+    (void) [scanner scanHexInt:&colorCode]; // ignore error
+  }
+  redByte = (unsigned char)(colorCode >> 16);
+  greenByte = (unsigned char)(colorCode >> 8);
+  blueByte = (unsigned char)(colorCode); // masks off high bits
+  
+  result = [NSColor
+            colorWithCalibratedRed:(CGFloat)redByte / 0xff
+            green:(CGFloat)greenByte / 0xff
+            blue:(CGFloat)blueByte / 0xff
+            alpha:1.0];
+  return result;
+}
+
+- (NSDictionary *)currentTheme
+{
+  NSArray *themes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"theme"];
+  id currentTheme = [themes objectAtIndex:0];
+  for(id themeItem in themes) {
+    NSString *name = [themeItem objectForKey:@"name"];
+    if([name isEqual: _theme]) {
+      currentTheme = themeItem;
+      break;
+    }
+  }
+  return [currentTheme objectForKey: _darkMode ? @"dark" : @"light"];
+}
+
+- (NSColor *)colorForKey: (NSString *)key
+{
+  NSDictionary *theme = [self currentTheme];
+  NSString *colorHex = [theme objectForKey:key];
+  return [self colorWithHexColorString: colorHex];
+}
+
+- (int)intForKey: (NSString *)key
+{
+  NSDictionary *theme = [self currentTheme];
+  NSNumber *value = [theme objectForKey:key];
+  return [value intValue];
+}
 
 - (void)setCpuinfo:(Cpuinfo *)_cpuinfo
 {
   cpuinfo = _cpuinfo;
 }
 
-- (BOOL)appearanceIsDark
-{
-  if (@available(macOS 10.14, *)) {
-    NSAppearance *appearance = NSAppearance.currentAppearance;
-    NSAppearanceName basicAppearance = [appearance bestMatchFromAppearancesWithNames:@[
-      NSAppearanceNameAqua,
-      NSAppearanceNameDarkAqua
-    ]];
-    return [basicAppearance isEqualToString:NSAppearanceNameDarkAqua];
-  } else {
-    return NO;
-  }
-}
-
 - (NSColor *)textColorForUsage:(float)usage
 {
   // usage
   if(usage < 0.75) {
-    if (@available(macOS 10.13, *)) {
-      return [NSColor colorNamed:@"GreenText"];
-    } else if([self appearanceIsDark]) {
-      return [NSColor systemGreenColor];
-    } else {
-      return [NSColor blackColor];
-    }
+    return [self colorForKey:@"TEXT_NORMAL"];
   }
   else if(usage < 0.9) {
-    return [NSColor systemOrangeColor];
+    return [self colorForKey:@"TEXT_MEDIUM"];
   }
   else {
-    return [NSColor systemRedColor];
+    return [self colorForKey:@"TEXT_HIGH"];
   }
 }
 
@@ -67,14 +97,24 @@
 {
   // usage
   if(usage < 0.75) {
-    return [NSColor systemGreenColor];
+    return [self colorForKey:@"BAR_NORMAL"];
   }
   else if(usage < 0.9) {
-    return [NSColor systemOrangeColor];
+    return [self colorForKey:@"BAR_MEDIUM"];
   }
   else {
-    return [NSColor systemRedColor];
+    return [self colorForKey:@"BAR_HIGH"];
   }
+}
+
+-(void)setTheme:(NSString *)theme
+{
+  _theme = theme;
+}
+
+-(NSString *)theme
+{
+  return _theme;
 }
 
 -(BOOL)multiCoreEnabled
@@ -91,6 +131,16 @@
 -(BOOL)imageEnabled
 {
   return _imageEnabled;
+}
+
+-(BOOL)darkMode
+{
+  return _darkMode;
+}
+
+-(void)setDarkMode:(BOOL)darkMode
+{
+  _darkMode = darkMode;
 }
 
 -(void)setImageEnabled:(BOOL)imageEnabled
@@ -114,10 +164,15 @@
 {
   CGFloat width = 0;
   int iteration = _multiCoreEnabled ? cpuinfo->getCoreCount() : 1;
+  int barWidth = [self intForKey: @"BARWIDTH"];
+  int barWidthIndividual = [self intForKey: @"BARWIDTH_INDIVIDUAL"];
+  int barMargin = [self intForKey: @"BARMARGIN_INDIVIDUAL"];
   for(int i = 0; i< iteration; i++) {
     if(_textEnabled) width += TEXTWIDTH;
-    if(_imageEnabled) width += _multiCoreEnabled ? COREIMAGEWIDTH : HOSTIMAGEWIDTH;
-    if(_multiCoreEnabled) width += COREMARGIN;
+    if(_imageEnabled) {
+      width += _multiCoreEnabled ? barWidthIndividual : barWidth;
+    }
+    if(_multiCoreEnabled) width += barMargin;
   }
   self.size = NSMakeSize(width, HEIGHT);
   [self update];
@@ -140,31 +195,37 @@
   }
   
   float offset = 0;
+  int barMargin = [self intForKey: @"BARMARGIN_INDIVIDUAL"];
   
   if(_multiCoreEnabled) {
     for(int i = 0; i < cpuinfo->getCoreCount(); i++) {
       double coreUsage = cpuinfo->getCoreUsageAt(i);
+      int barWidthIndividual = [self intForKey: @"BARWIDTH_INDIVIDUAL"];
+      int barHeight = [self intForKey: @"BARHEIGHT"];
     
       if(_imageEnabled) {
-        NSRect rect = NSMakeRect(offset, (HEIGHT - IMAGEHEIGHT)/2, COREIMAGEWIDTH, IMAGEHEIGHT);
+        NSRect rect = NSMakeRect(offset, (HEIGHT - barHeight)/2, barWidthIndividual, barHeight);
         
         [NSGraphicsContext saveGraphicsState];
         
         // clip rounded
-        NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:rect xRadius:IMAGEHEIGHT/2 yRadius:IMAGEHEIGHT/2];
+        int radius = [self intForKey: @"BORDERRADIUS"];
+        NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:rect xRadius:radius yRadius:radius];
         [path addClip];
         
         // background
-        [[NSColor windowBackgroundColor] set];
+        NSColor *bgColor = [self colorForKey:@"BAR_BACKGROUND"];
+        [bgColor set];
+        
         NSRectFill(rect);
         
         // usage
         [[self imageColorForUsage:coreUsage] set];
-        NSRectFill(NSMakeRect(offset, (HEIGHT - IMAGEHEIGHT)/2, COREIMAGEWIDTH*coreUsage, IMAGEHEIGHT));
+        NSRectFill(NSMakeRect(offset, (HEIGHT - barHeight)/2, barWidthIndividual*coreUsage, barHeight));
         
         [NSGraphicsContext restoreGraphicsState];
         
-        offset += COREIMAGEWIDTH;
+        offset += barWidthIndividual;
       }
       
       //
@@ -193,7 +254,7 @@
         offset += TEXTWIDTH;
       }
       
-      offset += COREMARGIN;
+      offset += barMargin;
 
     }
     
@@ -202,25 +263,30 @@
     double hostUsage = cpuinfo->getHostUsage();
     
     if(_imageEnabled) {
-      NSRect rect = NSMakeRect(0, (HEIGHT - IMAGEHEIGHT)/2, HOSTIMAGEWIDTH, IMAGEHEIGHT);
+      int barWidth = [self intForKey: @"BARWIDTH"];
+      int barHeight = [self intForKey: @"BARHEIGHT"];
+      NSRect rect = NSMakeRect(0, (HEIGHT - barHeight)/2, barWidth, barHeight);
       
       [NSGraphicsContext saveGraphicsState];
 
       // clip rounded
-      NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:rect xRadius:IMAGEHEIGHT/2 yRadius:IMAGEHEIGHT/2];
+      int radius = [self intForKey: @"BORDERRADIUS"];
+      NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:rect xRadius:radius yRadius:radius];
       [path addClip];
 
       // background
-      [[NSColor windowBackgroundColor] set];
+      NSColor *bgColor = [self colorForKey:@"BAR_BACKGROUND"];
+      [bgColor set];
+
       NSRectFill(rect);
       
       // usage
       [[self imageColorForUsage:hostUsage] set];
-      NSRectFill(NSMakeRect(0, (HEIGHT - IMAGEHEIGHT)/2, HOSTIMAGEWIDTH*hostUsage, IMAGEHEIGHT));
+      NSRectFill(NSMakeRect(0, (HEIGHT - barHeight)/2, barWidth*hostUsage, barHeight));
 
       [NSGraphicsContext restoreGraphicsState];
       
-      offset += HOSTIMAGEWIDTH;
+      offset += barWidth;
     }
 
     //

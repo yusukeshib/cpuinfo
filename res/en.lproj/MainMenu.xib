@@ -24,7 +24,7 @@
                 <menuItem isSeparatorItem="YES" id="594"/>
                 <menuItem title="Update Interval" id="545">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Menu" id="546">
+                    <menu key="submenu" title="Update Interval" id="546">
                         <items>
                             <menuItem title="0.1sec" tag="100" id="547">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -73,7 +73,7 @@
                 </menuItem>
                 <menuItem title="View Mode" id="541">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Menu" id="542">
+                    <menu key="submenu" title="View Mode" id="542">
                         <items>
                             <menuItem title="Image" state="on" tag="8" id="604">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -94,7 +94,26 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Show cores individually" id="602">
+                <menuItem title="Theme" id="fQn-cn-aSR">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" id="Uhs-yB-ofa">
+                        <items>
+                            <menuItem title="Default" state="on" id="nBb-5V-n6w">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="updateTheme:" target="494" id="XFp-X5-g6P"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="B/W" id="FLy-3M-Lxw">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="updateTheme:" target="494" id="0ue-mE-zNw"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Show cores indivisually" id="602">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="updateCoresIndividually:" target="494" id="brU-gf-ctp"/>
@@ -119,6 +138,7 @@
         </menu>
         <customObject id="494" customClass="CpuinfoDelegate">
             <connections>
+                <outlet property="mi_theme" destination="fQn-cn-aSR" id="lQK-HZ-XNK"/>
                 <outlet property="mi_updateInterval" destination="545" id="fsg-fb-SbM"/>
                 <outlet property="statusMenu" destination="536" id="540"/>
             </connections>
