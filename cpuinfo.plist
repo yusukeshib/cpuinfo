@@ -66,7 +66,7 @@
 				<key>BAR_HIGH</key>
 				<string>FF0000</string>
 				<key>BAR_MEDIUM</key>
-				<string>FFFF00</string>
+				<string>FF8C00</string>
 				<key>BAR_NORMAL</key>
 				<string>00FF00</string>
 				<key>BORDERRADIUS</key>
@@ -74,7 +74,7 @@
 				<key>TEXT_HIGH</key>
 				<string>FF0000</string>
 				<key>TEXT_MEDIUM</key>
-				<string>FFFF00</string>
+				<string>FF8C00</string>
 				<key>TEXT_NORMAL</key>
 				<string>00FF00</string>
 			</dict>
@@ -93,7 +93,7 @@
 				<key>BAR_HIGH</key>
 				<string>FF0000</string>
 				<key>BAR_MEDIUM</key>
-				<string>FFFF00</string>
+				<string>FF8C00</string>
 				<key>BAR_NORMAL</key>
 				<string>00FF00</string>
 				<key>BORDERRADIUS</key>
