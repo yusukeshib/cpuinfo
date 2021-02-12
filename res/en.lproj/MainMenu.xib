@@ -113,7 +113,7 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Show cores indivisually" id="602">
+                <menuItem title="Show cores individually" id="602">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="updateCoresIndividually:" target="494" id="brU-gf-ctp"/>
