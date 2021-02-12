@@ -63,6 +63,11 @@ void Cpuinfo::update() {
       cores[i].cpu_ticks[CPU_STATE_IDLE] = coreinfo[i].cpu_ticks[CPU_STATE_IDLE];
       cores[i].cpu_ticks[CPU_STATE_NICE] = coreinfo[i].cpu_ticks[CPU_STATE_NICE];
     }
+    
+    vm_deallocate(mach_task_self(),
+                  (vm_address_t)coreinfo,
+                  sizeof(processor_cpu_load_info_data_t) * core_count
+                  );
   }
   else {
     //host

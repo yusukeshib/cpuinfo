@@ -2,6 +2,7 @@
 #define Cpuinfo_hpp
 
 #include <mach/host_info.h>
+#include <mach/vm_map.h>
 #include <mach/mach_host.h>
 #include <mach/processor_info.h>
 #include <stdio.h>
