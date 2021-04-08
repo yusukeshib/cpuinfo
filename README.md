@@ -20,7 +20,7 @@ Download [Latest application zipped](dist/cpuinfo.zip?raw=true).
 or with [brew cask](http://caskroom.io/).
 
 ```sh
-brew cask install cpuinfo
+brew install --cask cpuinfo
 ```
 
 ## License
