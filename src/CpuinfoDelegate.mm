@@ -169,22 +169,21 @@
 
 -(void) updateView {
   [image update];
-  [image setDarkMode:[self appearanceIsDark]];
+  BOOL dark = [self appearanceIsDark:statusItem.button.effectiveAppearance];
+  [image setDarkMode:dark];
   statusItem.image = image;
 }
 
-- (BOOL)appearanceIsDark
+- (BOOL)appearanceIsDark: (NSAppearance *)appearance
 {
   if (@available(macOS 10.14, *)) {
-    NSApplication *app = [NSApplication sharedApplication];
-    NSAppearance *appearance = app.effectiveAppearance;
-    NSAppearanceName basicAppearance = [appearance bestMatchFromAppearancesWithNames:@[
-      NSAppearanceNameAqua,
-      NSAppearanceNameDarkAqua
-    ]];
-    return [basicAppearance isEqualToString:NSAppearanceNameDarkAqua];
+      NSAppearanceName basicAppearance = [appearance bestMatchFromAppearancesWithNames:@[
+          NSAppearanceNameAqua,
+          NSAppearanceNameDarkAqua
+      ]];
+      return [basicAppearance isEqualToString:NSAppearanceNameDarkAqua];
   } else {
-    return NO;
+      return NO;
   }
 }
 @end

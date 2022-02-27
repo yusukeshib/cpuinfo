@@ -27,7 +27,7 @@
 {
   NSColor* result = nil;
   unsigned colorCode = 0;
-  unsigned char redByte, greenByte, blueByte;
+  unsigned int redByte, greenByte, blueByte;
   
   if (nil != inColorString)
   {
@@ -72,6 +72,13 @@
   NSDictionary *theme = [self currentTheme];
   NSNumber *value = [theme objectForKey:key];
   return [value intValue];
+}
+
+- (double)doubleForKey: (NSString *)key
+{
+  NSDictionary *theme = [self currentTheme];
+  NSNumber *value = [theme objectForKey:key];
+  return [value doubleValue];
 }
 
 - (void)setCpuinfo:(Cpuinfo *)_cpuinfo
@@ -200,29 +207,32 @@
   if(_multiCoreEnabled) {
     for(int i = 0; i < cpuinfo->getCoreCount(); i++) {
       double coreUsage = cpuinfo->getCoreUsageAt(i);
-      int barWidthIndividual = [self intForKey: @"BARWIDTH_INDIVIDUAL"];
-      int barHeight = [self intForKey: @"BARHEIGHT"];
+      double barWidthIndividual = [self doubleForKey: @"BARWIDTH_INDIVIDUAL"];
+      double barHeight = [self doubleForKey: @"BARHEIGHT"];
     
       if(_imageEnabled) {
         NSRect rect = NSMakeRect(offset, (HEIGHT - barHeight)/2, barWidthIndividual, barHeight);
         
         [NSGraphicsContext saveGraphicsState];
-        
-        // clip rounded
-        int radius = [self intForKey: @"BORDERRADIUS"];
-        NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:rect xRadius:radius yRadius:radius];
-        [path addClip];
-        
+
         // background
         NSColor *bgColor = [self colorForKey:@"BAR_BACKGROUND"];
+        double radius = [self doubleForKey: @"BORDERRADIUS"];
+        double width = [self doubleForKey: @"BORDERWIDTH"];
+
         [bgColor set];
-        
-        NSRectFill(rect);
-        
+        NSBezierPath *border = [NSBezierPath bezierPath];
+        [border appendBezierPathWithRoundedRect:rect xRadius:radius yRadius:radius];
+        [border setLineWidth:width];
+        [border stroke];
+
         // usage
         [[self imageColorForUsage:coreUsage] set];
-        NSRectFill(NSMakeRect(offset, (HEIGHT - barHeight)/2, barWidthIndividual*coreUsage, barHeight));
-        
+        NSBezierPath *bar = [NSBezierPath bezierPath];
+        NSRect rect2 = NSMakeRect(2, (HEIGHT - barHeight)/2 + 2, barWidthIndividual*coreUsage - 4, barHeight - 4);
+        [bar appendBezierPathWithRoundedRect:rect2 xRadius:radius/2 yRadius:radius/2];
+        [bar fill];
+
         [NSGraphicsContext restoreGraphicsState];
         
         offset += barWidthIndividual;
@@ -263,26 +273,29 @@
     double hostUsage = cpuinfo->getHostUsage();
     
     if(_imageEnabled) {
-      int barWidth = [self intForKey: @"BARWIDTH"];
-      int barHeight = [self intForKey: @"BARHEIGHT"];
+      double barWidth = [self doubleForKey: @"BARWIDTH"];
+      double barHeight = [self doubleForKey: @"BARHEIGHT"];
       NSRect rect = NSMakeRect(0, (HEIGHT - barHeight)/2, barWidth, barHeight);
       
       [NSGraphicsContext saveGraphicsState];
 
-      // clip rounded
-      int radius = [self intForKey: @"BORDERRADIUS"];
-      NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:rect xRadius:radius yRadius:radius];
-      [path addClip];
-
       // background
       NSColor *bgColor = [self colorForKey:@"BAR_BACKGROUND"];
-      [bgColor set];
+      double radius = [self doubleForKey: @"BORDERRADIUS"];
+      double width = [self doubleForKey: @"BORDERWIDTH"];
 
-      NSRectFill(rect);
-      
+      [bgColor set];
+      NSBezierPath *border = [NSBezierPath bezierPath];
+      [border appendBezierPathWithRoundedRect:rect xRadius:radius yRadius:radius];
+      [border setLineWidth:width];
+      [border stroke];
+
       // usage
       [[self imageColorForUsage:hostUsage] set];
-      NSRectFill(NSMakeRect(0, (HEIGHT - barHeight)/2, barWidth*hostUsage, barHeight));
+      NSBezierPath *bar = [NSBezierPath bezierPath];
+      NSRect rect2 = NSMakeRect(2, (HEIGHT - barHeight)/2 + 2, barWidth*hostUsage - 4, barHeight - 4);
+      [bar appendBezierPathWithRoundedRect:rect2 xRadius:radius/2 yRadius:radius/2];
+      [bar fill];
 
       [NSGraphicsContext restoreGraphicsState];
       
