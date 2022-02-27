@@ -214,22 +214,25 @@
         NSRect rect = NSMakeRect(offset, (HEIGHT - barHeight)/2, barWidthIndividual, barHeight);
         
         [NSGraphicsContext saveGraphicsState];
-        
-        // clip rounded
-        double radius = [self doubleForKey: @"BORDERRADIUS"];
-        NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:rect xRadius:radius yRadius:radius];
-        [path addClip];
-        
+
         // background
         NSColor *bgColor = [self colorForKey:@"BAR_BACKGROUND"];
+        double radius = [self doubleForKey: @"BORDERRADIUS"];
+        double width = [self doubleForKey: @"BORDERWIDTH"];
+
         [bgColor set];
-        
-        NSRectFill(rect);
-        
+        NSBezierPath *border = [NSBezierPath bezierPath];
+        [border appendBezierPathWithRoundedRect:rect xRadius:radius yRadius:radius];
+        [border setLineWidth:width];
+        [border stroke];
+
         // usage
         [[self imageColorForUsage:coreUsage] set];
-        NSRectFill(NSMakeRect(offset, (HEIGHT - barHeight)/2, barWidthIndividual*coreUsage, barHeight));
-        
+        NSBezierPath *bar = [NSBezierPath bezierPath];
+        NSRect rect2 = NSMakeRect(2, (HEIGHT - barHeight)/2 + 2, barWidthIndividual*coreUsage - 4, barHeight - 4);
+        [bar appendBezierPathWithRoundedRect:rect2 xRadius:radius/2 yRadius:radius/2];
+        [bar fill];
+
         [NSGraphicsContext restoreGraphicsState];
         
         offset += barWidthIndividual;
@@ -287,7 +290,6 @@
       [border setLineWidth:width];
       [border stroke];
 
-      
       // usage
       [[self imageColorForUsage:hostUsage] set];
       NSBezierPath *bar = [NSBezierPath bezierPath];

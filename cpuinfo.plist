@@ -60,7 +60,7 @@
 				<key>BARWIDTH</key>
 				<integer>28</integer>
 				<key>BARWIDTH_INDIVIDUAL</key>
-				<integer>20</integer>
+				<integer>16</integer>
 				<key>BAR_BACKGROUND</key>
 				<string>FFFFFF</string>
 				<key>BAR_HIGH</key>
@@ -72,7 +72,7 @@
 				<key>BORDERRADIUS</key>
 				<integer>3</integer>
 				<key>BORDERWIDTH</key>
-				<real>0.65</real>
+				<real>0.5</real>
 				<key>TEXT_HIGH</key>
 				<string>FFFFFF</string>
 				<key>TEXT_MEDIUM</key>
@@ -89,7 +89,7 @@
 				<key>BARWIDTH</key>
 				<integer>28</integer>
 				<key>BARWIDTH_INDIVIDUAL</key>
-				<integer>20</integer>
+				<integer>16</integer>
 				<key>BAR_BACKGROUND</key>
 				<string>000000</string>
 				<key>BAR_HIGH</key>
@@ -101,7 +101,7 @@
 				<key>BORDERRADIUS</key>
 				<integer>3</integer>
 				<key>BORDERWIDTH</key>
-				<real>0.65</real>
+				<real>0.5</real>
 				<key>TEXT_HIGH</key>
 				<string>000000</string>
 				<key>TEXT_MEDIUM</key>
@@ -122,7 +122,7 @@
 				<key>BARWIDTH</key>
 				<integer>28</integer>
 				<key>BARWIDTH_INDIVIDUAL</key>
-				<integer>20</integer>
+				<integer>16</integer>
 				<key>BAR_BACKGROUND</key>
 				<string>FFFFFF</string>
 				<key>BAR_HIGH</key>
@@ -134,7 +134,7 @@
 				<key>BORDERRADIUS</key>
 				<integer>3</integer>
 				<key>BORDERWIDTH</key>
-				<real>0.65</real>
+				<real>0.5</real>
 				<key>TEXT_HIGH</key>
 				<string>FFFFFF</string>
 				<key>TEXT_MEDIUM</key>
@@ -151,7 +151,7 @@
 				<key>BARWIDTH</key>
 				<integer>28</integer>
 				<key>BARWIDTH_INDIVIDUAL</key>
-				<integer>20</integer>
+				<integer>16</integer>
 				<key>BAR_BACKGROUND</key>
 				<string>000000</string>
 				<key>BAR_HIGH</key>
@@ -163,7 +163,7 @@
 				<key>BORDERRADIUS</key>
 				<integer>3</integer>
 				<key>BORDERWIDTH</key>
-				<real>0.65</real>
+				<real>0.5</real>
 				<key>TEXT_HIGH</key>
 				<string>000000</string>
 				<key>TEXT_MEDIUM</key>
