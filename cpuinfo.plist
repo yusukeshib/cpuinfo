@@ -72,7 +72,7 @@
 				<key>BORDERRADIUS</key>
 				<integer>3</integer>
 				<key>BORDERWIDTH</key>
-				<real>0.5</real>
+				<integer>1</integer>
 				<key>TEXT_HIGH</key>
 				<string>FFFFFF</string>
 				<key>TEXT_MEDIUM</key>
@@ -101,7 +101,7 @@
 				<key>BORDERRADIUS</key>
 				<integer>3</integer>
 				<key>BORDERWIDTH</key>
-				<real>0.5</real>
+				<integer>1</integer>
 				<key>TEXT_HIGH</key>
 				<string>000000</string>
 				<key>TEXT_MEDIUM</key>
@@ -134,7 +134,7 @@
 				<key>BORDERRADIUS</key>
 				<integer>3</integer>
 				<key>BORDERWIDTH</key>
-				<real>0.5</real>
+				<integer>1</integer>
 				<key>TEXT_HIGH</key>
 				<string>FFFFFF</string>
 				<key>TEXT_MEDIUM</key>
@@ -163,7 +163,7 @@
 				<key>BORDERRADIUS</key>
 				<integer>3</integer>
 				<key>BORDERWIDTH</key>
-				<real>0.5</real>
+				<integer>1</integer>
 				<key>TEXT_HIGH</key>
 				<string>000000</string>
 				<key>TEXT_MEDIUM</key>
