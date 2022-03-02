@@ -54,13 +54,13 @@
 			<key>dark</key>
 			<dict>
 				<key>BARHEIGHT</key>
-				<integer>11</integer>
+				<integer>10</integer>
 				<key>BARMARGIN_INDIVIDUAL</key>
 				<string>4</string>
 				<key>BARWIDTH</key>
-				<integer>28</integer>
+				<integer>24</integer>
 				<key>BARWIDTH_INDIVIDUAL</key>
-				<integer>16</integer>
+				<integer>12</integer>
 				<key>BAR_BACKGROUND</key>
 				<string>FFFFFF</string>
 				<key>BAR_HIGH</key>
@@ -83,13 +83,13 @@
 			<key>light</key>
 			<dict>
 				<key>BARHEIGHT</key>
-				<integer>11</integer>
+				<integer>10</integer>
 				<key>BARMARGIN_INDIVIDUAL</key>
 				<string>4</string>
 				<key>BARWIDTH</key>
-				<integer>28</integer>
+				<integer>24</integer>
 				<key>BARWIDTH_INDIVIDUAL</key>
-				<integer>16</integer>
+				<integer>12</integer>
 				<key>BAR_BACKGROUND</key>
 				<string>000000</string>
 				<key>BAR_HIGH</key>
@@ -116,13 +116,13 @@
 			<key>dark</key>
 			<dict>
 				<key>BARHEIGHT</key>
-				<integer>11</integer>
+				<integer>10</integer>
 				<key>BARMARGIN_INDIVIDUAL</key>
 				<string>4</string>
 				<key>BARWIDTH</key>
-				<integer>28</integer>
+				<integer>24</integer>
 				<key>BARWIDTH_INDIVIDUAL</key>
-				<integer>16</integer>
+				<integer>12</integer>
 				<key>BAR_BACKGROUND</key>
 				<string>FFFFFF</string>
 				<key>BAR_HIGH</key>
@@ -145,13 +145,13 @@
 			<key>light</key>
 			<dict>
 				<key>BARHEIGHT</key>
-				<integer>11</integer>
+				<integer>10</integer>
 				<key>BARMARGIN_INDIVIDUAL</key>
 				<string>4</string>
 				<key>BARWIDTH</key>
-				<integer>28</integer>
+				<integer>24</integer>
 				<key>BARWIDTH_INDIVIDUAL</key>
-				<integer>16</integer>
+				<integer>12</integer>
 				<key>BAR_BACKGROUND</key>
 				<string>000000</string>
 				<key>BAR_HIGH</key>

@@ -318,7 +318,7 @@
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Updater.framework/Headers\"";
 				INFOPLIST_FILE = "$(SRCROOT)/cpuinfo.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MARKETING_VERSION = 1.4.7;
+				MARKETING_VERSION = 1.4.8;
 				PRODUCT_BUNDLE_IDENTIFIER = io.fata.shibata.cpuinfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -352,7 +352,7 @@
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Updater.framework/Headers\"";
 				INFOPLIST_FILE = "$(SRCROOT)/cpuinfo.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MARKETING_VERSION = 1.4.7;
+				MARKETING_VERSION = 1.4.8;
 				PRODUCT_BUNDLE_IDENTIFIER = io.fata.shibata.cpuinfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
