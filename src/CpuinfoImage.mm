@@ -9,8 +9,8 @@
 #import "CpuinfoImage.h"
 
 #define HEIGHT 24.0f
-#define TEXTWIDTH 32.0f
-#define TEXTHEIGHT 12.0f
+#define TEXTWIDTH 36.0f
+#define TEXTHEIGHT 20.0f
 
 @implementation CpuinfoImage {
   Cpuinfo *cpuinfo;
@@ -311,7 +311,7 @@
       // clear all
       [self drawInRect:rect fromRect:rect operation:NSCompositeClear fraction:1.0];
       
-      NSFont *font = [NSFont monospacedDigitSystemFontOfSize:[NSFont smallSystemFontSize] weight:NSFontWeightRegular];
+      NSFont *font = [NSFont menuBarFontOfSize:[NSFont systemFontSize]];
       NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
       style.alignment = NSTextAlignmentCenter;
       NSDictionary *attributes = @{
