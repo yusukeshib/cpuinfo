@@ -25,24 +25,22 @@
 // https://stackoverflow.com/questions/8697205/convert-hex-color-code-to-nscolor/8697241
 - (NSColor*)colorWithHexColorString:(NSString*)inColorString
 {
-  NSColor* result = nil;
   unsigned colorCode = 0;
-  unsigned int redByte, greenByte, blueByte;
-  
   if (nil != inColorString)
   {
     NSScanner* scanner = [NSScanner scannerWithString:inColorString];
     (void) [scanner scanHexInt:&colorCode]; // ignore error
   }
-  redByte = (unsigned char)(colorCode >> 16);
-  greenByte = (unsigned char)(colorCode >> 8);
-  blueByte = (unsigned char)(colorCode); // masks off high bits
-  
-  result = [NSColor
-            colorWithCalibratedRed:(CGFloat)redByte / 0xff
-            green:(CGFloat)greenByte / 0xff
-            blue:(CGFloat)blueByte / 0xff
-            alpha:1.0];
+  unsigned int red = (unsigned char)(colorCode >> 24);
+  unsigned int green = (unsigned char)(colorCode >> 16);
+  unsigned int blue = (unsigned char)(colorCode >> 8);
+  unsigned int alpha = (unsigned char)(colorCode); // masks off high bits
+
+  NSColor* result = [NSColor
+            colorWithCalibratedRed:(CGFloat)red / 0xff
+            green:(CGFloat)green / 0xff
+            blue:(CGFloat)blue / 0xff
+            alpha:(CGFloat)alpha / 0xff];
   return result;
 }
 
@@ -86,31 +84,31 @@
   cpuinfo = _cpuinfo;
 }
 
-- (NSColor *)textColorForUsage:(float)usage
+- (NSColor *)textColorForUsage:(double)usage
 {
   // usage
   if(usage < 0.75) {
-    return [self colorForKey:@"TEXT_NORMAL"];
+    return [self colorForKey:@"TEXT_NORMALCOLOR"];
   }
   else if(usage < 0.9) {
-    return [self colorForKey:@"TEXT_MEDIUM"];
+    return [self colorForKey:@"TEXT_MEDIUMCOLOR"];
   }
   else {
-    return [self colorForKey:@"TEXT_HIGH"];
+    return [self colorForKey:@"TEXT_HIGHCOLOR"];
   }
 }
 
-- (NSColor *)imageColorForUsage:(float)usage
+- (NSColor *)imageColorForUsage:(double)usage
 {
   // usage
   if(usage < 0.75) {
-    return [self colorForKey:@"BAR_NORMAL"];
+    return [self colorForKey:@"BAR_NORMALCOLOR"];
   }
   else if(usage < 0.9) {
-    return [self colorForKey:@"BAR_MEDIUM"];
+    return [self colorForKey:@"BAR_MEDIUMCOLOR"];
   }
   else {
-    return [self colorForKey:@"BAR_HIGH"];
+    return [self colorForKey:@"BAR_HIGHCOLOR"];
   }
 }
 
@@ -171,24 +169,101 @@
 {
   CGFloat width = 0;
   int iteration = _multiCoreEnabled ? cpuinfo->getCoreCount() : 1;
-  int barWidth = [self intForKey: @"BARWIDTH"];
-  int barWidthIndividual = [self intForKey: @"BARWIDTH_INDIVIDUAL"];
-  int barMargin = [self intForKey: @"BARMARGIN_INDIVIDUAL"];
+  double barWidth = [self doubleForKey: @"BAR_WIDTH"];
+  double barCoreWidth = [self doubleForKey: @"BAR_COREWIDTH"];
+  double barCoreMargin = [self doubleForKey: @"BAR_COREMARGIN"];
   for(int i = 0; i< iteration; i++) {
-    if(_textEnabled) width += TEXTWIDTH;
-    if(_imageEnabled) {
-      width += _multiCoreEnabled ? barWidthIndividual : barWidth;
+    if(_textEnabled) {
+      width += TEXTWIDTH;
     }
-    if(_multiCoreEnabled) width += barMargin;
+    if(_imageEnabled) {
+      width += _multiCoreEnabled ? barCoreWidth : barWidth;
+    }
+    if(_multiCoreEnabled) {
+      width += barCoreMargin;
+    }
   }
   self.size = NSMakeSize(width, HEIGHT);
   [self update];
 }
 
+- (double)drawImageAt: (double)usage offset:(double)offset
+{
+  double barTotalWidth = [self doubleForKey: @"BAR_WIDTH"];
+  double barCoreWidth = [self doubleForKey: @"BAR_COREWIDTH"];
+  double barWidth = _multiCoreEnabled ? barCoreWidth : barTotalWidth;
+  double barHeight = [self doubleForKey: @"BAR_HEIGHT"];
+  double barRadius = [self doubleForKey: @"BAR_RADIUS"];
+  NSColor *bgColor = [self colorForKey:@"BAR_BACKGROUNDCOLOR"];
+  NSColor *borderColor = [self colorForKey:@"BORDER_COLOR"];
+  double borderRadius = [self doubleForKey: @"BORDER_RADIUS"];
+  double borderWidth = [self doubleForKey: @"BORDER_WIDTH"];
+
+  [NSGraphicsContext saveGraphicsState];
+
+  // clip rounded
+  NSRect bgRect = NSMakeRect(offset, (HEIGHT - barHeight)/2, barWidth, barHeight);
+  NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:bgRect xRadius:borderRadius yRadius:borderRadius];
+  [path addClip];
+  
+  // background
+  [bgColor set];
+  NSBezierPath *bg = [NSBezierPath bezierPath];
+  [bg appendBezierPathWithRoundedRect:bgRect xRadius:borderRadius yRadius:borderRadius];
+  [bg fill];
+  
+  // border
+  if(borderWidth > 0) {
+    [borderColor set];
+    NSBezierPath *border = [NSBezierPath bezierPath];
+    NSRect borderRect = NSMakeRect(offset, (HEIGHT - barHeight)/2, barWidth, barHeight);
+    [border appendBezierPathWithRoundedRect:borderRect xRadius:borderRadius yRadius:borderRadius];
+    [border setLineWidth:borderWidth];
+    [border stroke];
+  }
+
+  // usage
+  [[self imageColorForUsage:usage] set];
+  NSBezierPath *bar = [NSBezierPath bezierPath];
+  NSRect barRect = NSMakeRect(offset + borderWidth * 2,
+                              (HEIGHT - barHeight)/2 + borderWidth * 2,
+                              (barWidth - borderWidth * 4) * usage,
+                              barHeight - borderWidth * 4);
+  [bar appendBezierPathWithRoundedRect:barRect xRadius:barRadius yRadius:barRadius];
+  [bar fill];
+
+  [NSGraphicsContext restoreGraphicsState];
+  
+  return offset + barWidth;
+}
+
+- (double)drawTextAt: (double)usage offset:(double)offset
+{
+  
+  [NSGraphicsContext saveGraphicsState];
+
+  NSFont *font = [NSFont menuBarFontOfSize:[NSFont systemFontSize]];
+  NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+  style.alignment = NSTextAlignmentCenter;
+  NSDictionary *attributes = @{
+    NSFontAttributeName: font,
+    NSParagraphStyleAttributeName: style,
+    NSForegroundColorAttributeName: [self textColorForUsage:usage]
+  };
+  NSString *str = [NSString stringWithFormat:@"%d%%", (int)round(usage * 100.0f)];
+  NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:str attributes:attributes];
+  NSRect rect = NSMakeRect(offset, (HEIGHT - TEXTHEIGHT)/2, TEXTWIDTH, TEXTHEIGHT);
+  [text drawInRect:rect];
+  
+  [NSGraphicsContext restoreGraphicsState];
+  
+  return offset + TEXTWIDTH;
+}
+
 - (void)update
 {
-  float w = self.size.width; 
-  float h = self.size.height;
+  double w = self.size.width;
+  double h = self.size.height;
   
   if(w == 0 || h == 0) return;
   
@@ -196,140 +271,37 @@
   [self lockFocus];
   
   // clear all
-  {
-    NSRect rect = NSMakeRect(0, 0, w, h);
-    [self drawInRect:rect fromRect:rect operation:NSCompositeClear fraction:1.0];
-  }
+  NSRect rect = NSMakeRect(0, 0, w, h);
+  [self drawInRect:rect fromRect:rect operation:NSCompositeClear fraction:1.0];
   
-  float offset = 0;
-  int barMargin = [self intForKey: @"BARMARGIN_INDIVIDUAL"];
+  double offset = 0;
   
   if(_multiCoreEnabled) {
+    int barCoreMargin = [self intForKey: @"BAR_COREMARGIN"];
     for(int i = 0; i < cpuinfo->getCoreCount(); i++) {
       double coreUsage = cpuinfo->getCoreUsageAt(i);
-      double barWidthIndividual = [self doubleForKey: @"BARWIDTH_INDIVIDUAL"];
-      double barHeight = [self doubleForKey: @"BARHEIGHT"];
-    
       if(_imageEnabled) {
-        NSRect rect = NSMakeRect(offset, (HEIGHT - barHeight)/2, barWidthIndividual, barHeight);
-        
-        [NSGraphicsContext saveGraphicsState];
-
-        // background
-        NSColor *bgColor = [self colorForKey:@"BAR_BACKGROUND"];
-        double radius = [self doubleForKey: @"BORDERRADIUS"];
-        double width = [self doubleForKey: @"BORDERWIDTH"];
-
-        [bgColor set];
-        NSBezierPath *border = [NSBezierPath bezierPath];
-        [border appendBezierPathWithRoundedRect:rect xRadius:radius yRadius:radius];
-        [border setLineWidth:width];
-        [border stroke];
-
-        // usage
-        [[self imageColorForUsage:coreUsage] set];
-        NSBezierPath *bar = [NSBezierPath bezierPath];
-        NSRect rect2 = NSMakeRect(2, (HEIGHT - barHeight)/2 + 2, barWidthIndividual*coreUsage - 4, barHeight - 4);
-        [bar appendBezierPathWithRoundedRect:rect2 xRadius:radius/2 yRadius:radius/2];
-        [bar fill];
-
-        [NSGraphicsContext restoreGraphicsState];
-        
-        offset += barWidthIndividual;
+        offset = [self drawImageAt:coreUsage offset: offset];
       }
-      
-      //
-      if(_textEnabled) {  
-        NSRect rect = NSMakeRect(offset, (HEIGHT - TEXTHEIGHT)/2, TEXTWIDTH, TEXTHEIGHT);
-        
-        [NSGraphicsContext saveGraphicsState];
-        
-        // clear all
-        [self drawInRect:rect fromRect:rect operation:NSCompositeClear fraction:1.0];
-        
-        NSFont *font = [NSFont monospacedDigitSystemFontOfSize:[NSFont smallSystemFontSize] weight:NSFontWeightRegular];
-        NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-        style.alignment = NSTextAlignmentCenter;
-        NSDictionary *attributes = @{
-          NSFontAttributeName: font,
-          NSParagraphStyleAttributeName: style,
-          NSForegroundColorAttributeName: [self textColorForUsage:coreUsage]
-        };
-        NSString *str = [NSString stringWithFormat:@"%d%%", (int)round(coreUsage * 100.0f)];
-        NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:str attributes:attributes];
-        [text drawInRect:rect];
-        
-        [NSGraphicsContext restoreGraphicsState];
-        
-        offset += TEXTWIDTH;
+      if(_textEnabled) {
+        offset = [self drawTextAt:coreUsage offset: offset];
       }
-      
-      offset += barMargin;
-
+      offset += barCoreMargin;
     }
-    
   }
   else {
     double hostUsage = cpuinfo->getHostUsage();
     
     if(_imageEnabled) {
-      double barWidth = [self doubleForKey: @"BARWIDTH"];
-      double barHeight = [self doubleForKey: @"BARHEIGHT"];
-      NSRect rect = NSMakeRect(0, (HEIGHT - barHeight)/2, barWidth, barHeight);
-      
-      [NSGraphicsContext saveGraphicsState];
-
-      // background
-      NSColor *bgColor = [self colorForKey:@"BAR_BACKGROUND"];
-      double radius = [self doubleForKey: @"BORDERRADIUS"];
-      double width = [self doubleForKey: @"BORDERWIDTH"];
-
-      [bgColor set];
-      NSBezierPath *border = [NSBezierPath bezierPath];
-      [border appendBezierPathWithRoundedRect:rect xRadius:radius yRadius:radius];
-      [border setLineWidth:width];
-      [border stroke];
-
-      // usage
-      [[self imageColorForUsage:hostUsage] set];
-      NSBezierPath *bar = [NSBezierPath bezierPath];
-      NSRect rect2 = NSMakeRect(2, (HEIGHT - barHeight)/2 + 2, barWidth*hostUsage - 4, barHeight - 4);
-      [bar appendBezierPathWithRoundedRect:rect2 xRadius:radius/2 yRadius:radius/2];
-      [bar fill];
-
-      [NSGraphicsContext restoreGraphicsState];
-      
-      offset += barWidth;
+      offset = [self drawImageAt:hostUsage offset: offset];
     }
-
-    //
     if(_textEnabled) {  
-      NSRect rect = NSMakeRect(offset, (HEIGHT - TEXTHEIGHT)/2, TEXTWIDTH, TEXTHEIGHT);
-      
-      [NSGraphicsContext saveGraphicsState];
-
-      // clear all
-      [self drawInRect:rect fromRect:rect operation:NSCompositeClear fraction:1.0];
-      
-      NSFont *font = [NSFont menuBarFontOfSize:[NSFont systemFontSize]];
-      NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-      style.alignment = NSTextAlignmentCenter;
-      NSDictionary *attributes = @{
-        NSFontAttributeName: font,
-        NSParagraphStyleAttributeName: style,
-        NSForegroundColorAttributeName: [self textColorForUsage:hostUsage]
-      };
-      NSString *str = [NSString stringWithFormat:@"%d%%", (int)round(hostUsage * 100.0f)];
-      NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:str attributes:attributes];
-      [text drawInRect:rect];
-
-      [NSGraphicsContext restoreGraphicsState];
+      offset = [self drawTextAt:hostUsage offset: offset];
     }
   }
   
   // unlock
   [self unlockFocus];
-  
 }
 
 @end

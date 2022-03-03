@@ -53,61 +53,69 @@
 		<dict>
 			<key>dark</key>
 			<dict>
-				<key>BARHEIGHT</key>
-				<integer>10</integer>
-				<key>BARMARGIN_INDIVIDUAL</key>
+				<key>BAR_BACKGROUNDCOLOR</key>
+				<string>FFFFFF00</string>
+				<key>BAR_COREMARGIN</key>
 				<string>4</string>
-				<key>BARWIDTH</key>
-				<integer>24</integer>
-				<key>BARWIDTH_INDIVIDUAL</key>
+				<key>BAR_COREWIDTH</key>
 				<integer>12</integer>
-				<key>BAR_BACKGROUND</key>
-				<string>FFFFFF</string>
-				<key>BAR_HIGH</key>
-				<string>FF0000</string>
-				<key>BAR_MEDIUM</key>
-				<string>FF8C00</string>
-				<key>BAR_NORMAL</key>
-				<string>00FF00</string>
-				<key>BORDERRADIUS</key>
-				<integer>3</integer>
-				<key>BORDERWIDTH</key>
+				<key>BAR_HEIGHT</key>
+				<integer>10</integer>
+				<key>BAR_HIGHCOLOR</key>
+				<string>FF0000FF</string>
+				<key>BAR_MEDIUMCOLOR</key>
+				<string>FF8C00FF</string>
+				<key>BAR_NORMALCOLOR</key>
+				<string>00FF00FF</string>
+				<key>BAR_RADIUS</key>
 				<integer>1</integer>
-				<key>TEXT_HIGH</key>
-				<string>FFFFFF</string>
-				<key>TEXT_MEDIUM</key>
-				<string>FFFFFF</string>
-				<key>TEXT_NORMAL</key>
-				<string>FFFFFF</string>
+				<key>BAR_WIDTH</key>
+				<integer>24</integer>
+				<key>BORDER_COLOR</key>
+				<string>FFFFFFFF</string>
+				<key>BORDER_RADIUS</key>
+				<integer>3</integer>
+				<key>BORDER_WIDTH</key>
+				<integer>1</integer>
+				<key>TEXT_HIGHCOLOR</key>
+				<string>FFFFFFFF</string>
+				<key>TEXT_MEDIUMCOLOR</key>
+				<string>FFFFFFFF</string>
+				<key>TEXT_NORMALCOLOR</key>
+				<string>FFFFFFFF</string>
 			</dict>
 			<key>light</key>
 			<dict>
-				<key>BARHEIGHT</key>
-				<integer>10</integer>
-				<key>BARMARGIN_INDIVIDUAL</key>
+				<key>BAR_BACKGROUNDCOLOR</key>
+				<string>00000000</string>
+				<key>BAR_COREMARGIN</key>
 				<string>4</string>
-				<key>BARWIDTH</key>
-				<integer>24</integer>
-				<key>BARWIDTH_INDIVIDUAL</key>
+				<key>BAR_COREWIDTH</key>
 				<integer>12</integer>
-				<key>BAR_BACKGROUND</key>
-				<string>000000</string>
-				<key>BAR_HIGH</key>
-				<string>FF0000</string>
-				<key>BAR_MEDIUM</key>
-				<string>FF8C00</string>
-				<key>BAR_NORMAL</key>
-				<string>00FF00</string>
-				<key>BORDERRADIUS</key>
-				<integer>3</integer>
-				<key>BORDERWIDTH</key>
+				<key>BAR_HEIGHT</key>
+				<integer>10</integer>
+				<key>BAR_HIGHCOLOR</key>
+				<string>FF0000FF</string>
+				<key>BAR_MEDIUMCOLOR</key>
+				<string>FF8C00FF</string>
+				<key>BAR_NORMALCOLOR</key>
+				<string>00FF00FF</string>
+				<key>BAR_RADIUS</key>
 				<integer>1</integer>
-				<key>TEXT_HIGH</key>
-				<string>000000</string>
-				<key>TEXT_MEDIUM</key>
-				<string>000000</string>
-				<key>TEXT_NORMAL</key>
-				<string>000000</string>
+				<key>BAR_WIDTH</key>
+				<integer>24</integer>
+				<key>BORDER_COLOR</key>
+				<string>000000FF</string>
+				<key>BORDER_RADIUS</key>
+				<integer>3</integer>
+				<key>BORDER_WIDTH</key>
+				<integer>1</integer>
+				<key>TEXT_HIGHCOLOR</key>
+				<string>000000FF</string>
+				<key>TEXT_MEDIUMCOLOR</key>
+				<string>000000FF</string>
+				<key>TEXT_NORMALCOLOR</key>
+				<string>000000FF</string>
 			</dict>
 			<key>name</key>
 			<string>Default</string>
@@ -115,64 +123,142 @@
 		<dict>
 			<key>dark</key>
 			<dict>
-				<key>BARHEIGHT</key>
-				<integer>10</integer>
-				<key>BARMARGIN_INDIVIDUAL</key>
+				<key>BAR_BACKGROUNDCOLOR</key>
+				<string>FFFFFF00</string>
+				<key>BAR_COREMARGIN</key>
 				<string>4</string>
-				<key>BARWIDTH</key>
-				<integer>24</integer>
-				<key>BARWIDTH_INDIVIDUAL</key>
+				<key>BAR_COREWIDTH</key>
 				<integer>12</integer>
-				<key>BAR_BACKGROUND</key>
-				<string>FFFFFF</string>
-				<key>BAR_HIGH</key>
-				<string>FFFFFF</string>
-				<key>BAR_MEDIUM</key>
-				<string>FFFFFF</string>
-				<key>BAR_NORMAL</key>
-				<string>FFFFFF</string>
-				<key>BORDERRADIUS</key>
-				<integer>3</integer>
-				<key>BORDERWIDTH</key>
+				<key>BAR_HEIGHT</key>
+				<integer>10</integer>
+				<key>BAR_HIGHCOLOR</key>
+				<string>FFFFFFFF</string>
+				<key>BAR_MEDIUMCOLOR</key>
+				<string>FFFFFFFF</string>
+				<key>BAR_NORMALCOLOR</key>
+				<string>FFFFFFFF</string>
+				<key>BAR_RADIUS</key>
 				<integer>1</integer>
-				<key>TEXT_HIGH</key>
-				<string>FFFFFF</string>
-				<key>TEXT_MEDIUM</key>
-				<string>FFFFFF</string>
-				<key>TEXT_NORMAL</key>
-				<string>FFFFFF</string>
+				<key>BAR_WIDTH</key>
+				<integer>24</integer>
+				<key>BORDER_COLOR</key>
+				<string>FFFFFFFF</string>
+				<key>BORDER_RADIUS</key>
+				<integer>3</integer>
+				<key>BORDER_WIDTH</key>
+				<integer>1</integer>
+				<key>TEXT_HIGHCOLOR</key>
+				<string>FFFFFFFF</string>
+				<key>TEXT_MEDIUMCOLOR</key>
+				<string>FFFFFFFF</string>
+				<key>TEXT_NORMALCOLOR</key>
+				<string>FFFFFFFF</string>
 			</dict>
 			<key>light</key>
 			<dict>
-				<key>BARHEIGHT</key>
-				<integer>10</integer>
-				<key>BARMARGIN_INDIVIDUAL</key>
+				<key>BAR_BACKGROUNDCOLOR</key>
+				<string>00000000</string>
+				<key>BAR_COREMARGIN</key>
 				<string>4</string>
-				<key>BARWIDTH</key>
-				<integer>24</integer>
-				<key>BARWIDTH_INDIVIDUAL</key>
+				<key>BAR_COREWIDTH</key>
 				<integer>12</integer>
-				<key>BAR_BACKGROUND</key>
-				<string>000000</string>
-				<key>BAR_HIGH</key>
-				<string>000000</string>
-				<key>BAR_MEDIUM</key>
-				<string>000000</string>
-				<key>BAR_NORMAL</key>
-				<string>000000</string>
-				<key>BORDERRADIUS</key>
-				<integer>3</integer>
-				<key>BORDERWIDTH</key>
+				<key>BAR_HEIGHT</key>
+				<integer>10</integer>
+				<key>BAR_HIGHCOLOR</key>
+				<string>000000FF</string>
+				<key>BAR_MEDIUMCOLOR</key>
+				<string>000000FF</string>
+				<key>BAR_NORMALCOLOR</key>
+				<string>000000FF</string>
+				<key>BAR_RADIUS</key>
 				<integer>1</integer>
-				<key>TEXT_HIGH</key>
-				<string>000000</string>
-				<key>TEXT_MEDIUM</key>
-				<string>000000</string>
-				<key>TEXT_NORMAL</key>
-				<string>000000</string>
+				<key>BAR_WIDTH</key>
+				<integer>24</integer>
+				<key>BORDER_COLOR</key>
+				<string>000000FF</string>
+				<key>BORDER_RADIUS</key>
+				<integer>3</integer>
+				<key>BORDER_WIDTH</key>
+				<integer>1</integer>
+				<key>TEXT_HIGHCOLOR</key>
+				<string>000000FF</string>
+				<key>TEXT_MEDIUMCOLOR</key>
+				<string>000000FF</string>
+				<key>TEXT_NORMALCOLOR</key>
+				<string>000000FF</string>
 			</dict>
 			<key>name</key>
 			<string>B/W</string>
+		</dict>
+		<dict>
+			<key>dark</key>
+			<dict>
+				<key>BAR_BACKGROUNDCOLOR</key>
+				<string>FFFFFF40</string>
+				<key>BAR_COREMARGIN</key>
+				<string>4</string>
+				<key>BAR_COREWIDTH</key>
+				<integer>15</integer>
+				<key>BAR_HEIGHT</key>
+				<integer>10</integer>
+				<key>BAR_HIGHCOLOR</key>
+				<string>FF0000FF</string>
+				<key>BAR_MEDIUMCOLOR</key>
+				<string>FF8C00FF</string>
+				<key>BAR_NORMALCOLOR</key>
+				<string>00FF00FF</string>
+				<key>BAR_RADIUS</key>
+				<integer>0</integer>
+				<key>BAR_WIDTH</key>
+				<integer>24</integer>
+				<key>BORDER_COLOR</key>
+				<string>FFFFFFFF</string>
+				<key>BORDER_RADIUS</key>
+				<integer>3</integer>
+				<key>BORDER_WIDTH</key>
+				<integer>0</integer>
+				<key>TEXT_HIGHCOLOR</key>
+				<string>FFFFFFFF</string>
+				<key>TEXT_MEDIUMCOLOR</key>
+				<string>FFFFFFFF</string>
+				<key>TEXT_NORMALCOLOR</key>
+				<string>FFFFFFFF</string>
+			</dict>
+			<key>light</key>
+			<dict>
+				<key>BAR_BACKGROUNDCOLOR</key>
+				<string>00000040</string>
+				<key>BAR_COREMARGIN</key>
+				<string>4</string>
+				<key>BAR_COREWIDTH</key>
+				<integer>15</integer>
+				<key>BAR_HEIGHT</key>
+				<integer>10</integer>
+				<key>BAR_HIGHCOLOR</key>
+				<string>000000FF</string>
+				<key>BAR_MEDIUMCOLOR</key>
+				<string>FF8C00FF</string>
+				<key>BAR_NORMALCOLOR</key>
+				<string>00FF00FF</string>
+				<key>BAR_RADIUS</key>
+				<integer>0</integer>
+				<key>BAR_WIDTH</key>
+				<integer>24</integer>
+				<key>BORDER_COLOR</key>
+				<string>000000FF</string>
+				<key>BORDER_RADIUS</key>
+				<integer>3</integer>
+				<key>BORDER_WIDTH</key>
+				<integer>0</integer>
+				<key>TEXT_HIGHCOLOR</key>
+				<string>000000FF</string>
+				<key>TEXT_MEDIUMCOLOR</key>
+				<string>000000FF</string>
+				<key>TEXT_NORMALCOLOR</key>
+				<string>000000FF</string>
+			</dict>
+			<key>name</key>
+			<string>Borderless</string>
 		</dict>
 	</array>
 </dict>
