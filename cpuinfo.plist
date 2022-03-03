@@ -53,24 +53,24 @@
 		<dict>
 			<key>dark</key>
 			<dict>
-				<key>BAR_WIDTH</key>
-				<integer>24</integer>
-				<key>BAR_HEIGHT</key>
-				<integer>10</integer>
-				<key>BAR_RADIUS</key>
-				<integer>1</integer>
+				<key>BAR_BACKGROUNDCOLOR</key>
+				<string>FFFFFF00</string>
 				<key>BAR_COREMARGIN</key>
 				<string>4</string>
 				<key>BAR_COREWIDTH</key>
 				<integer>12</integer>
-				<key>BAR_BACKGROUNDCOLOR</key>
-				<string>FFFFFF00</string>
+				<key>BAR_HEIGHT</key>
+				<integer>10</integer>
 				<key>BAR_HIGHCOLOR</key>
 				<string>FF0000FF</string>
 				<key>BAR_MEDIUMCOLOR</key>
 				<string>FF8C00FF</string>
 				<key>BAR_NORMALCOLOR</key>
 				<string>00FF00FF</string>
+				<key>BAR_RADIUS</key>
+				<integer>1</integer>
+				<key>BAR_WIDTH</key>
+				<integer>24</integer>
 				<key>BORDER_COLOR</key>
 				<string>FFFFFFFF</string>
 				<key>BORDER_RADIUS</key>
@@ -86,24 +86,24 @@
 			</dict>
 			<key>light</key>
 			<dict>
-				<key>BAR_WIDTH</key>
-				<integer>24</integer>
-				<key>BAR_HEIGHT</key>
-				<integer>10</integer>
-				<key>BAR_RADIUS</key>
-				<integer>1</integer>
+				<key>BAR_BACKGROUNDCOLOR</key>
+				<string>00000000</string>
 				<key>BAR_COREMARGIN</key>
 				<string>4</string>
 				<key>BAR_COREWIDTH</key>
 				<integer>12</integer>
-				<key>BAR_BACKGROUNDCOLOR</key>
-				<string>00000000</string>
+				<key>BAR_HEIGHT</key>
+				<integer>10</integer>
 				<key>BAR_HIGHCOLOR</key>
 				<string>FF0000FF</string>
 				<key>BAR_MEDIUMCOLOR</key>
 				<string>FF8C00FF</string>
 				<key>BAR_NORMALCOLOR</key>
 				<string>00FF00FF</string>
+				<key>BAR_RADIUS</key>
+				<integer>1</integer>
+				<key>BAR_WIDTH</key>
+				<integer>24</integer>
 				<key>BORDER_COLOR</key>
 				<string>000000FF</string>
 				<key>BORDER_RADIUS</key>
@@ -123,24 +123,24 @@
 		<dict>
 			<key>dark</key>
 			<dict>
-				<key>BAR_WIDTH</key>
-				<integer>24</integer>
-				<key>BAR_HEIGHT</key>
-				<integer>10</integer>
-				<key>BAR_RADIUS</key>
-				<integer>1</integer>
+				<key>BAR_BACKGROUNDCOLOR</key>
+				<string>FFFFFF00</string>
 				<key>BAR_COREMARGIN</key>
 				<string>4</string>
 				<key>BAR_COREWIDTH</key>
 				<integer>12</integer>
-				<key>BAR_BACKGROUNDCOLOR</key>
-				<string>FFFFFF00</string>
+				<key>BAR_HEIGHT</key>
+				<integer>10</integer>
 				<key>BAR_HIGHCOLOR</key>
 				<string>FFFFFFFF</string>
 				<key>BAR_MEDIUMCOLOR</key>
 				<string>FFFFFFFF</string>
 				<key>BAR_NORMALCOLOR</key>
 				<string>FFFFFFFF</string>
+				<key>BAR_RADIUS</key>
+				<integer>1</integer>
+				<key>BAR_WIDTH</key>
+				<integer>24</integer>
 				<key>BORDER_COLOR</key>
 				<string>FFFFFFFF</string>
 				<key>BORDER_RADIUS</key>
@@ -156,24 +156,24 @@
 			</dict>
 			<key>light</key>
 			<dict>
-				<key>BAR_WIDTH</key>
-				<integer>24</integer>
-				<key>BAR_HEIGHT</key>
-				<integer>10</integer>
-				<key>BAR_RADIUS</key>
-				<integer>1</integer>
+				<key>BAR_BACKGROUNDCOLOR</key>
+				<string>00000000</string>
 				<key>BAR_COREMARGIN</key>
 				<string>4</string>
 				<key>BAR_COREWIDTH</key>
 				<integer>12</integer>
-				<key>BAR_BACKGROUNDCOLOR</key>
-				<string>00000000</string>
+				<key>BAR_HEIGHT</key>
+				<integer>10</integer>
 				<key>BAR_HIGHCOLOR</key>
 				<string>000000FF</string>
 				<key>BAR_MEDIUMCOLOR</key>
 				<string>000000FF</string>
 				<key>BAR_NORMALCOLOR</key>
 				<string>000000FF</string>
+				<key>BAR_RADIUS</key>
+				<integer>1</integer>
+				<key>BAR_WIDTH</key>
+				<integer>24</integer>
 				<key>BORDER_COLOR</key>
 				<string>000000FF</string>
 				<key>BORDER_RADIUS</key>
@@ -193,24 +193,24 @@
 		<dict>
 			<key>dark</key>
 			<dict>
-				<key>BAR_WIDTH</key>
-				<integer>24</integer>
-				<key>BAR_HEIGHT</key>
-				<integer>10</integer>
-				<key>BAR_RADIUS</key>
-				<integer>0</integer>
+				<key>BAR_BACKGROUNDCOLOR</key>
+				<string>FFFFFF40</string>
 				<key>BAR_COREMARGIN</key>
 				<string>4</string>
 				<key>BAR_COREWIDTH</key>
 				<integer>15</integer>
-				<key>BAR_BACKGROUNDCOLOR</key>
-				<string>FFFFFF40</string>
+				<key>BAR_HEIGHT</key>
+				<integer>10</integer>
 				<key>BAR_HIGHCOLOR</key>
 				<string>FF0000FF</string>
 				<key>BAR_MEDIUMCOLOR</key>
 				<string>FF8C00FF</string>
 				<key>BAR_NORMALCOLOR</key>
 				<string>00FF00FF</string>
+				<key>BAR_RADIUS</key>
+				<integer>0</integer>
+				<key>BAR_WIDTH</key>
+				<integer>24</integer>
 				<key>BORDER_COLOR</key>
 				<string>FFFFFFFF</string>
 				<key>BORDER_RADIUS</key>
@@ -226,24 +226,24 @@
 			</dict>
 			<key>light</key>
 			<dict>
-				<key>BAR_WIDTH</key>
-				<integer>24</integer>
-				<key>BAR_HEIGHT</key>
-				<integer>10</integer>
-				<key>BAR_RADIUS</key>
-				<integer>0</integer>
+				<key>BAR_BACKGROUNDCOLOR</key>
+				<string>00000040</string>
 				<key>BAR_COREMARGIN</key>
 				<string>4</string>
 				<key>BAR_COREWIDTH</key>
 				<integer>15</integer>
-				<key>BAR_BACKGROUNDCOLOR</key>
-				<string>00000040</string>
+				<key>BAR_HEIGHT</key>
+				<integer>10</integer>
 				<key>BAR_HIGHCOLOR</key>
 				<string>000000FF</string>
 				<key>BAR_MEDIUMCOLOR</key>
 				<string>FF8C00FF</string>
 				<key>BAR_NORMALCOLOR</key>
 				<string>00FF00FF</string>
+				<key>BAR_RADIUS</key>
+				<integer>0</integer>
+				<key>BAR_WIDTH</key>
+				<integer>24</integer>
 				<key>BORDER_COLOR</key>
 				<string>000000FF</string>
 				<key>BORDER_RADIUS</key>
