@@ -25,24 +25,22 @@
 // https://stackoverflow.com/questions/8697205/convert-hex-color-code-to-nscolor/8697241
 - (NSColor*)colorWithHexColorString:(NSString*)inColorString
 {
-  NSColor* result = nil;
   unsigned colorCode = 0;
-  unsigned int redByte, greenByte, blueByte;
-  
   if (nil != inColorString)
   {
     NSScanner* scanner = [NSScanner scannerWithString:inColorString];
     (void) [scanner scanHexInt:&colorCode]; // ignore error
   }
-  redByte = (unsigned char)(colorCode >> 16);
-  greenByte = (unsigned char)(colorCode >> 8);
-  blueByte = (unsigned char)(colorCode); // masks off high bits
-  
-  result = [NSColor
-            colorWithCalibratedRed:(CGFloat)redByte / 0xff
-            green:(CGFloat)greenByte / 0xff
-            blue:(CGFloat)blueByte / 0xff
-            alpha:1.0];
+  unsigned int red = (unsigned char)(colorCode >> 24);
+  unsigned int green = (unsigned char)(colorCode >> 16);
+  unsigned int blue = (unsigned char)(colorCode >> 8);
+  unsigned int alpha = (unsigned char)(colorCode); // masks off high bits
+
+  NSColor* result = [NSColor
+            colorWithCalibratedRed:(CGFloat)red / 0xff
+            green:(CGFloat)green / 0xff
+            blue:(CGFloat)blue / 0xff
+            alpha:(CGFloat)alpha / 0xff];
   return result;
 }
 
@@ -90,13 +88,13 @@
 {
   // usage
   if(usage < 0.75) {
-    return [self colorForKey:@"TEXT_NORMAL"];
+    return [self colorForKey:@"TEXT_NORMALCOLOR"];
   }
   else if(usage < 0.9) {
-    return [self colorForKey:@"TEXT_MEDIUM"];
+    return [self colorForKey:@"TEXT_MEDIUMCOLOR"];
   }
   else {
-    return [self colorForKey:@"TEXT_HIGH"];
+    return [self colorForKey:@"TEXT_HIGHCOLOR"];
   }
 }
 
@@ -104,13 +102,13 @@
 {
   // usage
   if(usage < 0.75) {
-    return [self colorForKey:@"BAR_NORMAL"];
+    return [self colorForKey:@"BAR_NORMALCOLOR"];
   }
   else if(usage < 0.9) {
-    return [self colorForKey:@"BAR_MEDIUM"];
+    return [self colorForKey:@"BAR_MEDIUMCOLOR"];
   }
   else {
-    return [self colorForKey:@"BAR_HIGH"];
+    return [self colorForKey:@"BAR_HIGHCOLOR"];
   }
 }
 
@@ -171,18 +169,18 @@
 {
   CGFloat width = 0;
   int iteration = _multiCoreEnabled ? cpuinfo->getCoreCount() : 1;
-  double barWidth = [self doubleForKey: @"BARWIDTH"];
-  double barWidthIndividual = [self doubleForKey: @"BARWIDTH_INDIVIDUAL"];
-  double barMargin = [self doubleForKey: @"BARMARGIN_INDIVIDUAL"];
+  double barWidth = [self doubleForKey: @"BAR_WIDTH"];
+  double barCoreWidth = [self doubleForKey: @"BAR_COREWIDTH"];
+  double barCoreMargin = [self doubleForKey: @"BAR_COREMARGIN"];
   for(int i = 0; i< iteration; i++) {
     if(_textEnabled) {
       width += TEXTWIDTH;
     }
     if(_imageEnabled) {
-      width += _multiCoreEnabled ? barWidthIndividual : barWidth;
+      width += _multiCoreEnabled ? barCoreWidth : barWidth;
     }
     if(_multiCoreEnabled) {
-      width += barMargin;
+      width += barCoreMargin;
     }
   }
   self.size = NSMakeSize(width, HEIGHT);
@@ -191,29 +189,42 @@
 
 - (double)drawImageAt: (double)usage offset:(double)offset
 {
-  double barWidthTotal = [self doubleForKey: @"BARWIDTH"];
-  double barWidthIndividual = [self doubleForKey: @"BARWIDTH_INDIVIDUAL"];
-  double barWidth = _multiCoreEnabled ? barWidthIndividual : barWidthTotal;
-  double barHeight = [self doubleForKey: @"BARHEIGHT"];
-  NSColor *bgColor = [self colorForKey:@"BAR_BACKGROUND"];
-  double borderRadius = [self doubleForKey: @"BORDERRADIUS"];
-  double borderWidth = [self doubleForKey: @"BORDERWIDTH"];
+  double barTotalWidth = [self doubleForKey: @"BAR_WIDTH"];
+  double barCoreWidth = [self doubleForKey: @"BAR_COREWIDTH"];
+  double barWidth = _multiCoreEnabled ? barCoreWidth : barTotalWidth;
+  double barHeight = [self doubleForKey: @"BAR_HEIGHT"];
+  NSColor *bgColor = [self colorForKey:@"BAR_BACKGROUNDCOLOR"];
+  NSColor *borderColor = [self colorForKey:@"BORDER_COLOR"];
+  double borderRadius = [self doubleForKey: @"BORDER_RADIUS"];
+  double borderWidth = [self doubleForKey: @"BORDER_WIDTH"];
 
   [NSGraphicsContext saveGraphicsState];
 
   // background
   [bgColor set];
-  NSBezierPath *border = [NSBezierPath bezierPath];
-  NSRect rect = NSMakeRect(offset, (HEIGHT - barHeight)/2, barWidth, barHeight);
-  [border appendBezierPathWithRoundedRect:rect xRadius:borderRadius yRadius:borderRadius];
-  [border setLineWidth:borderWidth];
-  [border stroke];
+  NSBezierPath *bg = [NSBezierPath bezierPath];
+  NSRect bgRect = NSMakeRect(offset, (HEIGHT - barHeight)/2, barWidth, barHeight);
+  [bg appendBezierPathWithRoundedRect:bgRect xRadius:borderRadius yRadius:borderRadius];
+  [bg fill];
+  
+  // border
+  if(borderWidth > 0) {
+    [borderColor set];
+    NSBezierPath *border = [NSBezierPath bezierPath];
+    NSRect borderRect = NSMakeRect(offset, (HEIGHT - barHeight)/2, barWidth, barHeight);
+    [border appendBezierPathWithRoundedRect:borderRect xRadius:borderRadius yRadius:borderRadius];
+    [border setLineWidth:borderWidth];
+    [border stroke];
+  }
 
   // usage
   [[self imageColorForUsage:usage] set];
   NSBezierPath *bar = [NSBezierPath bezierPath];
-  NSRect rect2 = NSMakeRect(offset + 2, (HEIGHT - barHeight)/2 + 2, (barWidth - 4) * usage, barHeight - 4);
-  [bar appendBezierPathWithRoundedRect:rect2 xRadius:borderRadius/2 yRadius:borderRadius/2];
+  NSRect barRect = NSMakeRect(offset + borderWidth * 2,
+                              (HEIGHT - barHeight)/2 + borderWidth * 2,
+                              (barWidth - borderWidth * 4) * usage,
+                              barHeight - borderWidth * 4);
+  [bar appendBezierPathWithRoundedRect:barRect xRadius:borderRadius yRadius:borderRadius];
   [bar fill];
 
   [NSGraphicsContext restoreGraphicsState];
@@ -261,7 +272,7 @@
   double offset = 0;
   
   if(_multiCoreEnabled) {
-    int barMargin = [self intForKey: @"BARMARGIN_INDIVIDUAL"];
+    int barCoreMargin = [self intForKey: @"BAR_COREMARGIN"];
     for(int i = 0; i < cpuinfo->getCoreCount(); i++) {
       double coreUsage = cpuinfo->getCoreUsageAt(i);
       if(_imageEnabled) {
@@ -270,7 +281,7 @@
       if(_textEnabled) {
         offset = [self drawTextAt:coreUsage offset: offset];
       }
-      offset += barMargin;
+      offset += barCoreMargin;
     }
   }
   else {
