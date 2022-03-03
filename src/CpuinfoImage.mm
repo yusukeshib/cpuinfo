@@ -229,7 +229,7 @@
         // usage
         [[self imageColorForUsage:coreUsage] set];
         NSBezierPath *bar = [NSBezierPath bezierPath];
-        NSRect rect2 = NSMakeRect(2, (HEIGHT - barHeight)/2 + 2, barWidthIndividual*coreUsage - 4, barHeight - 4);
+        NSRect rect2 = NSMakeRect(offset + 2, (HEIGHT - barHeight)/2 + 2, (barWidthIndividual - 4) * coreUsage, barHeight - 4);
         [bar appendBezierPathWithRoundedRect:rect2 xRadius:radius/2 yRadius:radius/2];
         [bar fill];
 
@@ -247,7 +247,7 @@
         // clear all
         [self drawInRect:rect fromRect:rect operation:NSCompositeClear fraction:1.0];
         
-        NSFont *font = [NSFont monospacedDigitSystemFontOfSize:[NSFont smallSystemFontSize] weight:NSFontWeightRegular];
+        NSFont *font = [NSFont menuBarFontOfSize:[NSFont systemFontSize]];
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
         style.alignment = NSTextAlignmentCenter;
         NSDictionary *attributes = @{
@@ -293,7 +293,7 @@
       // usage
       [[self imageColorForUsage:hostUsage] set];
       NSBezierPath *bar = [NSBezierPath bezierPath];
-      NSRect rect2 = NSMakeRect(2, (HEIGHT - barHeight)/2 + 2, barWidth*hostUsage - 4, barHeight - 4);
+      NSRect rect2 = NSMakeRect(2, (HEIGHT - barHeight)/2 + 2, (barWidth - 4) * hostUsage, barHeight - 4);
       [bar appendBezierPathWithRoundedRect:rect2 xRadius:radius/2 yRadius:radius/2];
       [bar fill];
 
