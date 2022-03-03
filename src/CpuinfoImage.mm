@@ -193,6 +193,7 @@
   double barCoreWidth = [self doubleForKey: @"BAR_COREWIDTH"];
   double barWidth = _multiCoreEnabled ? barCoreWidth : barTotalWidth;
   double barHeight = [self doubleForKey: @"BAR_HEIGHT"];
+  double barRadius = [self doubleForKey: @"BAR_RADIUS"];
   NSColor *bgColor = [self colorForKey:@"BAR_BACKGROUNDCOLOR"];
   NSColor *borderColor = [self colorForKey:@"BORDER_COLOR"];
   double borderRadius = [self doubleForKey: @"BORDER_RADIUS"];
@@ -200,10 +201,14 @@
 
   [NSGraphicsContext saveGraphicsState];
 
+  // clip rounded
+  NSRect bgRect = NSMakeRect(offset, (HEIGHT - barHeight)/2, barWidth, barHeight);
+  NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:bgRect xRadius:borderRadius yRadius:borderRadius];
+  [path addClip];
+  
   // background
   [bgColor set];
   NSBezierPath *bg = [NSBezierPath bezierPath];
-  NSRect bgRect = NSMakeRect(offset, (HEIGHT - barHeight)/2, barWidth, barHeight);
   [bg appendBezierPathWithRoundedRect:bgRect xRadius:borderRadius yRadius:borderRadius];
   [bg fill];
   
@@ -224,7 +229,7 @@
                               (HEIGHT - barHeight)/2 + borderWidth * 2,
                               (barWidth - borderWidth * 4) * usage,
                               barHeight - borderWidth * 4);
-  [bar appendBezierPathWithRoundedRect:barRect xRadius:borderRadius yRadius:borderRadius];
+  [bar appendBezierPathWithRoundedRect:barRect xRadius:barRadius yRadius:barRadius];
   [bar fill];
 
   [NSGraphicsContext restoreGraphicsState];

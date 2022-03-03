@@ -57,6 +57,8 @@
 				<integer>24</integer>
 				<key>BAR_HEIGHT</key>
 				<integer>10</integer>
+				<key>BAR_RADIUS</key>
+				<integer>1</integer>
 				<key>BAR_COREMARGIN</key>
 				<string>4</string>
 				<key>BAR_COREWIDTH</key>
@@ -88,6 +90,8 @@
 				<integer>24</integer>
 				<key>BAR_HEIGHT</key>
 				<integer>10</integer>
+				<key>BAR_RADIUS</key>
+				<integer>1</integer>
 				<key>BAR_COREMARGIN</key>
 				<string>4</string>
 				<key>BAR_COREWIDTH</key>
@@ -123,6 +127,8 @@
 				<integer>24</integer>
 				<key>BAR_HEIGHT</key>
 				<integer>10</integer>
+				<key>BAR_RADIUS</key>
+				<integer>1</integer>
 				<key>BAR_COREMARGIN</key>
 				<string>4</string>
 				<key>BAR_COREWIDTH</key>
@@ -154,6 +160,8 @@
 				<integer>24</integer>
 				<key>BAR_HEIGHT</key>
 				<integer>10</integer>
+				<key>BAR_RADIUS</key>
+				<integer>1</integer>
 				<key>BAR_COREMARGIN</key>
 				<string>4</string>
 				<key>BAR_COREWIDTH</key>
@@ -189,6 +197,8 @@
 				<integer>24</integer>
 				<key>BAR_HEIGHT</key>
 				<integer>10</integer>
+				<key>BAR_RADIUS</key>
+				<integer>0</integer>
 				<key>BAR_COREMARGIN</key>
 				<string>4</string>
 				<key>BAR_COREWIDTH</key>
@@ -220,6 +230,8 @@
 				<integer>24</integer>
 				<key>BAR_HEIGHT</key>
 				<integer>10</integer>
+				<key>BAR_RADIUS</key>
+				<integer>0</integer>
 				<key>BAR_COREMARGIN</key>
 				<string>4</string>
 				<key>BAR_COREWIDTH</key>
