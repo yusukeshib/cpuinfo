@@ -173,14 +173,18 @@
   double barCoreWidth = [self doubleForKey: @"BAR_COREWIDTH"];
   double barCoreMargin = [self doubleForKey: @"BAR_COREMARGIN"];
   for(int i = 0; i< iteration; i++) {
-    if(_textEnabled) {
-      width += TEXTWIDTH;
-    }
-    if(_imageEnabled) {
-      width += _multiCoreEnabled ? barCoreWidth : barWidth;
-    }
     if(_multiCoreEnabled) {
+      // Force image view on MultiCore mode
+      width += barCoreWidth;
       width += barCoreMargin;
+    }
+    else {
+      if(_imageEnabled) {
+        width += barWidth;
+      }
+      if(_textEnabled) {
+        width += TEXTWIDTH;
+      }
     }
   }
   self.size = NSMakeSize(width, HEIGHT);
@@ -280,12 +284,8 @@
     int barCoreMargin = [self intForKey: @"BAR_COREMARGIN"];
     for(int i = 0; i < cpuinfo->getCoreCount(); i++) {
       double coreUsage = cpuinfo->getCoreUsageAt(i);
-      if(_imageEnabled) {
-        offset = [self drawImageAt:coreUsage offset: offset];
-      }
-      if(_textEnabled) {
-        offset = [self drawTextAt:coreUsage offset: offset];
-      }
+      // Force image view on MultiCore mode
+      offset = [self drawImageAt:coreUsage offset: offset];
       offset += barCoreMargin;
     }
   }

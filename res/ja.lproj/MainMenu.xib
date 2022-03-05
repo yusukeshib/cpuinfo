@@ -16,6 +16,7 @@
             <connections>
                 <outlet property="mi_theme" destination="8Hg-ui-yi9" id="kNR-Dj-1g7"/>
                 <outlet property="mi_updateInterval" destination="545" id="9Jc-EE-aal"/>
+                <outlet property="mi_viewMode" destination="541" id="EZv-Jo-OQ4"/>
                 <outlet property="statusMenu" destination="536" id="bbZ-yM-I5R"/>
             </connections>
         </customObject>
