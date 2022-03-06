@@ -198,7 +198,7 @@
 				<key>BAR_COREMARGIN</key>
 				<string>4</string>
 				<key>BAR_COREWIDTH</key>
-				<integer>15</integer>
+				<integer>12</integer>
 				<key>BAR_HEIGHT</key>
 				<integer>10</integer>
 				<key>BAR_HIGHCOLOR</key>
@@ -231,7 +231,7 @@
 				<key>BAR_COREMARGIN</key>
 				<string>4</string>
 				<key>BAR_COREWIDTH</key>
-				<integer>15</integer>
+				<integer>12</integer>
 				<key>BAR_HEIGHT</key>
 				<integer>10</integer>
 				<key>BAR_HIGHCOLOR</key>

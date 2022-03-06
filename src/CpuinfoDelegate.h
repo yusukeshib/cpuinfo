@@ -16,6 +16,7 @@
 @property IBOutlet NSMenu *statusMenu;
 @property IBOutlet NSMenuItem *mi_updateInterval;
 @property IBOutlet NSMenuItem *mi_theme;
+@property IBOutlet NSMenuItem *mi_viewMode;
 @property BOOL startAtLogin;
 @property BOOL showCoresIndividually;
 @property BOOL showImage;

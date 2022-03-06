@@ -146,6 +146,7 @@
             <connections>
                 <outlet property="mi_theme" destination="fQn-cn-aSR" id="lQK-HZ-XNK"/>
                 <outlet property="mi_updateInterval" destination="545" id="fsg-fb-SbM"/>
+                <outlet property="mi_viewMode" destination="541" id="SDp-JB-Pn1"/>
                 <outlet property="statusMenu" destination="536" id="540"/>
             </connections>
         </customObject>

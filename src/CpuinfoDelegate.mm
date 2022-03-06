@@ -13,6 +13,7 @@
 
 @synthesize window;
 @synthesize statusMenu;
+@synthesize mi_viewMode;
 @synthesize mi_updateInterval;
 @synthesize mi_theme;
 
@@ -21,16 +22,18 @@
 }
 
 -(void)awakeFromNib{
-  //
+
   image = [[CpuinfoImage alloc] init];
   [image setCpuinfo:&cpuinfo];
   
+  // initialize StatusItem
   statusItem = [[NSStatusBar systemStatusBar]
                 statusItemWithLength:NSVariableStatusItemLength];
   [statusItem setMenu:self.statusMenu];
   [statusItem setTitle:@""];
   [statusItem setHighlightMode:YES];
-  //
+  
+  // Retrieve params from UserDefaults
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults registerDefaults:
    @{
@@ -43,9 +46,11 @@
   self.showImage = [defaults boolForKey:@"showImage"];
   self.showText = [defaults boolForKey:@"showText"];
   self.showCoresIndividually = [defaults boolForKey:@"showCoresIndividually"];
+  
   image.imageEnabled = self.showImage;
   image.textEnabled = self.showText;
   image.multiCoreEnabled = self.showCoresIndividually;
+  
   cpuinfo.setMultiCoreEnabled(self.showCoresIndividually);
   
   // updateInterval
@@ -53,16 +58,18 @@
     NSMenuItem *mi = mi_updateInterval.submenu.itemArray[i];
     mi.state = mi.tag == updateInterval ? NSOnState : NSOffState;
   }
+  
   // theme
   for(int i=0;i<mi_theme.submenu.itemArray.count;i++) {
     NSMenuItem *mi = mi_theme.submenu.itemArray[i];
     mi.state = [mi.title isEqual:image.theme] ? NSOnState : NSOffState;
   }
-  //
+  
+  // loginController
   NSString * identifier = [[[NSBundle mainBundle] bundleIdentifier] stringByAppendingString:@".helper"];
   loginController = [[StartAtLoginController alloc] initWithIdentifier:identifier];
   self.startAtLogin = [loginController startAtLogin];
-  //
+  
   [self updateView];
 }
 
@@ -93,8 +100,7 @@
   }
   image.theme = mi_selected.title;
  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setObject:image.theme
-               forKey:@"theme"];
+  [defaults setObject:image.theme forKey:@"theme"];
 }
 
 - (IBAction)updateShowImage:(id)sender {
@@ -102,7 +108,7 @@
   image.imageEnabled = showImage;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:showImage forKey:@"showImage"];
-  //
+
   [self updateView];
 }
 
@@ -111,7 +117,7 @@
   image.textEnabled = showText;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:showText forKey:@"showText"];
-  //
+
   [self updateView];
 }
 
@@ -121,7 +127,10 @@
   cpuinfo.setMultiCoreEnabled(showCoresIndividually);
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:showCoresIndividually forKey:@"showCoresIndividually"];
-  //
+  
+  // enabled/disable ViewMode menu
+  mi_viewMode.enabled = !showCoresIndividually;
+  
   [self updateView];
 }
 
@@ -187,5 +196,6 @@
   }
 }
 @end
+
 
 
