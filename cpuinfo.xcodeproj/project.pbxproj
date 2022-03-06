@@ -167,6 +167,7 @@
 				742AC11D1DEBD150005EE2D6 /* Resources */,
 				742AC1551DEBD1E9005EE2D6 /* Embed Frameworks */,
 				746A13911DEF996400856F96 /* Copy Helper App */,
+				748501E127D4DFED000B7D28 /* Create zip */,
 			);
 			buildRules = (
 			);
@@ -249,6 +250,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		748501E127D4DFED000B7D28 /* Create zip */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Create zip";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd $BUILT_PRODUCTS_DIR\nrm -f $PROJECT_DIR/dist/cpuinfo.zip\nzip -r $PROJECT_DIR/dist/cpuinfo.zip cpuinfo.app\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		742AC11B1DEBD150005EE2D6 /* Sources */ = {
