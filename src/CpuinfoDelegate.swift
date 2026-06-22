@@ -182,11 +182,14 @@ final class CpuinfoDelegate: NSObject, NSApplicationDelegate {
   }
 
   private func updateView() {
-    image.update()
+    // Resolve appearance before drawing so this frame uses the right colors.
     if let appearance = statusItem.button?.effectiveAppearance {
       image.darkMode = appearanceIsDark(appearance)
     }
+    image.update()
+    // The image object is reused in place, so force the button to re-render.
     statusItem.button?.image = image
+    statusItem.button?.needsDisplay = true
   }
 
   private func appearanceIsDark(_ appearance: NSAppearance) -> Bool {

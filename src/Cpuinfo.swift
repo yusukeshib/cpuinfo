@@ -98,11 +98,13 @@ final class Cpuinfo {
     let stateMax = Int(CPU_STATE_MAX)
     for i in 0..<Int(coreCount) {
       let base = i * stateMax
+      // info holds integer_t (Int32); tick counters are unsigned and can
+      // exceed Int32.max, so reinterpret the bits instead of converting.
       let current = Ticks(
-        user: natural_t(info[base + Int(CPU_STATE_USER)]),
-        system: natural_t(info[base + Int(CPU_STATE_SYSTEM)]),
-        idle: natural_t(info[base + Int(CPU_STATE_IDLE)]),
-        nice: natural_t(info[base + Int(CPU_STATE_NICE)])
+        user: natural_t(bitPattern: info[base + Int(CPU_STATE_USER)]),
+        system: natural_t(bitPattern: info[base + Int(CPU_STATE_SYSTEM)]),
+        idle: natural_t(bitPattern: info[base + Int(CPU_STATE_IDLE)]),
+        nice: natural_t(bitPattern: info[base + Int(CPU_STATE_NICE)])
       )
       cores[i].usage = Cpuinfo.usage(from: cores[i].ticks, to: current)
       cores[i].ticks = current

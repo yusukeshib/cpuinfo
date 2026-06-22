@@ -36,10 +36,9 @@ final class CpuinfoImage: NSImage {
 
   // https://stackoverflow.com/questions/8697205/convert-hex-color-code-to-nscolor
   private func color(hex string: String?) -> NSColor {
-    var colorCode: UInt32 = 0
-    if let string = string {
-      Scanner(string: string).scanHexInt32(&colorCode)
-    }
+    // Hex string is RRGGBBAA (8 digits). Parse as UInt64 to tolerate the full
+    // 32-bit range, then keep the low 32 bits.
+    let colorCode = UInt32(truncatingIfNeeded: string.flatMap { UInt64($0, radix: 16) } ?? 0)
     let red = CGFloat((colorCode >> 24) & 0xff) / 0xff
     let green = CGFloat((colorCode >> 16) & 0xff) / 0xff
     let blue = CGFloat((colorCode >> 8) & 0xff) / 0xff
