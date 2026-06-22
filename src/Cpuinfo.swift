@@ -76,10 +76,14 @@ final class Cpuinfo {
 
   // Computes the fraction of busy time between two tick snapshots.
   private static func usage(from previous: Ticks, to current: Ticks) -> Double {
-    let user = Double(current.user &- previous.user)
-    let system = Double(current.system &- previous.system)
-    let idle = Double(current.idle &- previous.idle)
-    let nice = Double(current.nice &- previous.nice)
+    return usageRatio(user: Double(current.user &- previous.user),
+                      system: Double(current.system &- previous.system),
+                      idle: Double(current.idle &- previous.idle),
+                      nice: Double(current.nice &- previous.nice))
+  }
+
+  // Pure busy-time ratio from per-state deltas. Exposed (internal) for testing.
+  static func usageRatio(user: Double, system: Double, idle: Double, nice: Double) -> Double {
     let used = user + system + nice
     let total = system + user + idle + nice
     return total > 0 ? used / total : 0

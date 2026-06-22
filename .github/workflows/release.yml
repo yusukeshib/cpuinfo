@@ -11,6 +11,27 @@ permissions:
 jobs:
   release:
     runs-on: macos-14
+
+    # Signing/notarization run only when these secrets are configured.
+    # Leave them unset to ship an unsigned zip (Gatekeeper will warn on launch).
+    #
+    # Required secrets for signing + notarization:
+    #   MACOS_CERTIFICATE       base64 of a "Developer ID Application" .p12
+    #   MACOS_CERTIFICATE_PWD   password of that .p12
+    #   MACOS_SIGN_IDENTITY     e.g. "Developer ID Application: Name (TEAMID)"
+    #   KEYCHAIN_PWD            any throwaway password for the temp keychain
+    #   AC_APPLE_ID             Apple ID email used for notarization
+    #   AC_TEAM_ID              10-char Apple Developer Team ID
+    #   AC_APP_PASSWORD         app-specific password for that Apple ID
+    env:
+      MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+      MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+      MACOS_SIGN_IDENTITY: ${{ secrets.MACOS_SIGN_IDENTITY }}
+      KEYCHAIN_PWD: ${{ secrets.KEYCHAIN_PWD }}
+      AC_APPLE_ID: ${{ secrets.AC_APPLE_ID }}
+      AC_TEAM_ID: ${{ secrets.AC_TEAM_ID }}
+      AC_APP_PASSWORD: ${{ secrets.AC_APP_PASSWORD }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -24,16 +45,57 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             clean build
 
-      - name: Package app
+      - name: Locate app
+        id: app
         run: |
           APP="build/Build/Products/Release/cpuinfo.app"
-          if [ ! -d "$APP" ]; then
-            echo "::error::Built app not found at $APP"
-            exit 1
-          fi
+          [ -d "$APP" ] || { echo "::error::App not found at $APP"; exit 1; }
+          echo "path=$APP" >> "$GITHUB_OUTPUT"
+
+      - name: Import signing certificate
+        if: ${{ env.MACOS_CERTIFICATE != '' }}
+        run: |
+          KEYCHAIN="$RUNNER_TEMP/signing.keychain-db"
+          security create-keychain -p "$KEYCHAIN_PWD" "$KEYCHAIN"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN"
+          security unlock-keychain -p "$KEYCHAIN_PWD" "$KEYCHAIN"
+          echo "$MACOS_CERTIFICATE" | base64 --decode > "$RUNNER_TEMP/cert.p12"
+          security import "$RUNNER_TEMP/cert.p12" -k "$KEYCHAIN" \
+            -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$KEYCHAIN_PWD" "$KEYCHAIN"
+          security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
+
+      - name: Codesign (hardened runtime)
+        if: ${{ env.MACOS_CERTIFICATE != '' }}
+        run: |
+          APP="${{ steps.app.outputs.path }}"
+          # Sign nested code first, then the outer bundle.
+          codesign --force --options runtime --timestamp \
+            --sign "$MACOS_SIGN_IDENTITY" \
+            "$APP/Contents/Library/LoginItems/helper.app"
+          codesign --force --options runtime --timestamp \
+            --entitlements cpuinfo.entitlements \
+            --sign "$MACOS_SIGN_IDENTITY" "$APP"
+          codesign --verify --deep --strict --verbose=2 "$APP"
+
+      - name: Package app
+        run: |
+          APP="${{ steps.app.outputs.path }}"
           mkdir -p dist
-          # ditto produces a macOS-friendly zip that preserves the bundle.
           ditto -c -k --sequesterRsrc --keepParent "$APP" dist/cpuinfo.zip
+
+      - name: Notarize & staple
+        if: ${{ env.MACOS_CERTIFICATE != '' && env.AC_APPLE_ID != '' }}
+        run: |
+          xcrun notarytool submit dist/cpuinfo.zip \
+            --apple-id "$AC_APPLE_ID" \
+            --team-id "$AC_TEAM_ID" \
+            --password "$AC_APP_PASSWORD" \
+            --wait
+          # Staple the app, then re-zip so the ticket ships in the artifact.
+          xcrun stapler staple "${{ steps.app.outputs.path }}"
+          rm -f dist/cpuinfo.zip
+          ditto -c -k --sequesterRsrc --keepParent "${{ steps.app.outputs.path }}" dist/cpuinfo.zip
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

@@ -37,6 +37,16 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "TT00000000000000000000T1"
+               BuildableName = "cpuinfoTests.xctest"
+               BlueprintName = "cpuinfoTests"
+               ReferencedContainer = "container:cpuinfo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

@@ -16,6 +16,8 @@
 		746A13951DEF9CCD00856F96 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 746A13941DEF9CCD00856F96 /* ServiceManagement.framework */; };
 		BB00000000000000000000B2 /* CpuinfoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F2 /* CpuinfoImage.swift */; };
 		BB00000000000000000000B1 /* Cpuinfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F1 /* Cpuinfo.swift */; };
+		TT00000000000000000000B1 /* CpuinfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TT00000000000000000000F1 /* CpuinfoTests.swift */; };
+		TT00000000000000000000B2 /* Cpuinfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F1 /* Cpuinfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		746A13941DEF9CCD00856F96 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		AA00000000000000000000F2 /* CpuinfoImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuinfoImage.swift; sourceTree = "<group>"; };
 		AA00000000000000000000F1 /* Cpuinfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cpuinfo.swift; sourceTree = "<group>"; };
+		TT00000000000000000000F1 /* CpuinfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuinfoTests.swift; sourceTree = "<group>"; };
+		TT00000000000000000000P1 /* cpuinfoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cpuinfoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,8 +95,17 @@
 			isa = PBXGroup;
 			children = (
 				742AC11F1DEBD150005EE2D6 /* cpuinfo.app */,
+				TT00000000000000000000P1 /* cpuinfoTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		TT00000000000000000000G1 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				TT00000000000000000000F1 /* CpuinfoTests.swift */,
+			);
+			path = tests;
 			sourceTree = "<group>";
 		};
 		29B97314FDCFA39411CA2CEA /* Cpumeter */ = {
@@ -106,6 +119,7 @@
 				74203A181B16ADD10087E214 /* MainMenu.xib */,
 				743BD28E1DE2D01A000BA0D1 /* Images.xcassets */,
 				74203A0B1B16ADC20087E214 /* src */,
+				TT00000000000000000000G1 /* tests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -170,6 +184,21 @@
 			productReference = 742AC11F1DEBD150005EE2D6 /* cpuinfo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		TT00000000000000000000T1 /* cpuinfoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = TT00000000000000000000L1 /* Build configuration list for PBXNativeTarget "cpuinfoTests" */;
+			buildPhases = (
+				TT00000000000000000000S1 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = cpuinfoTests;
+			productName = cpuinfoTests;
+			productReference = TT00000000000000000000P1 /* cpuinfoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -192,6 +221,10 @@
 								enabled = 1;
 							};
 						};
+					};
+					TT00000000000000000000T1 = {
+						CreatedOnToolsVersion = 15.0;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -217,6 +250,7 @@
 			projectRoot = "";
 			targets = (
 				742AC11E1DEBD150005EE2D6 /* cpuinfo */,
+				TT00000000000000000000T1 /* cpuinfoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -274,6 +308,15 @@
 				BB00000000000000000000B3 /* CpuinfoDelegate.swift in Sources */,
 				BB00000000000000000000B4 /* StartAtLoginController.swift in Sources */,
 				BB00000000000000000000B5 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		TT00000000000000000000S1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				TT00000000000000000000B1 /* CpuinfoTests.swift in Sources */,
+				TT00000000000000000000B2 /* Cpuinfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +448,34 @@
 			};
 			name = Release;
 		};
+		TT00000000000000000000D1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = io.fata.shibata.cpuinfoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		TT00000000000000000000R1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = io.fata.shibata.cpuinfoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -422,6 +493,15 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		TT00000000000000000000L1 /* Build configuration list for PBXNativeTarget "cpuinfoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				TT00000000000000000000D1 /* Debug */,
+				TT00000000000000000000R1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

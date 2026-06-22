@@ -20,7 +20,7 @@ jobs:
           xcodebuild -version
           swift --version
 
-      - name: Build (Debug, unsigned)
+      - name: Build & test (Debug, unsigned)
         run: |
           xcodebuild \
             -project cpuinfo.xcodeproj \
@@ -28,4 +28,4 @@ jobs:
             -configuration Debug \
             -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
-            clean build
+            clean test
