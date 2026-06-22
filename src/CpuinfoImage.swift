@@ -7,13 +7,15 @@
 
 import Cocoa
 
-final class CpuinfoImage: NSImage {
+// Mutable state is only ever touched from the main thread; the explicit
+// @unchecked Sendable opts out of the conformance check inherited from NSImage.
+final class CpuinfoImage: NSImage, @unchecked Sendable {
 
   private static let height: CGFloat = 24.0
   private static let textWidth: CGFloat = 36.0
   private static let textHeight: CGFloat = 20.0
 
-  private var cpuinfo: Cpuinfo?
+  private var cpuinfo: Cpuinfo!
 
   var darkMode = false
   var theme: String?
@@ -96,7 +98,7 @@ final class CpuinfoImage: NSImage {
 
   private func updateSize() {
     var width: CGFloat = 0
-    let iteration = multiCoreEnabled ? Int(cpuinfo?.getCoreCount() ?? 0) : 1
+    let iteration = multiCoreEnabled ? Int(cpuinfo.getCoreCount()) : 1
     let barWidth = CGFloat(double(forKey: "BAR_WIDTH"))
     let barCoreWidth = CGFloat(double(forKey: "BAR_COREWIDTH"))
     let barCoreMargin = CGFloat(double(forKey: "BAR_COREMARGIN"))
@@ -209,15 +211,15 @@ final class CpuinfoImage: NSImage {
 
     if multiCoreEnabled {
       let barCoreMargin = CGFloat(int(forKey: "BAR_COREMARGIN"))
-      let count = Int(cpuinfo?.getCoreCount() ?? 0)
+      let count = Int(cpuinfo.getCoreCount())
       for i in 0..<count {
-        let coreUsage = cpuinfo?.getCoreUsageAt(UInt(i)) ?? 0
+        let coreUsage = cpuinfo.getCoreUsageAt(UInt(i))
         // Force image view on MultiCore mode
         offset = drawImage(at: coreUsage, offset: offset)
         offset += barCoreMargin
       }
     } else {
-      let hostUsage = cpuinfo?.getHostUsage() ?? 0
+      let hostUsage = cpuinfo.getHostUsage()
       if imageEnabled {
         offset = drawImage(at: hostUsage, offset: offset)
       }

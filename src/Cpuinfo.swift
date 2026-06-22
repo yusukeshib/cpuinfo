@@ -5,7 +5,7 @@
 //  CPU usage sampler backed by the Mach host/processor statistics APIs.
 //
 
-import Darwin
+import Foundation
 
 final class Cpuinfo {
 
@@ -20,6 +20,10 @@ final class Cpuinfo {
     var ticks = Ticks()
     var usage: Double = 0
   }
+
+  // update() runs on a background thread while the getters are read from the
+  // main thread during drawing, so all shared state is guarded by this lock.
+  private let lock = NSLock()
 
   private var multiCoreEnabled = false
   private(set) var coreCount: UInt = 0
@@ -48,14 +52,20 @@ final class Cpuinfo {
   }
 
   func setMultiCoreEnabled(_ enabled: Bool) {
+    lock.lock()
     multiCoreEnabled = enabled
+    lock.unlock()
   }
 
   func getHostUsage() -> Double {
+    lock.lock()
+    defer { lock.unlock() }
     return host.usage
   }
 
   func getCoreUsageAt(_ index: UInt) -> Double {
+    lock.lock()
+    defer { lock.unlock() }
     guard index < coreCount else { return 0 }
     return cores[Int(index)].usage
   }
@@ -76,6 +86,8 @@ final class Cpuinfo {
   }
 
   func update() {
+    lock.lock()
+    defer { lock.unlock() }
     if multiCoreEnabled {
       updateCores()
     } else {
