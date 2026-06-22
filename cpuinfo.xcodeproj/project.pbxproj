@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		7408CD561DEFA6C6000793CB /* helper.app in Copy Helper App */ = {isa = PBXBuildFile; fileRef = 7408CD4A1DEFA60D000793CB /* helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		BB00000000000000000000B3 /* CpuinfoDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F3 /* CpuinfoDelegate.swift */; };
-		BB00000000000000000000B5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F5 /* main.swift */; };
 		742AC1591DEBD30A005EE2D6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 743BD28E1DE2D01A000BA0D1 /* Images.xcassets */; };
 		742AC15A1DEBD532005EE2D6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74203A181B16ADD10087E214 /* MainMenu.xib */; };
-		BB00000000000000000000B4 /* StartAtLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F4 /* StartAtLoginController.swift */; };
 		746A13951DEF9CCD00856F96 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 746A13941DEF9CCD00856F96 /* ServiceManagement.framework */; };
-		BB00000000000000000000B2 /* CpuinfoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F2 /* CpuinfoImage.swift */; };
 		BB00000000000000000000B1 /* Cpuinfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F1 /* Cpuinfo.swift */; };
+		BB00000000000000000000B2 /* CpuinfoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F2 /* CpuinfoImage.swift */; };
+		BB00000000000000000000B3 /* CpuinfoDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F3 /* CpuinfoDelegate.swift */; };
+		BB00000000000000000000B4 /* StartAtLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F4 /* StartAtLoginController.swift */; };
+		BB00000000000000000000B5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F5 /* main.swift */; };
 		TT00000000000000000000B1 /* CpuinfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TT00000000000000000000F1 /* CpuinfoTests.swift */; };
 		TT00000000000000000000B2 /* Cpuinfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F1 /* Cpuinfo.swift */; };
 /* End PBXBuildFile section */
@@ -62,8 +62,6 @@
 		7408CD261DEFA5A8000793CB /* cpuinfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cpuinfo.plist; sourceTree = "<group>"; };
 		7408CD451DEFA60D000793CB /* helper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = helper.xcodeproj; path = helper/helper.xcodeproj; sourceTree = "<group>"; };
 		740BC7191B04DBFE00324CDD /* cpuinfo.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = cpuinfo.xcconfig; sourceTree = "<group>"; };
-		AA00000000000000000000F3 /* CpuinfoDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CpuinfoDelegate.swift; sourceTree = "<group>"; };
-		AA00000000000000000000F5 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		74203A171B16ADD10087E214 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		74203A191B16ADD10087E214 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		74203A1C1B16ADD20087E214 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -71,10 +69,12 @@
 		742AC11F1DEBD150005EE2D6 /* cpuinfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cpuinfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		743A38001F68DF0F0003A2DB /* cpuinfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cpuinfo.entitlements; sourceTree = "<group>"; };
 		743BD28E1DE2D01A000BA0D1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = res/Images.xcassets; sourceTree = "<group>"; };
-		AA00000000000000000000F4 /* StartAtLoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartAtLoginController.swift; sourceTree = "<group>"; };
 		746A13941DEF9CCD00856F96 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
-		AA00000000000000000000F2 /* CpuinfoImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuinfoImage.swift; sourceTree = "<group>"; };
 		AA00000000000000000000F1 /* Cpuinfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cpuinfo.swift; sourceTree = "<group>"; };
+		AA00000000000000000000F2 /* CpuinfoImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuinfoImage.swift; sourceTree = "<group>"; };
+		AA00000000000000000000F3 /* CpuinfoDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CpuinfoDelegate.swift; sourceTree = "<group>"; };
+		AA00000000000000000000F4 /* StartAtLoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartAtLoginController.swift; sourceTree = "<group>"; };
+		AA00000000000000000000F5 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		TT00000000000000000000F1 /* CpuinfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuinfoTests.swift; sourceTree = "<group>"; };
 		TT00000000000000000000P1 /* cpuinfoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cpuinfoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -98,14 +98,6 @@
 				TT00000000000000000000P1 /* cpuinfoTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		TT00000000000000000000G1 /* tests */ = {
-			isa = PBXGroup;
-			children = (
-				TT00000000000000000000F1 /* CpuinfoTests.swift */,
-			);
-			path = tests;
 			sourceTree = "<group>";
 		};
 		29B97314FDCFA39411CA2CEA /* Cpumeter */ = {
@@ -159,6 +151,14 @@
 				AA00000000000000000000F5 /* main.swift */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		TT00000000000000000000G1 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				TT00000000000000000000F1 /* CpuinfoTests.swift */,
+			);
+			path = tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,7 +360,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 231;
+				CURRENT_PROJECT_VERSION = 236;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 4TZUUASNPN;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -380,8 +380,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -399,7 +399,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 231;
+				CURRENT_PROJECT_VERSION = 236;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 4TZUUASNPN;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -416,8 +416,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
