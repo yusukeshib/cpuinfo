@@ -79,7 +79,29 @@ final class CpuinfoDelegate: NSObject, NSApplicationDelegate {
     loginController = StartAtLoginController(identifier: identifier)
     startAtLogin = loginController.startAtLogin
 
+    // Show the Activity Monitor app icon next to its menu item.
+    setActivityMonitorIcon()
+
     updateView()
+  }
+
+  private func setActivityMonitorIcon() {
+    guard let item = statusMenu?.items.first(where: {
+      $0.action == #selector(launchActivityMonitor(_:))
+    }) else { return }
+
+    let bundleID = "com.apple.ActivityMonitor"
+    let path: String?
+    if #available(macOS 10.15, *) {
+      path = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleID)?.path
+    } else {
+      path = NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: bundleID)
+    }
+    guard let appPath = path else { return }
+
+    let icon = NSWorkspace.shared.icon(forFile: appPath)
+    icon.size = NSSize(width: 16, height: 16)
+    item.image = icon
   }
 
   func applicationDidFinishLaunching(_ notification: Notification) {
@@ -111,22 +133,27 @@ final class CpuinfoDelegate: NSObject, NSApplicationDelegate {
     UserDefaults.standard.set(image.theme, forKey: "theme")
   }
 
+  // NOTE: the menu items carry a Cocoa `value` binding to these properties,
+  // which toggles the bound property itself when the item is clicked. So the
+  // actions must NOT toggle it again (that double-toggle cancels out); they
+  // read the upcoming value as `!self.prop` and apply the side effects.
+
   @IBAction func updateShowImage(_ sender: Any) {
-    showImage.toggle()
+    let showImage = !self.showImage
     image.imageEnabled = showImage
     UserDefaults.standard.set(showImage, forKey: "showImage")
     updateView()
   }
 
   @IBAction func updateShowText(_ sender: Any) {
-    showText.toggle()
+    let showText = !self.showText
     image.textEnabled = showText
     UserDefaults.standard.set(showText, forKey: "showText")
     updateView()
   }
 
   @IBAction func updateCoresIndividually(_ sender: Any) {
-    showCoresIndividually.toggle()
+    let showCoresIndividually = !self.showCoresIndividually
     image.multiCoreEnabled = showCoresIndividually
     cpuinfo.setMultiCoreEnabled(showCoresIndividually)
     UserDefaults.standard.set(showCoresIndividually, forKey: "showCoresIndividually")
@@ -138,7 +165,7 @@ final class CpuinfoDelegate: NSObject, NSApplicationDelegate {
   }
 
   @IBAction func updateStartAtLogin(_ sender: Any) {
-    startAtLogin.toggle()
+    let startAtLogin = !self.startAtLogin
     loginController.startAtLogin = startAtLogin
   }
 
@@ -187,7 +214,10 @@ final class CpuinfoDelegate: NSObject, NSApplicationDelegate {
       image.darkMode = appearanceIsDark(appearance)
     }
     image.update()
-    // The image object is reused in place, so force the button to re-render.
+    // The image object is reused in place, so the button neither re-renders nor
+    // recomputes its width on its own. Drive the status item length from the
+    // image size and force a redraw.
+    statusItem.length = image.size.width
     statusItem.button?.image = image
     statusItem.button?.needsDisplay = true
   }
