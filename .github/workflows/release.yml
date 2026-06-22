@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build (Release, unsigned)
+        run: |
+          xcodebuild \
+            -project cpuinfo.xcodeproj \
+            -scheme cpuinfo \
+            -configuration Release \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            clean build
+
+      - name: Package app
+        run: |
+          APP="build/Build/Products/Release/cpuinfo.app"
+          if [ ! -d "$APP" ]; then
+            echo "::error::Built app not found at $APP"
+            exit 1
+          fi
+          mkdir -p dist
+          # ditto produces a macOS-friendly zip that preserves the bundle.
+          ditto -c -k --sequesterRsrc --keepParent "$APP" dist/cpuinfo.zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/cpuinfo.zip
+          generate_release_notes: true
+          fail_on_unmatched_files: true

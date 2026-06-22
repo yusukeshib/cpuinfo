@@ -1,0 +1,31 @@
+name: Build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: |
+          xcodebuild -version
+          swift --version
+
+      - name: Build (Debug, unsigned)
+        run: |
+          xcodebuild \
+            -project cpuinfo.xcodeproj \
+            -scheme cpuinfo \
+            -configuration Debug \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            clean build
