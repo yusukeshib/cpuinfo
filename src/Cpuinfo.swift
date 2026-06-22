@@ -1,0 +1,133 @@
+//
+//  Cpuinfo.swift
+//  cpuinfo
+//
+//  CPU usage sampler backed by the Mach host/processor statistics APIs.
+//
+
+import Darwin
+
+final class Cpuinfo {
+
+  private struct Ticks {
+    var user: natural_t = 0
+    var system: natural_t = 0
+    var idle: natural_t = 0
+    var nice: natural_t = 0
+  }
+
+  private struct Core {
+    var ticks = Ticks()
+    var usage: Double = 0
+  }
+
+  private var multiCoreEnabled = false
+  private(set) var coreCount: UInt = 0
+
+  private var host = Core()
+  private var cores: [Core] = []
+
+  init() {
+    var cpuCount = natural_t(0)
+    var info: processor_info_array_t?
+    var infoCount = mach_msg_type_number_t(0)
+
+    let result = host_processor_info(mach_host_self(),
+                                     PROCESSOR_CPU_LOAD_INFO,
+                                     &cpuCount,
+                                     &info,
+                                     &infoCount)
+
+    if result == KERN_SUCCESS, let info = info {
+      coreCount = UInt(cpuCount)
+      cores = Array(repeating: Core(), count: Int(cpuCount))
+      vm_deallocate(mach_task_self_,
+                    vm_address_t(bitPattern: info),
+                    vm_size_t(Int(infoCount) * MemoryLayout<integer_t>.stride))
+    }
+  }
+
+  func setMultiCoreEnabled(_ enabled: Bool) {
+    multiCoreEnabled = enabled
+  }
+
+  func getHostUsage() -> Double {
+    return host.usage
+  }
+
+  func getCoreUsageAt(_ index: UInt) -> Double {
+    guard index < coreCount else { return 0 }
+    return cores[Int(index)].usage
+  }
+
+  func getCoreCount() -> UInt {
+    return coreCount
+  }
+
+  // Computes the fraction of busy time between two tick snapshots.
+  private static func usage(from previous: Ticks, to current: Ticks) -> Double {
+    let user = Double(current.user &- previous.user)
+    let system = Double(current.system &- previous.system)
+    let idle = Double(current.idle &- previous.idle)
+    let nice = Double(current.nice &- previous.nice)
+    let used = user + system + nice
+    let total = system + user + idle + nice
+    return total > 0 ? used / total : 0
+  }
+
+  func update() {
+    if multiCoreEnabled {
+      updateCores()
+    } else {
+      updateHost()
+    }
+  }
+
+  private func updateCores() {
+    var cpuCount = natural_t(0)
+    var info: processor_info_array_t?
+    var infoCount = mach_msg_type_number_t(0)
+
+    let result = host_processor_info(mach_host_self(),
+                                     PROCESSOR_CPU_LOAD_INFO,
+                                     &cpuCount,
+                                     &info,
+                                     &infoCount)
+    guard result == KERN_SUCCESS, let info = info else { return }
+
+    let stateMax = Int(CPU_STATE_MAX)
+    for i in 0..<Int(coreCount) {
+      let base = i * stateMax
+      let current = Ticks(
+        user: natural_t(info[base + Int(CPU_STATE_USER)]),
+        system: natural_t(info[base + Int(CPU_STATE_SYSTEM)]),
+        idle: natural_t(info[base + Int(CPU_STATE_IDLE)]),
+        nice: natural_t(info[base + Int(CPU_STATE_NICE)])
+      )
+      cores[i].usage = Cpuinfo.usage(from: cores[i].ticks, to: current)
+      cores[i].ticks = current
+    }
+
+    vm_deallocate(mach_task_self_,
+                  vm_address_t(bitPattern: info),
+                  vm_size_t(Int(infoCount) * MemoryLayout<integer_t>.stride))
+  }
+
+  private func updateHost() {
+    var count = mach_msg_type_number_t(MemoryLayout<host_cpu_load_info_data_t>.stride / MemoryLayout<integer_t>.stride)
+    var cpuLoad = host_cpu_load_info_data_t()
+
+    let result = withUnsafeMutablePointer(to: &cpuLoad) { ptr -> kern_return_t in
+      ptr.withMemoryRebound(to: integer_t.self, capacity: Int(count)) {
+        host_statistics(mach_host_self(), HOST_CPU_LOAD_INFO, $0, &count)
+      }
+    }
+    guard result == KERN_SUCCESS else { return }
+
+    // cpu_ticks tuple order matches CPU_STATE_USER/SYSTEM/IDLE/NICE (0..3).
+    let t = cpuLoad.cpu_ticks
+    let current = Ticks(user: t.0, system: t.1, idle: t.2, nice: t.3)
+    host.usage = Cpuinfo.usage(from: host.ticks, to: current)
+    host.ticks = current
+  }
+}

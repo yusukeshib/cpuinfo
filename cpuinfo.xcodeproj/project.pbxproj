@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		7408CD561DEFA6C6000793CB /* helper.app in Copy Helper App */ = {isa = PBXBuildFile; fileRef = 7408CD4A1DEFA60D000793CB /* helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		742AC1561DEBD2F6005EE2D6 /* CpuinfoDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74203A0E1B16ADC20087E214 /* CpuinfoDelegate.mm */; };
-		742AC1581DEBD2FE005EE2D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74203A111B16ADC20087E214 /* main.m */; };
+		BB00000000000000000000B3 /* CpuinfoDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F3 /* CpuinfoDelegate.swift */; };
+		BB00000000000000000000B5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F5 /* main.swift */; };
 		742AC1591DEBD30A005EE2D6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 743BD28E1DE2D01A000BA0D1 /* Images.xcassets */; };
 		742AC15A1DEBD532005EE2D6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74203A181B16ADD10087E214 /* MainMenu.xib */; };
-		746A13781DEF96D800856F96 /* StartAtLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746A13771DEF96D800856F96 /* StartAtLoginController.m */; };
+		BB00000000000000000000B4 /* StartAtLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F4 /* StartAtLoginController.swift */; };
 		746A13951DEF9CCD00856F96 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 746A13941DEF9CCD00856F96 /* ServiceManagement.framework */; };
-		74DC99D1235459F2005D8091 /* CpuinfoImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 74DC99D0235459F2005D8091 /* CpuinfoImage.mm */; };
-		74DC99D42354A7B2005D8091 /* Cpuinfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DC99D22354A7B2005D8091 /* Cpuinfo.cpp */; };
+		BB00000000000000000000B2 /* CpuinfoImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F2 /* CpuinfoImage.swift */; };
+		BB00000000000000000000B1 /* Cpuinfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000F1 /* Cpuinfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,9 +60,8 @@
 		7408CD261DEFA5A8000793CB /* cpuinfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cpuinfo.plist; sourceTree = "<group>"; };
 		7408CD451DEFA60D000793CB /* helper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = helper.xcodeproj; path = helper/helper.xcodeproj; sourceTree = "<group>"; };
 		740BC7191B04DBFE00324CDD /* cpuinfo.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = cpuinfo.xcconfig; sourceTree = "<group>"; };
-		74203A0D1B16ADC20087E214 /* CpuinfoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpuinfoDelegate.h; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
-		74203A0E1B16ADC20087E214 /* CpuinfoDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CpuinfoDelegate.mm; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
-		74203A111B16ADC20087E214 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AA00000000000000000000F3 /* CpuinfoDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CpuinfoDelegate.swift; sourceTree = "<group>"; };
+		AA00000000000000000000F5 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		74203A171B16ADD10087E214 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		74203A191B16ADD10087E214 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		74203A1C1B16ADD20087E214 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -70,13 +69,10 @@
 		742AC11F1DEBD150005EE2D6 /* cpuinfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cpuinfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		743A38001F68DF0F0003A2DB /* cpuinfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cpuinfo.entitlements; sourceTree = "<group>"; };
 		743BD28E1DE2D01A000BA0D1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = res/Images.xcassets; sourceTree = "<group>"; };
-		746A13761DEF96D800856F96 /* StartAtLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartAtLoginController.h; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
-		746A13771DEF96D800856F96 /* StartAtLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartAtLoginController.m; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
+		AA00000000000000000000F4 /* StartAtLoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartAtLoginController.swift; sourceTree = "<group>"; };
 		746A13941DEF9CCD00856F96 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
-		74DC99CF235459F2005D8091 /* CpuinfoImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CpuinfoImage.h; sourceTree = "<group>"; };
-		74DC99D0235459F2005D8091 /* CpuinfoImage.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CpuinfoImage.mm; sourceTree = "<group>"; };
-		74DC99D22354A7B2005D8091 /* Cpuinfo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Cpuinfo.cpp; sourceTree = "<group>"; };
-		74DC99D32354A7B2005D8091 /* Cpuinfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Cpuinfo.hpp; sourceTree = "<group>"; };
+		AA00000000000000000000F2 /* CpuinfoImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CpuinfoImage.swift; sourceTree = "<group>"; };
+		AA00000000000000000000F1 /* Cpuinfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cpuinfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,15 +138,11 @@
 		74203A0B1B16ADC20087E214 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				746A13761DEF96D800856F96 /* StartAtLoginController.h */,
-				746A13771DEF96D800856F96 /* StartAtLoginController.m */,
-				74203A0D1B16ADC20087E214 /* CpuinfoDelegate.h */,
-				74203A0E1B16ADC20087E214 /* CpuinfoDelegate.mm */,
-				74203A111B16ADC20087E214 /* main.m */,
-				74DC99CF235459F2005D8091 /* CpuinfoImage.h */,
-				74DC99D0235459F2005D8091 /* CpuinfoImage.mm */,
-				74DC99D32354A7B2005D8091 /* Cpuinfo.hpp */,
-				74DC99D22354A7B2005D8091 /* Cpuinfo.cpp */,
+				AA00000000000000000000F1 /* Cpuinfo.swift */,
+				AA00000000000000000000F2 /* CpuinfoImage.swift */,
+				AA00000000000000000000F3 /* CpuinfoDelegate.swift */,
+				AA00000000000000000000F4 /* StartAtLoginController.swift */,
+				AA00000000000000000000F5 /* main.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -277,11 +269,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74DC99D1235459F2005D8091 /* CpuinfoImage.mm in Sources */,
-				742AC1561DEBD2F6005EE2D6 /* CpuinfoDelegate.mm in Sources */,
-				742AC1581DEBD2FE005EE2D6 /* main.m in Sources */,
-				74DC99D42354A7B2005D8091 /* Cpuinfo.cpp in Sources */,
-				746A13781DEF96D800856F96 /* StartAtLoginController.m in Sources */,
+				BB00000000000000000000B1 /* Cpuinfo.swift in Sources */,
+				BB00000000000000000000B2 /* CpuinfoImage.swift in Sources */,
+				BB00000000000000000000B3 /* CpuinfoDelegate.swift in Sources */,
+				BB00000000000000000000B4 /* StartAtLoginController.swift in Sources */,
+				BB00000000000000000000B5 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +337,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -379,6 +373,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -391,7 +387,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -404,7 +400,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				SDKROOT = macosx;
 			};
 			name = Release;

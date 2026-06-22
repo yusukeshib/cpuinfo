@@ -1,0 +1,199 @@
+//
+//  CpuinfoDelegate.swift
+//  cpuinfo
+//
+//  Application delegate: owns the status item, the sampling loop and the menu.
+//
+
+import Cocoa
+
+@objc(CpuinfoDelegate)
+final class CpuinfoDelegate: NSObject, NSApplicationDelegate {
+
+  @IBOutlet weak var window: NSWindow?
+  @IBOutlet var statusMenu: NSMenu?
+  @IBOutlet var mi_updateInterval: NSMenuItem?
+  @IBOutlet var mi_theme: NSMenuItem?
+  @IBOutlet var mi_viewMode: NSMenuItem?
+
+  // KVO-compliant properties bound from MainMenu.xib menu items.
+  @objc dynamic var startAtLogin = false
+  @objc dynamic var showCoresIndividually = false
+  @objc dynamic var showImage = false
+  @objc dynamic var showText = false
+
+  private var statusItem: NSStatusItem!
+  private var loginController: StartAtLoginController!
+  private var running = false
+  private var updateInterval: Int = 500
+  private let cpuinfo = Cpuinfo()
+  private var group: DispatchGroup?
+  private let image = CpuinfoImage()
+
+  // MARK: - Lifecycle
+
+  override func awakeFromNib() {
+    super.awakeFromNib()
+
+    image.setCpuinfo(cpuinfo)
+
+    // initialize StatusItem
+    statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+    statusItem.menu = statusMenu
+    statusItem.button?.title = ""
+
+    // Retrieve params from UserDefaults
+    let defaults = UserDefaults.standard
+    defaults.register(defaults: [
+      "updateInterval": 500,
+      "showImage": true,
+      "showText": false
+    ])
+    updateInterval = defaults.integer(forKey: "updateInterval")
+    image.theme = defaults.string(forKey: "theme")
+    showImage = defaults.bool(forKey: "showImage")
+    showText = defaults.bool(forKey: "showText")
+    showCoresIndividually = defaults.bool(forKey: "showCoresIndividually")
+
+    image.imageEnabled = showImage
+    image.textEnabled = showText
+    image.multiCoreEnabled = showCoresIndividually
+
+    cpuinfo.setMultiCoreEnabled(showCoresIndividually)
+
+    // updateInterval
+    mi_updateInterval?.submenu?.items.forEach { item in
+      item.state = (item.tag == updateInterval) ? .on : .off
+    }
+
+    // theme
+    mi_theme?.submenu?.items.forEach { item in
+      item.state = (item.title == image.theme) ? .on : .off
+    }
+
+    // viewMode is meaningless while per-core mode is on
+    mi_viewMode?.isEnabled = !showCoresIndividually
+
+    // loginController
+    let identifier = (Bundle.main.bundleIdentifier ?? "") + ".helper"
+    loginController = StartAtLoginController(identifier: identifier)
+    startAtLogin = loginController.startAtLogin
+
+    updateView()
+  }
+
+  func applicationDidFinishLaunching(_ notification: Notification) {
+    begin()
+  }
+
+  func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+    terminate()
+    return .terminateNow
+  }
+
+  // MARK: - Actions
+
+  @IBAction func updateUpdateInterval(_ sender: NSMenuItem) {
+    sender.state = .on
+    sender.menu?.items.forEach { item in
+      if item != sender { item.state = .off }
+    }
+    updateInterval = sender.tag
+    UserDefaults.standard.set(updateInterval, forKey: "updateInterval")
+  }
+
+  @IBAction func updateTheme(_ sender: NSMenuItem) {
+    sender.state = .on
+    sender.menu?.items.forEach { item in
+      if item != sender { item.state = .off }
+    }
+    image.theme = sender.title
+    UserDefaults.standard.set(image.theme, forKey: "theme")
+  }
+
+  @IBAction func updateShowImage(_ sender: Any) {
+    showImage.toggle()
+    image.imageEnabled = showImage
+    UserDefaults.standard.set(showImage, forKey: "showImage")
+    updateView()
+  }
+
+  @IBAction func updateShowText(_ sender: Any) {
+    showText.toggle()
+    image.textEnabled = showText
+    UserDefaults.standard.set(showText, forKey: "showText")
+    updateView()
+  }
+
+  @IBAction func updateCoresIndividually(_ sender: Any) {
+    showCoresIndividually.toggle()
+    image.multiCoreEnabled = showCoresIndividually
+    cpuinfo.setMultiCoreEnabled(showCoresIndividually)
+    UserDefaults.standard.set(showCoresIndividually, forKey: "showCoresIndividually")
+
+    // enable/disable ViewMode menu
+    mi_viewMode?.isEnabled = !showCoresIndividually
+
+    updateView()
+  }
+
+  @IBAction func updateStartAtLogin(_ sender: Any) {
+    startAtLogin.toggle()
+    loginController.startAtLogin = startAtLogin
+  }
+
+  @IBAction func launchActivityMonitor(_ sender: Any) {
+    NSWorkspace.shared.launchApplication(withBundleIdentifier: "com.apple.ActivityMonitor",
+                                         options: [],
+                                         additionalEventParamDescriptor: nil,
+                                         launchIdentifier: nil)
+  }
+
+  // MARK: - Sampling loop
+
+  private func begin() {
+    running = true
+    let group = DispatchGroup()
+    self.group = group
+    group.enter()
+    DispatchQueue.global(qos: .default).async { [weak self] in
+      self?.updateLoop()
+      group.leave()
+    }
+  }
+
+  private func terminate() {
+    running = false
+    group?.wait()
+  }
+
+  private func updateLoop() {
+    autoreleasepool {
+      while running {
+        let interval = max(Double(updateInterval) / 1000.0, 0.1)
+        Thread.sleep(forTimeInterval: interval)
+
+        cpuinfo.update()
+        DispatchQueue.main.async { [weak self] in
+          self?.updateView()
+        }
+      }
+    }
+  }
+
+  private func updateView() {
+    image.update()
+    if let appearance = statusItem.button?.effectiveAppearance {
+      image.darkMode = appearanceIsDark(appearance)
+    }
+    statusItem.button?.image = image
+  }
+
+  private func appearanceIsDark(_ appearance: NSAppearance) -> Bool {
+    if #available(macOS 10.14, *) {
+      let basic = appearance.bestMatch(from: [.aqua, .darkAqua])
+      return basic == .darkAqua
+    }
+    return false
+  }
+}
