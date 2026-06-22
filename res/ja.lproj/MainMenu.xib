@@ -119,12 +119,6 @@
                                     <action selector="updateTheme:" target="494" id="gKJ-pj-8vJ"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Borderless" id="Yi0-7U-X8j">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="updateTheme:" target="494" id="K6Z-mP-fqI"/>
-                                </connections>
-                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>

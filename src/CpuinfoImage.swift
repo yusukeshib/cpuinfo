@@ -15,6 +15,20 @@ final class CpuinfoImage: NSImage, @unchecked Sendable {
   private static let textWidth: CGFloat = 36.0
   private static let textHeight: CGFloat = 20.0
 
+  // Per-core ("individual") mode is drawn as a compact vertical-bar equalizer.
+  private static let coreBarWidth: CGFloat = 3.0
+  private static let coreBarGap: CGFloat = 2.0
+  private static let coreInset: CGFloat = 2.0
+  private static let coreTrackHeight: CGFloat = 14.0
+
+  // Single ("one-meter") mode is a slim horizontal pill: track + colored fill.
+  private static let singleBarHeight: CGFloat = 8.0
+
+  // Faint neutral track shared by both meter styles.
+  private var trackColor: NSColor {
+    darkMode ? NSColor(white: 1.0, alpha: 0.18) : NSColor(white: 0.0, alpha: 0.15)
+  }
+
   private var cpuinfo: Cpuinfo!
 
   var darkMode = false
@@ -98,20 +112,18 @@ final class CpuinfoImage: NSImage, @unchecked Sendable {
 
   private func updateSize() {
     var width: CGFloat = 0
-    let iteration = multiCoreEnabled ? Int(cpuinfo.getCoreCount()) : 1
-    let barWidth = CGFloat(double(forKey: "BAR_WIDTH"))
-    let barCoreWidth = CGFloat(double(forKey: "BAR_COREWIDTH"))
-    let barCoreMargin = CGFloat(double(forKey: "BAR_COREMARGIN"))
 
-    for _ in 0..<iteration {
-      if multiCoreEnabled {
-        // Force image view on MultiCore mode
-        width += barCoreWidth
-        width += barCoreMargin
-      } else {
-        if imageEnabled { width += barWidth }
-        if textEnabled { width += CpuinfoImage.textWidth }
+    if multiCoreEnabled {
+      // Vertical equalizer: one thin bar per core with a small gap.
+      let count = CGFloat(cpuinfo.getCoreCount())
+      if count > 0 {
+        width = count * CpuinfoImage.coreBarWidth
+          + max(0, count - 1) * CpuinfoImage.coreBarGap
+          + CpuinfoImage.coreInset * 2
       }
+    } else {
+      if imageEnabled { width += CGFloat(double(forKey: "BAR_WIDTH")) }
+      if textEnabled { width += CpuinfoImage.textWidth }
     }
 
     size = NSSize(width: width, height: CpuinfoImage.height)
@@ -120,55 +132,59 @@ final class CpuinfoImage: NSImage, @unchecked Sendable {
 
   // MARK: - Drawing
 
+  // Single overall meter: a slim horizontal pill that fills left -> right,
+  // matching the equalizer's track + usage-colored fill aesthetic.
   @discardableResult
   private func drawImage(at usage: Double, offset: CGFloat) -> CGFloat {
-    let barTotalWidth = CGFloat(double(forKey: "BAR_WIDTH"))
-    let barCoreWidth = CGFloat(double(forKey: "BAR_COREWIDTH"))
-    let barWidth = multiCoreEnabled ? barCoreWidth : barTotalWidth
-    let barHeight = CGFloat(double(forKey: "BAR_HEIGHT"))
-    let barRadius = CGFloat(double(forKey: "BAR_RADIUS"))
-    let bgColor = color(forKey: "BAR_BACKGROUNDCOLOR")
-    let borderColor = color(forKey: "BORDER_COLOR")
-    let borderRadius = CGFloat(double(forKey: "BORDER_RADIUS"))
-    let borderWidth = CGFloat(double(forKey: "BORDER_WIDTH"))
+    let barWidth = CGFloat(double(forKey: "BAR_WIDTH"))
+    let barH = CpuinfoImage.singleBarHeight
+    let radius = barH / 2
+    let y = (CpuinfoImage.height - barH) / 2
+    let u = max(0.0, min(1.0, usage))
 
-    NSGraphicsContext.saveGraphicsState()
+    // track
+    trackColor.set()
+    NSBezierPath(roundedRect: NSRect(x: offset, y: y, width: barWidth, height: barH),
+                 xRadius: radius, yRadius: radius).fill()
 
-    // clip rounded
-    let bgRect = NSRect(x: offset,
-                        y: (CpuinfoImage.height - barHeight) / 2,
-                        width: barWidth,
-                        height: barHeight)
-    NSBezierPath(roundedRect: bgRect, xRadius: borderRadius, yRadius: borderRadius).addClip()
-
-    // background
-    bgColor.set()
-    let bg = NSBezierPath()
-    bg.appendRoundedRect(bgRect, xRadius: borderRadius, yRadius: borderRadius)
-    bg.fill()
-
-    // border
-    if borderWidth > 0 {
-      borderColor.set()
-      let border = NSBezierPath()
-      border.appendRoundedRect(bgRect, xRadius: borderRadius, yRadius: borderRadius)
-      border.lineWidth = borderWidth
-      border.stroke()
-    }
-
-    // usage
-    imageColor(forUsage: usage).set()
-    let bar = NSBezierPath()
-    let barRect = NSRect(x: offset + borderWidth * 2,
-                         y: (CpuinfoImage.height - barHeight) / 2 + borderWidth * 2,
-                         width: (barWidth - borderWidth * 4) * CGFloat(usage),
-                         height: barHeight - borderWidth * 4)
-    bar.appendRoundedRect(barRect, xRadius: barRadius, yRadius: barRadius)
-    bar.fill()
-
-    NSGraphicsContext.restoreGraphicsState()
+    // usage fill (min width keeps a visible rounded nub at 0%)
+    let fillW = max(barH, CGFloat(u) * barWidth)
+    imageColor(forUsage: u).set()
+    NSBezierPath(roundedRect: NSRect(x: offset, y: y, width: fillW, height: barH),
+                 xRadius: radius, yRadius: radius).fill()
 
     return offset + barWidth
+  }
+
+  // Per-core vertical bars (equalizer style), drawn over a faint track.
+  private func drawCoreBars() {
+    let count = Int(cpuinfo.getCoreCount())
+    guard count > 0 else { return }
+
+    let barW = CpuinfoImage.coreBarWidth
+    let gap = CpuinfoImage.coreBarGap
+    let radius = barW / 2
+    let trackH = CpuinfoImage.coreTrackHeight
+    let baseY = (CpuinfoImage.height - trackH) / 2
+    let minH = barW // small rounded nub even at 0%
+
+    var x = CpuinfoImage.coreInset
+    for i in 0..<count {
+      let usage = max(0.0, min(1.0, cpuinfo.getCoreUsageAt(UInt(i))))
+
+      // track
+      trackColor.set()
+      let trackRect = NSRect(x: x, y: baseY, width: barW, height: trackH)
+      NSBezierPath(roundedRect: trackRect, xRadius: radius, yRadius: radius).fill()
+
+      // usage bar (grows upward from the baseline)
+      let h = max(minH, CGFloat(usage) * trackH)
+      imageColor(forUsage: usage).set()
+      let barRect = NSRect(x: x, y: baseY, width: barW, height: h)
+      NSBezierPath(roundedRect: barRect, xRadius: radius, yRadius: radius).fill()
+
+      x += barW + gap
+    }
   }
 
   @discardableResult
@@ -210,14 +226,7 @@ final class CpuinfoImage: NSImage, @unchecked Sendable {
     var offset: CGFloat = 0
 
     if multiCoreEnabled {
-      let barCoreMargin = CGFloat(int(forKey: "BAR_COREMARGIN"))
-      let count = Int(cpuinfo.getCoreCount())
-      for i in 0..<count {
-        let coreUsage = cpuinfo.getCoreUsageAt(UInt(i))
-        // Force image view on MultiCore mode
-        offset = drawImage(at: coreUsage, offset: offset)
-        offset += barCoreMargin
-      }
+      drawCoreBars()
     } else {
       let hostUsage = cpuinfo.getHostUsage()
       if imageEnabled {
