@@ -7,9 +7,11 @@ A tiny macOS menu bar app that shows live CPU usage as a compact meter.
 The meter fills green when the machine is mostly idle and turns orange / red as
 load rises. Click it for options.
 
-| Overall meter | Per-core equalizer | B/W theme |
-| --- | --- | --- |
-| ![overall meter](res/menubar-overall.png?raw=true) | ![per-core equalizer](res/menubar-percore.png?raw=true) | ![monochrome theme](res/menubar-bw.png?raw=true) |
+| Per-core equalizer *(default)* | Overall meter |
+| :--: | :--: |
+| ![per-core equalizer](res/menubar-percore.png?raw=true) | ![overall meter](res/menubar-overall.png?raw=true) |
+| **Percentage readout** | **Monochrome (B/W) theme** |
+| ![overall meter with percentage](res/menubar-percent.png?raw=true) | ![monochrome theme](res/menubar-bw.png?raw=true) |
 
 ## Features
 
