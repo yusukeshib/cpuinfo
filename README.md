@@ -13,8 +13,8 @@ load rises. Click it for options.
 
 ## Features
 
+- **Per-core mode** *(default)* — a compact vertical-bar equalizer, one bar per logical core.
 - **Overall meter** — a slim pill that fills left → right with total CPU usage.
-- **Per-core mode** — a compact vertical-bar equalizer, one bar per logical core.
 - **Optional percentage text** next to the bar.
 - **Light / dark adaptive** — follows the system appearance.
 - **Themes** — `Default` (color) and `B/W` (monochrome).

@@ -47,7 +47,8 @@ final class CpuinfoDelegate: NSObject, NSApplicationDelegate {
     defaults.register(defaults: [
       "updateInterval": 500,
       "showImage": true,
-      "showText": false
+      "showText": false,
+      "showCoresIndividually": true
     ])
     updateInterval = defaults.integer(forKey: "updateInterval")
     image.theme = defaults.string(forKey: "theme")
