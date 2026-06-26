@@ -3,3 +3,6 @@
 xcuserdata/
 *.xcworkspace/
 /build/
+*.xcarchive/
+# App Store Connect API keys — never commit
+*.p8

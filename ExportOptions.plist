@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Export options for Mac App Store distribution (used by `make appstore`).
+
+  `xcodebuild -exportArchive` re-signs the archived app with the
+  "Apple Distribution" + "3rd Party Mac Developer Installer" identities and
+  the Mac App Store provisioning profiles. With signingStyle=automatic and
+  -allowProvisioningUpdates, xcodebuild creates/downloads those for you using
+  the App Store Connect API key — no certs need to be installed by hand.
+
+  destination=upload makes the export step deliver straight to App Store
+  Connect, so no separate altool/Transporter step is needed.
+-->
+<plist version="1.0">
+<dict>
+	<key>method</key>
+	<string>app-store-connect</string>
+	<key>destination</key>
+	<string>upload</string>
+	<key>teamID</key>
+	<string>4TZUUASNPN</string>
+	<key>signingStyle</key>
+	<string>automatic</string>
+	<key>uploadSymbols</key>
+	<true/>
+</dict>
+</plist>
